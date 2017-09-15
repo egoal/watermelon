@@ -7,11 +7,11 @@ path = '/media/psf/Home/Documents/Projects/run0913/all_output/1_0/iteration_2/in
 print(path.split('/')[-4])
 
 # quality
-os.system('rm qualitylist')
-os.system('find {} -name quality.txt >> qualitylist'.format(path))
+os.system('rm temp/qualitylist')
+os.system('find {} -name quality.txt >> temp/qualitylist'.format(path))
 
 dctQua = {}
-with open('qualitylist') as fin:
+with open('temp/qualitylist') as fin:
     for quaFile in fin.readlines():
         # print(quaFile.strip().split('/')[-2], end=' ')
         with open(quaFile.strip()) as fqin:
@@ -22,11 +22,11 @@ with open('qualitylist') as fin:
 
 
 # init frame
-os.system('rm loclist')
-os.system('find {} -name loc_2017-09*.txt >> loclist'.format(path))
+os.system('rm temp/loclist')
+os.system('find {} -name loc_2017-09*.txt >> temp/loclist'.format(path))
 
 dctFrames = {}
-with open('loclist') as fin:
+with open('temp/loclist') as fin:
     for locFile in fin.readlines():
         rvtname = locFile.strip().split('/')[-2]
         dctFrames[rvtname] = list()
@@ -42,18 +42,32 @@ lstKeys.sort()
 for k in lstKeys:
     print('{} {:>7} {}'.format(k, float(dctQua[k]), dctFrames[k][0] if len(dctFrames[k]) else ''))
 
-exit()
+# exit()
 # db size
 path = '/media/psf/Home/Documents/Projects/run0913/all_output/'
 dbname = '9248586222975057963.bin'
-os.system('rm dblist')
-os.system('find {} -name {} >> dblist'.format(path, dbname))
+os.system('rm temp/dblist')
+os.system('find {} -name {} >> temp/dblist'.format(path, dbname))
 
-with open('dblist') as fin:
+fout = open('temp/dbsize', 'w')
+with open('temp/dblist') as fin:
     for line in fin.readlines():
         eles = line.strip().split('/')
         if eles[-2]=='section_db':
-            print('{} {} section_db/section_out {:.2f}MB/'.format(eles[-4], eles[-3], os.path.getsize(line.strip())/1024/1024), end='')
+            fout.write('{} {} section_db/section_out {:.2f}MB/'.format(eles[-4], eles[-3], os.path.getsize(line.strip())/1024/1024))
         elif eles[-2]=='section_out':
-            print('{:.2f}MB'.format(os.path.getsize(line.strip())/1024/1024))
-       
+            fout.write('{:.2f}MB\n'.format(os.path.getsize(line.strip())/1024/1024))
+fout.close()
+
+i = 0
+str1, str2 = '', ''
+with open('temp/dbsize') as fin:
+    for line in fin.readlines():
+        i+=1
+        if i%2==1:
+            str1 += line.strip().split(' ')[-1]+' '
+        else:
+            str2 += line.strip().split(' ')[-1]+' '
+
+print(str1)
+print(str2)
