@@ -41,3 +41,19 @@ lstKeys = list(dctQua.keys())
 lstKeys.sort()
 for k in lstKeys:
     print('{} {:>7} {}'.format(k, float(dctQua[k]), dctFrames[k][0] if len(dctFrames[k]) else ''))
+
+exit()
+# db size
+path = '/media/psf/Home/Documents/Projects/run0913/all_output/'
+dbname = '9248586222975057963.bin'
+os.system('rm dblist')
+os.system('find {} -name {} >> dblist'.format(path, dbname))
+
+with open('dblist') as fin:
+    for line in fin.readlines():
+        eles = line.strip().split('/')
+        if eles[-2]=='section_db':
+            print('{} {} section_db/section_out {:.2f}MB/'.format(eles[-4], eles[-3], os.path.getsize(line.strip())/1024/1024), end='')
+        elif eles[-2]=='section_out':
+            print('{:.2f}MB'.format(os.path.getsize(line.strip())/1024/1024))
+       
