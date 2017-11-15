@@ -2,7 +2,7 @@
 import os, sys
 import re
 
-path = '/media/psf/Home/Documents/Projects/run0913/all_output/1_0/iteration_2/incre_snippets/'
+path = '/media/psf/Home/Documents/Projects/run0913/all_output/4_0_3/iteration_2/incre_snippets/'
 
 print(path.split('/')[-4])
 
@@ -39,12 +39,21 @@ with open('temp/loclist') as fin:
 # sort and print
 lstKeys = list(dctQua.keys())
 lstKeys.sort()
+# for k in lstKeys:
+#     print('{} {:>7} {}'.format(k, float(dctQua[k]), dctFrames[k][0] if len(dctFrames[k]) else ''))
+
 for k in lstKeys:
-    print('{} {:>7} {}'.format(k, float(dctQua[k]), dctFrames[k][0] if len(dctFrames[k]) else ''))
+    print(k)
+print('------------------------------')
+for k in lstKeys:
+    print(dctQua[k])
+print('------------------------------')
+for k in lstKeys:
+    print(dctFrames[k][0] if len(dctFrames[k]) else '')
 
 # exit()
 # db size
-path = '/media/psf/Home/Documents/Projects/run0913/all_output/'
+path = '/media/psf/Home/Documents/Projects/run0913/4_1/'
 dbname = '9248586222975057963.bin'
 os.system('rm temp/dblist')
 os.system('find {} -name {} >> temp/dblist'.format(path, dbname))
