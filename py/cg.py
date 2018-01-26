@@ -6,6 +6,7 @@
 
 import sys, os
 import argparse
+import json
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,6 +22,7 @@ plot_3d
     contour line map
 curve_fit
 find_minimal
+use_json    -> xlsx2json
 '''
 
 def use_command_line_parser():
@@ -63,6 +65,7 @@ def curve_fit():
     oy = a*ox**b+c+(np.random.rand(20)-0.5)*2
 
     prm, cov = optimize.curve_fit(f, ox, oy)
+    
     print(prm, '\n', cov)
 
 def find_minimal():
