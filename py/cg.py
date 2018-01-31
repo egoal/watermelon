@@ -20,6 +20,7 @@ plot_3d
     surface
     mesh
     contour line map
+plot_interactively          交互式绘图
 curve_fit
 find_minimal
 use_json    -> xlsx2json
@@ -56,6 +57,17 @@ def plot_3d():
     plt.clabel(cts, inline=True, fontsize=10, )
 
     plt.show()
+
+def plot_interactively():
+    x, y = np.linspace(0, 10, ), np.linspace(0, 10)
+
+    plt.ion()
+    for i in range(50):
+        plt.plot(x, y, 'ro')
+        plt.pause(.01)  # 动画
+
+    plt.ioff()  # 回归阻塞
+    plt.show()  # 确保绘制完不会自动关闭
 
 def curve_fit():
     def f(x, a, b, c):

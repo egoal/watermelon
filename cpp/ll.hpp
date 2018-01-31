@@ -28,6 +28,8 @@
 #define LL_LOG std::cout<<"["<<__FILE__<<"-"<<__LINE__<<"]: "
 #define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
 
+#define LL_ABS(x) ((x)>0?(x):(-x))
+
 namespace ll{
     template <typename T>
     void dump(const std::vector<T>& vec, const std::string& filename=""){
