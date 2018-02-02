@@ -1,5 +1,5 @@
 temp/
-cpps/build/
+cpp/build/
 .vscode/
 .ipynb_checkpoints/
 .DS_Store/
