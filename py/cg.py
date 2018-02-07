@@ -21,6 +21,7 @@ plot_3d
     mesh
     contour line map
 plot_interactively          交互式绘图
+plot_in_tk
 curve_fit
 find_minimal
 use_json    -> xlsx2json
@@ -68,6 +69,54 @@ def plot_interactively():
 
     plt.ioff()  # 回归阻塞
     plt.show()  # 确保绘制完不会自动关闭
+
+def plot_in_tk():
+    import matplotlib
+    matplotlib.use('TkAgg')
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+
+    import tkinter as tk
+
+    # create image
+    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    a = fig.add_subplot(111)
+
+    t = np.arange(0., 3., .01)
+    s = np.sin(2*np.pi*t)
+
+    a.plot(t, s)
+
+    # create tk window
+    root = tk.Tk()
+    root.wm_title('Embedding in TK')
+    # create& add canvas
+    canvas = FigureCanvasTkAgg(fig, master=root)
+    canvas.show()
+    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    # add ui
+    # default toolbar
+    # toolbar = NavigationToolbar2TkAgg(canvas, root)
+    # toolbar.update()
+    # canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    # buttons
+    def on_btnQuit_clicked():
+        root.quit()
+        root.destroy()
+    btnQuit = tk.Button(master=root, text='Quit', command=on_btnQuit_clicked)
+    btnQuit.pack(side=tk.BOTTOM)
+
+    def on_btnClear_clicked():
+        a.cla()
+        a.plot(np.linspace(0, 10), np.linspace(0, 10), 'r')
+        canvas.show()
+
+    btnClear = tk.Button(master=root, text='Clear', command=on_btnClear_clicked)
+    btnClear.pack(side=tk.BOTTOM)
+
+    # tk loop
+    tk.mainloop()
 
 def curve_fit():
     def f(x, a, b, c):
