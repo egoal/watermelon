@@ -31,20 +31,22 @@
 #define LL_ABS(x) ((x)>0?(x):(-x))
 
 namespace ll{
-    template <typename T>
-    void dump(const std::vector<T>& vec, const std::string& filename=""){
-        std::ofstream fout(filename.c_str());
-        assert(fout.is_open());
-        for(const auto& v: vec) 
-            fout<<v<<"\n";
+
+    template<typename IT>
+    std::ostream& dump(IT beg, IT end, std::ostream& os=std::cout, 
+        const std::string& deli=", "){
+        for(auto it=beg; it!=end; ++it)
+            os<<(*it)<<deli;
+        return os;
     }
 
-    template<typename T>
-    void dump(const T* data, std::size_t cnt, const std::string& filename=""){
+    template<typename IT>
+    std::ostream& dump(IT beg, IT end, const std::string& filename, 
+        const std::string& deli=", "){
         std::ofstream fout(filename.c_str());
-        assert(fout.is_open());
-        for(size_t i=0; i<cnt; ++i) 
-            fout<<data[i]<<"\n";
+        assert(fout.is_open() && "cannot open file");
+
+        return dump(beg, end, fout, deli);
     }
 
     void waitKey(const std::string& str=""){
@@ -59,6 +61,13 @@ namespace ll{
     }
 
     template<typename T>
+    T clamp(T val, T low, T high){
+        if(val<low) return low;
+        if(val>high) return high;
+        return val;
+    }
+
+    template<typename T>
     T rand(T maxval){
         return std::rand()/T(RAND_MAX)*maxval;
     }
@@ -66,4 +75,5 @@ namespace ll{
     T randrange(T minval, T maxval){
         return std::rand()/T(RAND_MAX)*(maxval-minval)+minval;
     }
+
 }
