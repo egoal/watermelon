@@ -181,7 +181,7 @@ def ex_5_1():
 
         return x, k
 
-    order = 20
+    order = 80
     H = construct_hilbert(order)
     b, x0 = np.ones(order), np.zeros(order)
 
@@ -192,4 +192,4 @@ def ex_5_1():
 
 
 if __name__=='__main__':
-    ex_4_2()
+    ex_5_1()

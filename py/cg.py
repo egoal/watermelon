@@ -22,6 +22,7 @@ plot_3d
     contour line map
 plot_interactively          交互式绘图
 plot_in_tk
+plot_text_and_annotation
 curve_fit
 find_minimal
 use_json    -> xlsx2json
@@ -117,6 +118,46 @@ def plot_in_tk():
 
     # tk loop
     tk.mainloop()
+
+def plot_text_and_annotation():
+    # make demo for cg tutorial
+    import matplotlib.patches as mp
+
+    isLineSearch = True
+
+    plt.figure(figsize=(4, 4), dpi=150)
+    # plt.ylim([.0, .6])
+    plt.axis('off')
+
+    # trace
+    # arrows
+    lst = [.2, .2, .5, .15, .6, .5, .8, .5]
+    for i in range(len(lst)//2-1):
+        plt.annotate('', xytext=(lst[2*i], lst[2*i+1]), xy=(lst[2*i+2], lst[2*i+3]), arrowprops={'arrowstyle': '->'})
+    plt.arrow(.1, 0., .1, .2,  color='r', head_width=.02, length_includes_head=True)
+
+    # strings
+    lstt = [.2, .25, '$x_k$', 
+            .65, .35, '$x_{k+1}$', 
+            .8, .4, '$p_k$', 
+            .5, .1, '$z_1$', 
+            .35, .1, '$d_0$', 
+        ]
+    for i in range(0, len(lstt), 3):
+        plt.text(lstt[i], lstt[i+1], lstt[i+2], )
+
+    if isLineSearch:
+        # search direction
+        plt.annotate('', xytext=(.2, .2), xy=(.8, .5), arrowprops={'arrowstyle': '->', 'color': 'g', })
+        # step
+        plt.annotate('', xytext=(.2, .2), xy=(.7, .45), arrowprops={'arrowstyle': 'simple', 'color': 'r', 'alpha': .4})
+    else:
+        # trust region
+        ax = plt.gca()
+        ax.add_patch(mp.Circle(xy=(.2, .2), radius=.55, alpha=.4, color='g', fill=False))
+        plt.annotate('', xytext=(.2, .2), xy=(.67, .5), arrowprops={'arrowstyle': 'simple', 'color': 'b', 'alpha': .4})
+
+    plt.show()
 
 def curve_fit():
     def f(x, a, b, c):

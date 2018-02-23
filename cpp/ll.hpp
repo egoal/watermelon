@@ -24,6 +24,10 @@
 #include <ctime>
 
 // macros
+#define LL_BAN_COPY(X) \
+    X(const X& )    =   delete; \
+    X& operator=(const X& ) =   delete
+
 #define LL_ABORT(...) throw(std::runtime_error(__VA_ARGS__))
 #define LL_LOG std::cout<<"["<<__FILE__<<"-"<<__LINE__<<"]: "
 #define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
