@@ -32,3 +32,8 @@ endmacro()
 
 SIMPLE_OPTION_BUILD(sphere_test ON)
 
+# pybind11
+option(pyb_test "c++ pybind" OFF)
+if(pyb_test)
+    add_subdirectory(pyb_test)
+endif()
