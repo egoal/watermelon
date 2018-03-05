@@ -5,6 +5,7 @@
 #include <random>
 #include <memory>
 #include <chrono>
+#include <numeric>
 
 #include <vector>
 #include <list>
@@ -53,7 +54,7 @@ namespace ll{
         return dump(beg, end, fout, deli);
     }
 
-    void waitKey(const std::string& str=""){
+    inline void waitKey(const std::string& str=""){
 #if 0
         std::string line    =   "read -p '"+(str.empty()?"press any key":str)+"'";
         system(line.c_str());
@@ -73,11 +74,11 @@ namespace ll{
 
     template<typename T>
     T rand(T maxval){
-        return std::rand()/T(RAND_MAX)*maxval;
+        return T(std::rand()/double(RAND_MAX)*maxval);
     }
     template<typename T>
     T randrange(T minval, T maxval){
-        return std::rand()/T(RAND_MAX)*(maxval-minval)+minval;
+        return T(std::rand()/double(RAND_MAX)*(maxval-minval))+minval;
     }
 
 }
