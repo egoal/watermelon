@@ -154,9 +154,8 @@ namespace ll{
             return false;
         }
         bool save(const std::string& filename, const std::string& headers="") const{
-            save(filename, headers, std::unordered_map<std::string, std::string >());
+            return save(filename, headers, std::unordered_map<std::string, std::string >());
         }
-
         bool save(const std::string& filename, const std::string& headers, 
             const std::unordered_map<std::string, std::string>& umapValDesc) const{
             std::ofstream fout(filename);
@@ -189,6 +188,11 @@ namespace ll{
         int defval=0){
         ConfigParser cp(filename);
         return cp.getInt(keyname, defval);
+    }
+    inline double getDoubleFrom(const std::string& filename, 
+        const std::string& keyname, double defval=0.){
+        ConfigParser cp(filename);
+        return cp.getDouble(keyname, defval);
     }
     inline std::string getStringFrom(const std::string& filename, 
         const std::string& keyname, const std::string& defval=""){

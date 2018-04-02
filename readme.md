@@ -1,2 +1,3 @@
 dont worry about trivia
-just so so 
+
+solve ordinary problem, write study notes
