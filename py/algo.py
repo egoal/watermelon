@@ -189,7 +189,54 @@ def ex_5_1():
 
     print('{}: {}, with {}'.format(x, k, np.linalg.norm(H.dot(x)-b)))
 
+'''
+    f = x^2-1, x0 = 1/2
+    a = 1/2
+    H = l*(x^2-1)+(1-l)*(x-a)
+'''
+def homotopy_demo():
+    X0 = .5
+    STEP_LENGTH = .1
+    MAX_ITERATIONS = 20
+    
+    a = X0
+    lbd, x = 0, a
+    lstXL = [[lbd, x]]
+    ldx, ldlbd = 0., 0. # last update
 
+    for k in range(MAX_ITERATIONS):
+        # caculate direction
+        dx, dlbd = x**2-x+a-1, -(lbd*2.*x+(1.-lbd))
+        ds = (dx**2+dlbd**2)**.5
+        dx, dlbd = dx/ds*STEP_LENGTH, dlbd/ds*STEP_LENGTH
+        # check sign
+        if (k==0 and dlbd<0) or (k>0 and (ldx*dx+ldlbd*dlbd)<0):
+            dx, dlbd = -dx, -dlbd
+
+        # project to H=0
+        if lbd+dlbd>1.:
+            dx *= (1-lbd)/dlbd
+            dlbd = 1-lbd
+
+        # fix dx
+        x += dx
+        lbd = (a-x)/(x**2-x+a-1)
+
+        # update
+        ldx, ldlbd = x-lstXL[-1][1], lbd-lstXL[-1][0]
+
+        lstXL.append([lbd, x])
+
+        if 1.-lbd<.001:
+            break
+
+    print('%d: %.3f, %.3f' % (len(lstXL), lstXL[-1][0], lstXL[-1][1]))
+    # plot
+    lstXL = np.array(lstXL)
+    plt.plot(lstXL[:, 0], lstXL[:, 1], '-o')
+    plt.xlim([0, 1])
+    plt.grid('on')
+    plt.show()
 
 if __name__=='__main__':
-    ex_5_1()
+    homotopy_demo()

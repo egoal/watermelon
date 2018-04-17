@@ -36,6 +36,8 @@
 #define LL_LOG std::cout<<"["<<__FILE__<<"-"<<__LINE__<<"]: "
 #define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
 
+// #define LL_ASSERT(...) if(!(__VA_ARGS__)) 
+
 #define LL_ABS(x) ((x)>0?(x):(-x))
 
 #define LL_TOFILE(f, ...) \
@@ -125,12 +127,15 @@ namespace ll{
                     continue;
                 
                 std::stringstream ssin(line);
-                ssin>>key>>e>>val;
-                umapData_.insert({key, val});
+                ssin>>key>>e;
+                std::getline(ssin, val);
+                if(!val.empty())
+                    umapData_.insert({key, val});
             }
 
         }
 
+        // single value
         int getInt(const std::string& key, int defval=0) const{
             auto iter   =   umapData_.find(key);
             return iter==umapData_.end()? defval: std::stoi(iter->second);
@@ -143,6 +148,43 @@ namespace ll{
             auto iter   =   umapData_.find(key);
             return iter==umapData_.end()? defval: iter->second;
         }
+        
+        // value list
+        std::vector<std::string > getStringList(const std::string& key){
+            std::vector<std::string > vecStrs;
+            auto iter   =   umapData_.find(key);
+            if(iter!=umapData_.end()){
+                // simple split
+                int s(0), i(0);
+                std::string strList =   iter->second;
+                while(i<strList.size()){
+                    if(strList[i]==','){
+                        if(s<i)
+                            vecStrs.push_back(strList.substr(s, i-s));
+                        s   =   i+1;
+                    }
+                    ++i;
+                }
+                if(s<i)
+                    vecStrs.push_back(strList.substr(s, i));
+            }
+            return vecStrs;
+        }
+        std::vector<int> getIntList(const std::string& key){
+            auto vecStrs    =   getStringList(key);
+            std::vector<int> vecInts(vecStrs.size());
+            std::transform(vecStrs.begin(), vecStrs.end(), vecInts.begin(), 
+                [](const std::string& str){ return std::stoi(str); });
+            return vecInts;
+        }
+        std::vector<double> getDoubleList(const std::string& key){
+            auto vecStrs    =   getStringList(key);
+            std::vector<double> vecVals(vecStrs.size());
+            std::transform(vecStrs.begin(), vecStrs.end(), vecVals.begin(), 
+                [](const std::string& str){ return std::stod(str); });
+            return vecVals;
+        }
+
 
         // may not use
         bool add(const std::string& key, const std::string& val){
