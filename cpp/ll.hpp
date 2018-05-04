@@ -33,10 +33,11 @@
     X& operator=(const X& ) =   delete
 
 #define LL_ABORT(...) throw(std::runtime_error(__VA_ARGS__))
+//todo: filename only
 #define LL_LOG std::cout<<"["<<__FILE__<<"-"<<__LINE__<<"]: "
 #define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
 
-// #define LL_ASSERT(...) if(!(__VA_ARGS__)) 
+#define LL_ASSERT(...) if(!(__VA_ARGS__)) LL_ABORT(#__VA_ARGS__)
 
 #define LL_ABS(x) ((x)>0?(x):(-x))
 
@@ -45,7 +46,25 @@
     ll::CommaOS cos(fout); \
     cos, __VA_ARGS__; }
 
+#define LL_REPEAT(n) for(int __i__=0; __i__<n; ++__i__)
+
 namespace ll{
+
+    // range vector
+    template<typename T>
+    std::vector<T> range(T e){
+        std::vector<T> vec(e);
+        std::iota(vec.begin(), vec.end(), 0);
+        return vec;
+    }
+    template<typename T>
+    std::vector<T> range(T s, T e, T d){
+        assert((e-s)/d >0 && "invalid range call");
+        std::vector<T> vec(int((e-s)/d), d);
+        vec[0]  =   s;
+        std::partial_sum(vec.begin(), vec.end(), vec.begin());
+        return vec;
+    }
 
     template<typename IT>
     std::ostream& dump(IT beg, IT end, std::ostream& os=std::cout, 
@@ -129,6 +148,7 @@ namespace ll{
                 std::stringstream ssin(line);
                 ssin>>key>>e;
                 std::getline(ssin, val);
+                val =   val.substr(0, val.find('#'));
                 if(!val.empty())
                     umapData_.insert({key, val});
             }
