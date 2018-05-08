@@ -96,6 +96,7 @@ namespace ll{
 
     template<typename T>
     T clamp(T val, T low, T high){
+        assert(low<=high && "bad argumentss");
         if(val<low) return low;
         if(val>high) return high;
         return val;
