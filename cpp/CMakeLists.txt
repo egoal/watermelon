@@ -30,7 +30,8 @@ macro(SIMPLE_OPTION_BUILD filename on_off)
 
 endmacro()
 
-SIMPLE_OPTION_BUILD(sphere_test ON)
+SIMPLE_OPTION_BUILD(sphere_test OFF)
+SIMPLE_OPTION_BUILD(delaunay ON)
 
 # pybind11
 option(pyb_test "c++ pybind" OFF)

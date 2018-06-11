@@ -83,17 +83,6 @@ namespace ll{
         return dump(beg, end, fout, deli);
     }
 
-    inline void waitKey(const std::string& str=""){
-#if 0
-        std::string line    =   "read -p '"+(str.empty()?"press any key":str)+"'";
-        system(line.c_str());
-#else
-        std::cout<<(str.empty()? "press any key": str);
-        int i;
-        std::cin>>i;
-#endif
-    }
-
     template<typename T>
     T clamp(T val, T low, T high){
         assert(low<=high && "bad argumentss");
@@ -110,6 +99,44 @@ namespace ll{
     T randrange(T minval, T maxval){
         return T(std::rand()/double(RAND_MAX)*(maxval-minval))+minval;
     }
+
+    template<typename T, typename... Args>
+    std::unique_ptr<T> make_unique(Args&&... args){
+        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
+
+    //* simple unique patch
+    template<typename IT, typename BOP> IT unique(IT beg, IT end, BOP eql){
+        if(beg==end) return end;
+
+        IT cur  =   beg;
+        IT result   =   beg+1;
+        while(++cur!=end){
+            if(std::find_if(beg, result, [&](decltype(*cur) value){
+                    return eql(value, *cur);
+                })==result){
+                *result =   *cur;
+                ++result;
+            }
+        }
+
+        return result;
+    }
+    template<typename IT> IT unique(IT beg, IT end){
+        if(beg==end) return end;
+
+        IT cur  =   beg;
+        IT result   =   beg+1;
+        while(++cur!=end){
+            if(std::find(beg, result, *cur)==result){
+                *result =   *cur;
+                ++result;
+            }
+        }
+
+        return result;
+    }
+
 
     /*file output*/
     // comma to stream, can be help to macro define
@@ -178,7 +205,7 @@ namespace ll{
                 // simple split
                 int s(0), i(0);
                 std::string strList =   iter->second;
-                while(i<strList.size()){
+                while(i<static_cast<int>(strList.size())){
                     if(strList[i]==','){
                         if(s<i)
                             vecStrs.push_back(strList.substr(s, i-s));
