@@ -3,6 +3,17 @@
 #include "ll.hpp"
 #include "llda.hpp"
 
+void testConfig(){
+    ll::ConfigParser cp("config");
+
+    cp.print(std::cout);
+    std::cout<<cp.getNumber<int>("find-kps-num")<<std::endl;
+    auto vs =   cp.getNumberList("frames-of-interested");
+    for(auto& v: vs)
+        std::cout<<v<<", ";
+    std::cout<<std::endl;
+}
+
 void testRange(){
     for(auto& v: ll::range(1., 0., -.2))
         std::cout<<v<<" ";
@@ -25,8 +36,60 @@ void testUnique(){
     std::for_each(v.begin(), it, [](int i){ std::cout<<i<<", "; });
 }
 
+void testFp(){
+    std::vector<int > vec{1, 2, 3, 4, 5, 6, 7, 8};
+
+    auto echo   =   [](int i){ std::cout<<i<<", "; };
+    ll::for_each(vec, echo);
+    std::cout<<std::endl;
+
+    auto addone =   [](int i){ return i+1; };
+    ll::map(vec, addone);
+
+    ll::for_each(vec, echo);
+    std::cout<<std::endl;
+
+    ll::zip(vec, vec, [](int i, int j){ return i*j; });
+
+    ll::for_each(vec, echo);
+    std::cout<<std::endl;
+
+    ll::filter(vec, [](int i){ return i%2==0; });
+
+    ll::for_each(vec, echo);
+    std::cout<<std::endl;
+
+    std::vector<int > vec2{1, 2, 3, 4, 5, 6, 7, 8};
+    std::vector<int > vec3  =   ll::range(10);
+    ll::filter(
+        ll::zip(
+            ll::map(vec, [](int i){ return i+1; }), 
+            vec3, [](int i, int j){ return i+j; }), 
+        [](int i){ return i%2==0; });
+
+    ll::for_each(vec2, echo);
+    std::cout<<std::endl;
+    ll::for_each(vec3, echo);
+    std::cout<<std::endl;
+}
+
+void testMatch(){
+    std::vector<int > vec0{0, 1, 2, 4, 6, 8 };
+    auto vec1   =   ll::range(10);
+
+    auto mths   =   ll::da::match_bf(vec0.size(), vec1.size(), 
+        [&](int i, int j){ return (vec0[i]-vec1[j])*(vec0[i]-vec1[j]); });
+
+    for(auto& m: mths){
+        int id0, id1;
+        double dis;
+        std::tie(id0, id1, dis) =   m;
+        std::cout<<id0<<" -> "<<id1<<": "<<dis<<"\n";
+    }
+}
+
 int main(int, char**){
-    testUnique();
+    testConfig();
 
     return 0;
 }

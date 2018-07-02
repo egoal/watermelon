@@ -17,6 +17,8 @@
 #include <set>
 #include <unordered_set>
 #include <stack>
+#include <queue>
+#include <tuple>
 
 #include <exception>
 #include <functional>
@@ -49,6 +51,14 @@
 #define LL_REPEAT(n) for(int __i__=0; __i__<n; ++__i__)
 
 namespace ll{
+
+#if __cplusplus<201402L
+    //* before c++14
+    template<typename T, typename... Args>
+    std::unique_ptr<T> make_unique(Args&&... args){
+        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
+#endif
 
     // range vector
     template<typename T>
@@ -100,11 +110,6 @@ namespace ll{
         return T(std::rand()/double(RAND_MAX)*(maxval-minval))+minval;
     }
 
-    template<typename T, typename... Args>
-    std::unique_ptr<T> make_unique(Args&&... args){
-        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-    }
-
     //* simple unique patch
     template<typename IT, typename BOP> IT unique(IT beg, IT end, BOP eql){
         if(beg==end) return end;
@@ -137,6 +142,36 @@ namespace ll{
         return result;
     }
 
+    //* simple warpper on algo, for fp
+    template<typename Container, typename unop> 
+    void for_each(Container& c, unop op){
+        std::for_each(std::begin(c), std::end(c), op);
+    }
+    template<typename Container, typename unop> 
+    Container& map(Container& c, unop op){
+        std::transform(std::begin(c), std::end(c), std::begin(c), op);
+        return c;
+    }
+    template<typename Container, typename binop>
+    Container& zip(Container& fc, Container& sc, binop op){
+        std::transform(std::begin(sc), std::end(sc), std::begin(sc), std::begin(fc), op);
+        return fc;
+    }
+    template<typename Container, typename con>
+    bool exists(Container& c, con co){
+        return std::any_of(std::begin(c), std::end(c), co);
+    }
+    template<typename Container, typename Predicate>
+    Container& filter_not(Container& c, Predicate pre){
+        c.erase(std::remove_if(std::begin(c), std::end(c), pre), std::end(c));
+        return c;
+    }
+    template<typename Container, typename Predicate>
+    Container& filter(Container& c, Predicate pre){
+        return filter_not(c, [pre](typename Container::value_type i){
+            return !pre(i);
+        });
+    }
 
     /*file output*/
     // comma to stream, can be help to macro define
@@ -170,13 +205,13 @@ namespace ll{
             assert(fin.is_open());
             std::string line, key, e, val;
             while(std::getline(fin, line)){
-                if(line.empty() || line[0]=='#')
+                if(line.empty() || line[0]==';')
                     continue;
                 
                 std::stringstream ssin(line);
                 ssin>>key>>e;
                 std::getline(ssin, val);
-                val =   val.substr(0, val.find('#'));
+                val =   val.substr(0, val.find(';'));
                 if(!val.empty())
                     umapData_.insert({key, val});
             }
@@ -192,13 +227,19 @@ namespace ll{
             auto iter   =   umapData_.find(key);
             return iter==umapData_.end()? defval: std::stod(iter->second);
         }
+        
         std::string getString(const std::string& key, const std::string& defval="") const{
             auto iter   =   umapData_.find(key);
             return iter==umapData_.end()? defval: iter->second;
         }
-        
+        template<typename T=double>
+        T getNumber(const std::string& key, T defval=T(0)) const{
+            auto str    =   getString(key, "");
+            return str.empty()? defval: static_cast<T>(std::stod(str));
+        }
+
         // value list
-        std::vector<std::string > getStringList(const std::string& key){
+        std::vector<std::string > getStringList(const std::string& key) const{
             std::vector<std::string > vecStrs;
             auto iter   =   umapData_.find(key);
             if(iter!=umapData_.end()){
@@ -218,21 +259,17 @@ namespace ll{
             }
             return vecStrs;
         }
-        std::vector<int> getIntList(const std::string& key){
-            auto vecStrs    =   getStringList(key);
-            std::vector<int> vecInts(vecStrs.size());
-            std::transform(vecStrs.begin(), vecStrs.end(), vecInts.begin(), 
-                [](const std::string& str){ return std::stoi(str); });
-            return vecInts;
-        }
-        std::vector<double> getDoubleList(const std::string& key){
-            auto vecStrs    =   getStringList(key);
-            std::vector<double> vecVals(vecStrs.size());
-            std::transform(vecStrs.begin(), vecStrs.end(), vecVals.begin(), 
-                [](const std::string& str){ return std::stod(str); });
-            return vecVals;
-        }
 
+        template<typename T=double>
+        std::vector<T> getNumberList(const std::string& key) const{
+            auto vecStrs    =   getStringList(key);
+            std::vector<T> vecNums(vecStrs.size());
+            std::transform(vecStrs.begin(), vecStrs.end(), vecNums.begin(), 
+                [](const std::string& str){
+                    return static_cast<T>(std::stoi(str));
+                });
+            return vecNums;
+        }
 
         // may not use
         bool add(const std::string& key, const std::string& val){
