@@ -2,6 +2,7 @@
 
 // std headers
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -25,6 +26,7 @@
 #include <algorithm>
 #include <thread>
 #include <mutex>
+#include <utility>
 
 #include <cassert>
 #include <ctime>
@@ -35,11 +37,12 @@
     X& operator=(const X& ) =   delete
 
 #define LL_ABORT(...) throw(std::runtime_error(__VA_ARGS__))
-//todo: filename only
-#define LL_LOG std::cout<<"["<<__FILE__<<"-"<<__LINE__<<"]: "
-#define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
-
 #define LL_ASSERT(...) if(!(__VA_ARGS__)) LL_ABORT(#__VA_ARGS__)
+
+#define __FILENAME__ ll::__current_filename(__FILE__)
+#define LL_LOG std::cerr<<"["<<__FILENAME__<<": "<<__LINE__<<"] "
+
+#define LL_NOTNULL(x) {if(!x) LL_ABORT("null check failed: "+#x);} x
 
 #define LL_ABS(x) ((x)>0?(x):(-x))
 
@@ -51,6 +54,11 @@
 #define LL_REPEAT(n) for(int __i__=0; __i__<n; ++__i__)
 
 namespace ll{
+
+    inline std::string __current_filename(const std::string& file){
+        auto pos    =   file.rfind('/');
+        return file.substr(pos==std::string::npos? 0: pos+1);
+    }
 
 #if __cplusplus<201402L
     //* before c++14
@@ -76,26 +84,9 @@ namespace ll{
         return vec;
     }
 
-    template<typename IT>
-    std::ostream& dump(IT beg, IT end, std::ostream& os=std::cout, 
-        const std::string& deli=", "){
-        for(auto it=beg; it!=end; ++it)
-            os<<(*it)<<deli;
-        return os;
-    }
-
-    template<typename IT>
-    std::ostream& dump(IT beg, IT end, const std::string& filename, 
-        const std::string& deli=", "){
-        std::ofstream fout(filename.c_str());
-        assert(fout.is_open() && "cannot open file");
-
-        return dump(beg, end, fout, deli);
-    }
-
     template<typename T>
     T clamp(T val, T low, T high){
-        assert(low<=high && "bad argumentss");
+        assert(low<=high && "bad arguments");
         if(val<low) return low;
         if(val>high) return high;
         return val;
@@ -108,6 +99,26 @@ namespace ll{
     template<typename T>
     T randrange(T minval, T maxval){
         return T(std::rand()/double(RAND_MAX)*(maxval-minval))+minval;
+    }
+
+    //* tuple print
+    template<typename Tuple, std::size_t N>
+    struct __tuple_printer{
+        static void print(const Tuple& t){
+            __tuple_printer<Tuple, N-1>::print(t);
+            std::cout<<", "<<std::get<N-1>(t);
+        }
+    };
+    template<typename Tuple>
+    struct __tuple_printer<Tuple, 1>{
+        static void print(const Tuple& t){
+            std::cout<<std::get<0>(t);
+        }
+    };
+    template<typename... Args> void print(const std::tuple<Args...>& t){
+        std::cout<<"(";
+        __tuple_printer<decltype(t), sizeof...(Args)>::print(t);
+        std::cout<<")";
     }
 
     //* simple unique patch
@@ -140,6 +151,35 @@ namespace ll{
         }
 
         return result;
+    }
+
+    //* string function, dont want to relate to boost
+    template<typename UOP>
+    std::vector<std::string > string_split(const std::string& str, UOP uop){
+        std::vector<std::string > vecStrs;
+        int s(0), i(0);
+        while(i<static_cast<int>(str.size())){
+            if(uop(str[i])){
+                if(s<i) vecStrs.push_back(str.substr(s, i-s));
+                s   =   i+1;
+            }
+            ++i;
+        }
+        if(s<i) vecStrs.push_back(str.substr(s, i));
+
+        return vecStrs;
+    }
+    template<> inline 
+    std::vector<std::string > string_split<char>(const std::string& str, char c){
+        return string_split(str, [&](char tc){ return tc==c; });
+    }
+    template<> inline 
+    std::vector<std::string > string_split<std::string>(const std::string& str, std::string s){
+        return string_split(str, [&](char c){ return s.find(c)!=std::string::npos; });
+    }
+    template<> inline 
+    std::vector<std::string > string_split<const char*>(const std::string& str, const char* ps){
+        return string_split(str, std::string(ps));
     }
 
     //* simple warpper on algo, for fp
@@ -205,29 +245,19 @@ namespace ll{
             assert(fin.is_open());
             std::string line, key, e, val;
             while(std::getline(fin, line)){
-                if(line.empty() || line[0]==';')
-                    continue;
+                line    =   line.substr(0, line.find(';'));
+                if(line.empty()) continue;
                 
                 std::stringstream ssin(line);
-                ssin>>key>>e;
-                std::getline(ssin, val);
-                val =   val.substr(0, val.find(';'));
-                if(!val.empty())
-                    umapData_.insert({key, val});
+                ssin>>key>>e>>val;
+                assert(e=="=" && "bad format");
+
+                if(!val.empty()) umapData_.insert({key, val});
             }
 
         }
 
         // single value
-        int getInt(const std::string& key, int defval=0) const{
-            auto iter   =   umapData_.find(key);
-            return iter==umapData_.end()? defval: std::stoi(iter->second);
-        }
-        double getDouble(const std::string& key, double defval=0.0) const{
-            auto iter   =   umapData_.find(key);
-            return iter==umapData_.end()? defval: std::stod(iter->second);
-        }
-        
         std::string getString(const std::string& key, const std::string& defval="") const{
             auto iter   =   umapData_.find(key);
             return iter==umapData_.end()? defval: iter->second;
@@ -240,24 +270,10 @@ namespace ll{
 
         // value list
         std::vector<std::string > getStringList(const std::string& key) const{
-            std::vector<std::string > vecStrs;
             auto iter   =   umapData_.find(key);
-            if(iter!=umapData_.end()){
-                // simple split
-                int s(0), i(0);
-                std::string strList =   iter->second;
-                while(i<static_cast<int>(strList.size())){
-                    if(strList[i]==','){
-                        if(s<i)
-                            vecStrs.push_back(strList.substr(s, i-s));
-                        s   =   i+1;
-                    }
-                    ++i;
-                }
-                if(s<i)
-                    vecStrs.push_back(strList.substr(s, i));
-            }
-            return vecStrs;
+
+            return iter==umapData_.end()? std::vector<std::string >():
+                string_split(iter->second, ", ");
         }
 
         template<typename T=double>
@@ -266,7 +282,7 @@ namespace ll{
             std::vector<T> vecNums(vecStrs.size());
             std::transform(vecStrs.begin(), vecStrs.end(), vecNums.begin(), 
                 [](const std::string& str){
-                    return static_cast<T>(std::stoi(str));
+                    return static_cast<T>(std::stod(str));
                 });
             return vecNums;
         }
@@ -311,21 +327,16 @@ namespace ll{
     };
 
     // no cache used, for very light use
-    inline int getIntFrom(const std::string& filename, const std::string& keyname, 
-        int defval=0){
+    template<typename T>
+    inline T getNumberFrom(const std::string& filename, const std::string& keyname, 
+        T defval=T(0)){
         ConfigParser cp(filename);
-        return cp.getInt(keyname, defval);
-    }
-    inline double getDoubleFrom(const std::string& filename, 
-        const std::string& keyname, double defval=0.){
-        ConfigParser cp(filename);
-        return cp.getDouble(keyname, defval);
+        return cp.getNumber<T>(keyname, defval);
     }
     inline std::string getStringFrom(const std::string& filename, 
         const std::string& keyname, const std::string& defval=""){
         ConfigParser cp(filename);
         return cp.getString(keyname, defval);
     }
-
     
 }

@@ -2,6 +2,9 @@
 
 #include "ll.hpp"
 #include "llda.hpp"
+#include "llui.hpp"
+
+#define NUMBER_EQUAL(a, b) if(LL_ABS(a-b)>1e-8) LL_ABORT("equal test failed: ")
 
 void testConfig(){
     ll::ConfigParser cp("config");
@@ -21,11 +24,8 @@ void testRange(){
 }
 
 void testMean(){
-    int a[]{1, 2, 3, 4, 5, 6, 7, 8};
-    std::vector<int > v(a, a+8);
-    std::cout<<ll::da::mean<decltype(v.begin()), int>(v.begin(), v.end())<<"\n";
-
-    std::cout<<ll::da::variance(v.begin(), v.end())<<"\n";
+    std::vector<double > v{1, 2, 3, 4, 5, 6, 7, 8};
+    ll::print(ll::da::mean_and_variance(v));
 }
 
 void testUnique(){
@@ -88,8 +88,30 @@ void testMatch(){
     }
 }
 
+void testPlot(){
+    auto xs =   ll::range(0., 10., .1);
+    std::vector<double > ys;
+    std::transform(xs.begin(), xs.end(), std::back_inserter(ys), 
+        [](double x){ return std::sin(x); });
+
+    ll::ui::board b(200, 60);
+    ll::ui::plot(b, xs, ys, 'o');
+
+    std::transform(xs.begin(), xs.end(), ys.begin(), 
+        [](double x){ return std::cos(x); });
+
+    ll::ui::plot(b, xs, ys, '+').print();
+}
+
 int main(int, char**){
-    testConfig();
+
+    auto vec    =   ll::range(0., 1., .11);
+    for(auto& v: vec) std::cout<<v<<", ";
+    std::cout<<std::endl;
+
+    auto bins   =   ll::da::histogram(vec, {0., .2, .4, 1});
+    for(auto& v: bins) std::cout<<v<<", ";
+    std::cout<<std::endl;
 
     return 0;
 }
