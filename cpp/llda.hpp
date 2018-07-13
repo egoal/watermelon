@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ll.hpp"
 
 namespace ll{ namespace da{
@@ -38,7 +40,7 @@ std::vector<T> percent_quantile(const std::vector<T>& c, std::initializer_list<d
 
 template<typename T1=double, typename T2=double>
 std::vector<int> histogram(const std::vector<T1>& c, const std::vector<T2>& ranges){
-    assert(std::is_sorted(ranges.begin(), ranges.end()) && "bad arguments");
+    assert(ranges.size()>1 && std::is_sorted(ranges.begin(), ranges.end()) && "bad arguments");
 
     std::vector<int > counts(ranges.size()-1, 0);
     for(auto& val: c){
@@ -52,16 +54,6 @@ std::vector<int> histogram(const std::vector<T1>& c, const std::vector<T2>& rang
 
     return counts;
 }
-template<typename T1=double, typename T2=double>
-std::vector<int> histogram(const std::vector<T1>& c, std::initializer_list<T2> ranges){
-    std::vector<T2> vrngs;
-    vrngs.reserve(ranges.size());
-    for(auto& v: ranges)
-        vrngs.push_back(v);
-    
-    return histogram(c, vrngs);
-}
-
 
 template<typename BOP> std::vector<std::tuple<int, int, double > > match_bf(
     int maxidx0, int maxidx1, BOP bop, bool crossCheck=false){
@@ -95,7 +87,7 @@ template<typename BOP> std::vector<std::tuple<int, int, double > > match_bf(
 }
 
 // p-> a-b
-double distance_to_line(double ax, double ay, double bx, double by, double px, double py){
+inline double distance_to_line(double ax, double ay, double bx, double by, double px, double py){
     double apx(px-ax), apy(py-ay), abx(bx-ax), aby(by-ay);
     assert(abx*abx+aby*aby> 1e-8 && "cannot use same point");
 

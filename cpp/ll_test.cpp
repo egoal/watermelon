@@ -103,15 +103,13 @@ void testPlot(){
     ll::ui::plot(b, xs, ys, '+').print();
 }
 
-int main(int, char**){
+int main(int, char** argv){
+    std::srand(std::time(nullptr));
+    std::vector<double > vec;
+    LL_REPEAT(100) vec.push_back(ll::randrange(0., 1.));
 
-    auto vec    =   ll::range(0., 1., .11);
-    for(auto& v: vec) std::cout<<v<<", ";
-    std::cout<<std::endl;
-
-    auto bins   =   ll::da::histogram(vec, {0., .2, .4, 1});
-    for(auto& v: bins) std::cout<<v<<", ";
-    std::cout<<std::endl;
+    ll::ui::hist(vec, {0., .123456789, .4123456789, .6, .66, 123456789.123456789}, 
+        argv[1][0], std::cout, 40);
 
     return 0;
 }
