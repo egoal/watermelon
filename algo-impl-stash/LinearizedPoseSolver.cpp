@@ -304,12 +304,12 @@ bool LinearizedPoseSolver::solve(){
         return false;
     }
 
-#if 0
+#if 0   // chordal
     if(!estimateTranslation()){
         LPS_LOG<<"translation estimation failed";
         return false;
     }
-#else
+#else   // pose with disturbed rotation
     if(!estimatePose()){
         LPS_LOG<<"pose estimation failed";
         return false;

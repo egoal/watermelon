@@ -153,6 +153,10 @@ namespace ll{
         return result;
     }
 
+    //* transform if
+    template<typename IT>
+    IT transform_if(){}
+
     //* string function, dont want to relate to boost
     template<typename UOP>
     std::vector<std::string > string_split(const std::string& str, UOP uop){
@@ -249,8 +253,9 @@ namespace ll{
                 if(line.empty()) continue;
                 
                 std::stringstream ssin(line);
-                ssin>>key>>e>>val;
+                ssin>>key>>e;
                 assert(e=="=" && "bad format");
+                std::getline(ssin, val);
 
                 if(!val.empty()) umapData_.insert({key, val});
             }

@@ -3,17 +3,17 @@
 import sys, os
 import random
 
-MAP_WIDTH, MAP_HEIGHT = 64, 64
+MAP_WIDTH, MAP_HEIGHT = 42, 42
 
 UP, DOWN, LEFT, RIGHT = 1, -1, 2, -2
 DIRECTIONS = [UP, DOWN, LEFT, RIGHT]
 HORIZONTAL, VERTICAL = 'horizontal', 'vertical'
 CORRIDOR_DIRECTIONS = [HORIZONTAL, VERTICAL]
 
-ROOM_WIDTH_RANGE, ROOM_HEIGHT_RANGE = [6, 12], [6, 12]
-CORRIDOR_LENGTH_RANGE = [4, 12]
+ROOM_WIDTH_RANGE, ROOM_HEIGHT_RANGE = [6, 10], [6, 10]
+CORRIDOR_LENGTH_RANGE = [4, 10]
 
-ROOM_NUMBER_RANGE = [16, 24]
+ROOM_NUMBER_RANGE = [10, 15]
 PROBABILITY_SPAWN_ROOM = .4
 
 def clamp(x, min, max):
@@ -120,7 +120,7 @@ def expand(rect, direct):
 def place_first_room():
     w = random.randint(ROOM_WIDTH_RANGE[0], ROOM_WIDTH_RANGE[1])
     h = random.randint(ROOM_HEIGHT_RANGE[0], ROOM_HEIGHT_RANGE[1])
-    inner = 10
+    inner = MAP_WIDTH//6
     x1 = random.randint(0+inner, MAP_WIDTH-inner-w)
     y1 = random.randint(0+inner, MAP_HEIGHT-inner-h)
 
@@ -311,11 +311,15 @@ def show_picture():
     plt.imshow(img)
     plt.show()
 
-# process
-init_map()
+def main():
+    # process
+    init_map()
 
-place_rooms()
-build_walls()
+    place_rooms()
+    build_walls()
 
-# print_map()
-show_picture()
+    # print_map()
+    show_picture()
+
+if __name__=='__main__':
+    main()
