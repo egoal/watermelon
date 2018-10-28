@@ -1,0 +1,25 @@
+createdAt: "2018-10-28T05:18:46.464Z"
+updatedAt: "2018-10-28T13:11:09.346Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "advanced calculus of serveral variables"
+content: '''
+  ## advanced calculus of serveral variables
+  
+  #### 2. Multivariable Differential Calculus
+  
+  The mapping $F: D\\subset R^n \\to R^m$, is *differentiable* at the point $a\\in D$ if and only if there exists a *linear* mapping $L: R^n\\to R^m$ such that
+  $$ \\lim_{h\\to 0} \\frac {F(a+h)- F(a)- L(h)}{|h|} = 0$$
+  the linear mapping $L$ is then denoted by $dF_a$, called the *differential* of $F$ at $a$, its matrix $F'(a)$ is called the derivative of $F$ at $a$.
+  
+  If $F: R^n\\to R^m$ is differential at $a$, then the directional derivative $D_vF(a)$ exists for all $v\\in R^n$ and $D_vF(a)=dF_a(v)$, then:
+  $$ D_vF(a) = dF_a(\\sum v_ie_i) = \\sum v_i\\ dF_a(e_i) = \\sum v_iD_i(a) $$
+  for special case $f: R^n\\to R$, $D_vf(a) = \\nabla f(a)\\cdot v$
+  
+  The mapping $F: R^n\\to R^m$ is *continuously differentiable* at $a$ if the partial derivatives $D_iF$ all exist at each point of some open set containing $a$, and are continuous at $a$. every continuously differentiable funciton is differentiable, and every differentiabl function has directional derivatives.
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
