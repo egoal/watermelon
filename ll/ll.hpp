@@ -20,6 +20,7 @@
 #include <stack>
 #include <queue>
 #include <tuple>
+#include <array>
 
 #include <exception>
 #include <functional>
