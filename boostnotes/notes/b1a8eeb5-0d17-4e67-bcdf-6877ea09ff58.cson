@@ -1,0 +1,43 @@
+createdAt: "2018-10-29T02:09:19.417Z"
+updatedAt: "2018-10-29T02:22:13.751Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "matplotlib"
+content: '''
+  # matplotlib
+  
+  ```python
+  import matplotlib.pyplot as plt 
+  plt.style.use('ggplot')
+  
+  # 垂线
+  plt.axvline(x=1, color='r', linestyle='--', )
+  
+  # 旋转标签以避免tick重叠
+  plt.xticks(range(len(xs)), xs, rotation=60, )
+  
+  # 钉图
+  markerline, stemlines, baseline = plt.stem(x, np.cos(x), '-.')
+  plt.setp(baseline, color='r', linewidth=2)
+  
+  # 条形图
+  plt.bar(x, height=y, )
+  
+  # 3D
+  from mpl_toolkits.mplot3d import Axes3D
+  
+  fig = plt.figure()
+  ax = fig.add_subplot(111, projection='3D')
+  ax.scatter(x, y, z)
+  
+  # 
+  plt.xticks([]) # 关闭刻度
+  plt.axis('off') # 关闭轴与边框，'equal'等距轴
+  f = plt.gca()
+  f.axes.get_yaxis().set_visible(False) # 关闭坐标轴
+  ```
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

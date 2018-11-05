@@ -1,0 +1,16 @@
+createdAt: "2018-11-01T09:59:58.151Z"
+updatedAt: "2018-11-01T10:01:33.776Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "convex optimization"
+content: '''
+  ## convex optimization
+  
+  #### 5. duality
+  
+  $$\\min f_0(x)$$
+  $$s.t.\\quad f_i(x)\\le 0, \\quad h_i(x)=0$$
+'''
+tags: []
+isStarred: false
+isTrashed: false

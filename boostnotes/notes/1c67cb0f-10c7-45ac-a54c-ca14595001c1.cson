@@ -1,0 +1,61 @@
+createdAt: "2018-10-29T02:34:59.727Z"
+updatedAt: "2018-10-29T03:36:00.739Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "standard library"
+content: '''
+  # standard library
+  
+  ```python
+  import sys, os
+  
+  # 遍历全文件
+  for root, dirs, files in os.walk('.'):
+    print(root, dirs, files, )
+  
+  # 删除所有txt文件
+  for f in os.path.listdir('.'):
+    if os.path.isfile(f) as os.path.splitext(f)[1]=='.txt':
+      os.remove(f)
+      
+  ```
+  
+  ```python
+  from collections import namedtuple
+  
+  Student = namedtuple('Student', ['id', 'ans'])
+  s = Student(1, 'A')
+  ```
+  
+  ```python
+  import json
+  
+  json.loads([JSON_STRING]) # 一般会解码为dict或list
+  
+  # 读写文件，按情况变为内置数据
+  with open('out.json', 'w') as f:
+    json.dump(data, f)
+  with open('in.json') as f:
+    data = json.load(f)
+  
+  ```
+  
+  ```python
+  import time
+  
+  time.sleep(1)
+  
+  tm = time.localtime() # (tm_year=2017, tm_mon=5, ...)
+  time.strtime('%Y-%m-%d %H:%M:%S') # 2018-10-29 10:42:44
+  \'''
+  %a, %A  简化，完整的星期名
+  %b, %B  月份名
+  %j      日期数 001-366
+  %w, %W  星期(0-6)，星期数(00-53)
+  \'''
+  ```
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

@@ -3,7 +3,17 @@
     {
       "key": "1e8e7087e48b4c193327",
       "color": "#E10051",
-      "name": "default"
+      "name": "books"
+    },
+    {
+      "key": "f3aeaddc36c42d9137b3",
+      "color": "#FF8E00",
+      "name": "python"
+    },
+    {
+      "key": "3ee76ac761e39836b6e0",
+      "color": "#FF8E00",
+      "name": "maker"
     }
   ],
   "version": "1.0"

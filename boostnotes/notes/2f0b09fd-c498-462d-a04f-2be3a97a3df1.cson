@@ -1,0 +1,49 @@
+createdAt: "2018-10-29T02:23:02.440Z"
+updatedAt: "2018-10-29T08:20:37.431Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "numpy"
+content: '''
+  # numpy
+  
+  ```python
+  import numpy as np 
+  ```
+  
+  ```python
+  # 百分位数
+  np.percentile(data, q=[5, 95])
+  
+  # 按某列排序array
+  A[np.argsort(A[:, 0]), :]
+  
+  # array构造
+  np.r_[3, [0]*3, 1:2:3j]
+  np.c_[1:3, [0]*3, 0:1:3j]
+  np.hstack((a, b))
+  np.vstack((a, b))
+  np.repeat(a, (1, 2)) # 重复 [1, 2] -> [1, 1, 2, 2]
+  np.tile(a, (1, 2)) # 按块重复 [1, 2] -> [1, 2, 1, 2]
+  
+  # 控制打印格式
+  np.set_printoptions(precision=3, suppress=True, )
+  ```
+  
+  ```python
+  # np.linalg
+  # import scipy.linalg as la
+  np.linalg.norm(A)
+  np.linalg.det(A)
+  np.linalg.matrix_rank(A)
+  np.linalg.trace(A)
+  np.linalg.inv(A)
+  np.linalg.solve(A, b)
+  la.lstsq(A, b)
+  np.linalg.eig(A) # eigh针对hermitian矩阵，下同
+  np.linalg.eigvals(A)
+  ```
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
