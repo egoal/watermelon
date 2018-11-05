@@ -1,0 +1,67 @@
+createdAt: "2018-11-05T02:33:49.841Z"
+updatedAt: "2018-11-05T08:38:05.660Z"
+type: "MARKDOWN_NOTE"
+folder: "3ee76ac761e39836b6e0"
+title: "love"
+content: '''
+  ## love
+  
+  ---
+  #### thirdparty
+  ojbect-orient 
+  > git clone https://github.com/rxi/classic
+  
+  input 
+  > git clone https://github.com/adnzzzzZ/boipushy
+  ```lua
+  input = Input()
+  
+  :bind(keycode, action_name)
+  :bind(keycode| mouse, on_pressed| on_mouse_down)
+  
+  ```
+  
+  timer 
+  > git clone https://github.com/adnzzzzZ/chrono
+  ```lua
+  -- refer to hump/timer 
+  timer = Timer()
+  
+  :update(dt) -- this should be called in each frame
+  :after(time, on_timeout)
+  :every(time, on_each_time)
+  :tween(time, target, table_result_attributes, mode_interp, [on_done])
+  :cancel(handle) -- handle is returned by above functions
+  
+  ```
+  
+  camera
+  > git clone https://github.com/adnzzzzZ/STALKER-X
+  
+  aabb collider
+  > git clone https://github.com/kikito/bump.lua
+  
+  functional 
+  > git clone https://github.com/Yonaba/Moses
+  ```lua
+  M = require 'Moses/moses'
+  
+  M.each(table, func_value_key)
+  M.at(table, keys...) -- slice, give sub table
+  M.adjust(table, key, value| func)
+  M.count(table, value)
+  M.countf(table, func_pass)
+  M.allEqual(table, [func_compare])
+  M.map(table, func_value| func_value_key) -- can maps both keys and values
+  M.reduce(table, func_v0_v1)
+  
+  ```
+  
+  utility 
+  > git clone https://github.com/vrld/hump
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
