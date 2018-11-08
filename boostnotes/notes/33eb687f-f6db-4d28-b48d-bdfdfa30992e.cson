@@ -1,5 +1,5 @@
 createdAt: "2018-11-05T02:33:49.841Z"
-updatedAt: "2018-11-05T08:38:05.660Z"
+updatedAt: "2018-11-07T03:03:31.655Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "love"
@@ -10,6 +10,24 @@ content: '''
   #### thirdparty
   ojbect-orient 
   > git clone https://github.com/rxi/classic
+  ```lua 
+  -- mixins
+  A = Object:extend()
+  function A:p() print('A:p') end
+  
+  B = Object:extend()
+  function B.p() print('B:p') end 
+  function B.q() print('B:q') end 
+  
+  C = A:extend()
+  C:implement(B) -- only gain methods from B, A:p won't be overwritten!
+  -- until now, C.super is A, has metchod A:p and B:q
+  
+  c = C()
+  c:is(A) and c:is(C) -- true
+  c:is(B) -- false
+  
+  ```
   
   input 
   > git clone https://github.com/adnzzzzZ/boipushy
@@ -40,6 +58,9 @@ content: '''
   
   aabb collider
   > git clone https://github.com/kikito/bump.lua
+  
+  assets manager
+  > git clone https://github.com/bjornbytes/cargo
   
   functional 
   > git clone https://github.com/Yonaba/Moses

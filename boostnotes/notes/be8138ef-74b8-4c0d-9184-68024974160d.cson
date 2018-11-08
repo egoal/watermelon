@@ -1,0 +1,27 @@
+createdAt: "2018-11-07T08:48:44.831Z"
+updatedAt: "2018-11-08T02:02:17.751Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "sympy"
+content: '''
+  # sympy
+  
+  ```python
+  import sympy as sm
+  ```
+  
+  ```python
+  sm.init_printing(use_unicode=True)
+  
+  x, y = sm.symbols('x y')
+  
+  # 化简三角函数
+  a = sm.cos(x+ sm.pi/3)+ sm.cos(x- sm.pi/3)
+  a.trigsimp() # cos(x)
+  
+  ```
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
