@@ -187,6 +187,16 @@ namespace ll{
         return string_split(str, std::string(ps));
     }
 
+    inline std::string& string_strip(std::string& str){
+        str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](char c){
+            return !std::isspace(c);
+        }));
+        str.erase(std::find_if(str.rbegin(), str.rend(), [](char c){
+            return !std::isspace(c);
+        }).base(), str.end());
+        return str;
+    }
+
     //* simple warpper on algo, for fp
     template<typename Container, typename unop> 
     void for_each(Container& c, unop op){
@@ -257,6 +267,8 @@ namespace ll{
                 ssin>>key>>e;
                 assert(e=="=" && "bad format");
                 std::getline(ssin, val);
+                // strip
+                string_strip(val);
 
                 if(!val.empty()) umapData_.insert({key, val});
             }
