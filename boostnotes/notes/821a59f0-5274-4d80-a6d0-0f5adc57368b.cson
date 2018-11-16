@@ -1,0 +1,17 @@
+createdAt: "2018-11-12T01:09:50.172Z"
+updatedAt: "2018-11-12T01:13:19.222Z"
+type: "MARKDOWN_NOTE"
+folder: "3ee76ac761e39836b6e0"
+title: "lua & moonscript"
+content: '''
+  # lua & moonscript
+  ```lua
+  math.mod 
+  ```
+  
+  ```moonscript
+  ```
+'''
+tags: []
+isStarred: false
+isTrashed: false

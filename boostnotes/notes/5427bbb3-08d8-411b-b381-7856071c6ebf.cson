@@ -1,5 +1,5 @@
 createdAt: "2018-11-01T09:59:58.151Z"
-updatedAt: "2018-11-01T10:01:33.776Z"
+updatedAt: "2018-11-15T01:18:39.533Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "convex optimization"
@@ -10,6 +10,13 @@ content: '''
   
   $$\\min f_0(x)$$
   $$s.t.\\quad f_i(x)\\le 0, \\quad h_i(x)=0$$
+  
+  **Slater's condition**: given the primial problem convex: 
+  $$\\min f_0(x)$$
+  $$s.t.\\quad f_i(x)\\le 0, \\quad Ax=b$$
+  with $f_i$ convex, if there exists an *strictly feasible* point, ($f_i(x)<0, Ax=b$), then strong duality holds. 
+  
+  
 '''
 tags: []
 isStarred: false
