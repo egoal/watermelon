@@ -1,5 +1,5 @@
 createdAt: "2018-11-12T01:09:50.172Z"
-updatedAt: "2018-11-12T01:13:19.222Z"
+updatedAt: "2018-11-19T06:44:18.018Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "lua & moonscript"
@@ -7,10 +7,13 @@ content: '''
   # lua & moonscript
   ```lua
   math.mod 
+  -- 运算符重载, moonscript中可以直接写在class内
+  __add, __sub, __mul, __div, __unm -- 相反数 
+  __mod, __pow, __concat -- 字符串连接符..
+  __eq, __lt, __le -- 比较==, <, <=
+  __tostring
   ```
   
-  ```moonscript
-  ```
 '''
 tags: []
 isStarred: false

@@ -1,9 +1,66 @@
 Timer = require 'thirdparty/chrono/Timer'
 Input = require 'thirdparty/boipushy/Input'
-export Vector = require 'thirdparty/hump/vector'
+-- export Vector = require 'thirdparty/hump/vector'
 bump = require 'thirdparty/bump/bump'
 cargo = require 'thirdparty/cargo/cargo' 
 anim8 = require 'thirdparty/anim8/anim8'
+
+--[[basic]]
+export instance_of = (obj, cls)->
+  o = obj.__class 
+  while o 
+    return true if o==cls
+    o = o.__parent
+  false 
+
+--[[Vector, 2d]]
+export class Vector 
+  new: (x=0, y=0)=> @x, @y = x, y 
+  
+  copy: => Vector @x, @y 
+
+  unpack: => @x, @y 
+
+  -- operators
+  __tostring: => "("..tonumber(@x)..","..tonumber(@y)..")"
+
+  __unm: => Vector -@x, -@y
+
+  __add: (other)=> 
+    return Vector @x+ other, @y+ other if type(other)=='number' 
+    Vector @x+ other.x, @y+ other.y 
+
+  __sub: (other)=> Vector @x- other.x, @y- other.y  
+
+  __mul: (number)=> Vector @x* number, @y* number
+
+  __div: (number)=> Vector @x/number, @y/number
+
+  __eq: (other)=> @x==other.x and @y==other.y
+
+  __dot: (other)=> @x* other.x + @y* other.y 
+
+  len2: => @x* @x+ @y* @y 
+
+  len: => math.sqrt @x*@x+ @y*@y 
+
+  angle: => math.tan2 @y, @x 
+
+  normalize: => 
+    l = @len!
+    self /= l if l>0 
+
+  normalized: => @copy!\normalize!
+
+  -- statics
+  @Zero: => Point 0, 0 
+
+  @FromPolar: (angle, radius=1)=>
+    Point math.cos(angle)* radius, math.sin(angle)* radius
+  
+  @RandomDirection: (len_min=1, len_max)=>
+    len_max = len_max or len_min
+    @FromPolar ll.random(0, 2*math.pi), ll.random(len_min, len_max)
 
 --[[GameObject]]
 export class GameObject
@@ -22,7 +79,6 @@ export class GameObject
   init: =>
   update: (dt)=>
     @timer\update dt 
-    @update_collider! if @collider
 
   draw: =>
     love.graphics.push!
@@ -44,6 +100,14 @@ export class GameObject
 
   update_collider: =>
     Room.Current.world\update self, @pos.x+ @collider.x, @pos.y+ @collider.y, @collider.w, @collider.h   
+
+  check_collider: (dx, dy, filter)=>
+    x, y, items, len = Room.Current.world\check self, @pos.x+ @collider.x+ dx, @pos.y+ @collider.y+ dy
+    x, y, items, len 
+
+  move_collider: (dx, dy, filter)=>
+    x, y, items, len = Room.Current.world\move self, @pos.x+ @collider.x+ dx, @pos.y+ @collider.y+ dy
+    x- @collider.x, y- @collider.y, items, len 
 
 --[[Room]]
 export class Room
