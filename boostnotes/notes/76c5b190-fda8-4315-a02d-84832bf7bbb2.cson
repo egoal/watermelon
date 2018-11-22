@@ -1,0 +1,28 @@
+createdAt: "2018-11-22T02:51:51.660Z"
+updatedAt: "2018-11-22T02:56:14.711Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "scipy"
+content: '''
+  # scipy
+  
+  ```python
+  import scipy.linalg as la 
+  
+  # 线形方程组
+  la.solve(A, b)
+  la.lstsq(A, b)
+  ```
+  
+  ```python
+  import scipy.optimize as opt
+  
+  # 曲线拟合
+  opt.curve_fit(func, x, y, ...)
+    # 模型由func给出: lambda x, a, b: a* x+ b
+  ```
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

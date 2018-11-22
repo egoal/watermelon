@@ -1,10 +1,10 @@
 createdAt: "2018-10-29T02:34:59.727Z"
-updatedAt: "2018-10-29T03:36:00.739Z"
+updatedAt: "2018-11-22T03:09:26.285Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
-title: "standard library"
+title: "std: sys, os, collections, json, time, tkinter"
 content: '''
-  # standard library
+  # std: sys, os, collections, json, time, tkinter
   
   ```python
   import sys, os
@@ -53,6 +53,44 @@ content: '''
   %j      日期数 001-366
   %w, %W  星期(0-6)，星期数(00-53)
   \'''
+  ```
+  
+  ```python
+  import tkinter as tk 
+  
+  class MainWidget(tk.Frame):
+    def __init__(self, master):
+      tk.Frame.__init__(master)
+      tk.Label(self, text='hello world').grid(row=0, column=0, sticky='WENS')
+    
+  root = tk.Tk()
+  MainWidget(root).grid()
+  root.mainloop()
+  
+  # 各个组件
+  # 按钮
+  tk.Button(self, text='Close', command=self.master.destroy).grid(row=1, sticky='WENS')
+  # 标签
+  tk.Label(self, text='Name: ').pack()
+  # 输入框
+  self.newLine = tk.StringVar(value='Ah')
+  tk.Entry(self, textvariable=self.newline).pack()
+  # 单选框
+  self.rare = tk.StringVar(value='normal')
+  tk.Radiobutton(self, variable=self.rare, value='normal', text=u'普通').pack()
+  tk.Radiobutton(self, variable=self.rare, value='rare', text=u'稀有').pack()
+  tk.Radiobutton(self, variable=self.rare, value='legendary', text=u'传说').pack()
+  # 勾选框
+  # 有command参数作为回调
+  self.isFirst = tk.IntVar(value=1)
+  tk.checkbutton(self, text=u'先手', onvalue=1, offvalue=0, variable=self.isFirst).pack()
+    
+  # 对话框
+  from tkinter import messagebox
+  messagebox.showerror('error', 'undefined id!')
+  
+  # 文件浏览
+  from tkinter import tkinter.filedialog  
   ```
   
 '''
