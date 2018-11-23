@@ -14,6 +14,11 @@
       "key": "3ee76ac761e39836b6e0",
       "color": "#FF8E00",
       "name": "maker"
+    },
+    {
+      "key": "742b290c4e679bed3513",
+      "color": "#E10051",
+      "name": "cpp"
     }
   ],
   "version": "1.0"

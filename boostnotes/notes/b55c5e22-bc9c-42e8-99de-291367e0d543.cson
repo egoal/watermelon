@@ -1,0 +1,63 @@
+createdAt: "2018-11-23T02:00:09.275Z"
+updatedAt: "2018-11-23T02:19:27.232Z"
+type: "MARKDOWN_NOTE"
+folder: "742b290c4e679bed3513"
+title: "cmake"
+content: '''
+  # cmake
+  
+  ```cmake
+  # NOT, EXISTS等关键词需要大写
+  if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+  endif()
+  
+  PROJECT_SOURCE_DIR # 当前作用域内上一个project的路径
+  # -top
+  #  |-sub
+  #   |-ssub
+  #  |-sub2
+  # top中添加sub和sub2的编译
+  # sub中有project，则为top/sub，sub中添加了ssub，其中没有project，保持为top/sub
+  # sub2中没有project，则为top
+  
+  # c++11
+  set(CMAKE_CXX_FLAGS "-std=c++11")
+  # 专业版，感觉像引用了包里的几个宏来检查
+  include(CheckCXXCompilerFlag) 
+  CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORT_CXX11)
+  CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORT_CXX0X)
+  if(COMPILER_SUPPORT_CXX11)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    add_definitions(-DCOMPILEDWITHC11)
+  elseif(COMPILER_SUPPORT_CXX0X)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    add_definitions(-DCOMPILEDWITHC0X)
+  else()
+    message(FATAL_ERROR "the compiler ${CMAKE_CXX_COMPILER} has no c++11 support.")
+  endif()
+  
+  aux_source_directory(. SRC_LST)
+  
+  cmake -D CMAKE_BUILD_TYPE=Debug ..
+  ```
+  
+  常用库
+  
+  ```cmake
+  # eigen3
+  find_package(Eigen3 REQUIRED)
+  include_directories(${EIGEN3_INCLUDE_DIR})
+  
+  # gflags
+  find_package(Gflags REQUIRED)
+  if(GFLAGS_FOUND)
+  ${GFLAGS_INCLUDE_DIRS}
+  ${GFLAGS_LIBRARIES}
+  ```
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
