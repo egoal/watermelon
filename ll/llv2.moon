@@ -14,7 +14,7 @@ export ll = {
     return false 
 
   random: (low, high)-> love.math.random! *(high-low)+ low 
-  random_color: -> { ll.random(0, 1), ll.random_color(0, 1), ll.random_color(0, 1) }
+  random_color: -> { ll.random(0, 1), ll.random(0, 1), ll.random(0, 1) }
   
   color_rgb: (r, g, b) -> { r/255, g/255, b/255 }
 

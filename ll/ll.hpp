@@ -367,11 +367,7 @@ inline std::string getStringFrom(const std::string& filename,
 // simple binary map
 template <typename K, typename V>
 class bimap {
-  LL_BAN_COPY(bimap);
-
 public:
-  bimap() {}
-
   bool insert(const K& k, const V& v) {
     auto prl = left_.insert(std::make_pair(std::forward(k), std::forward(v)));
     if (!prl.second) return false;

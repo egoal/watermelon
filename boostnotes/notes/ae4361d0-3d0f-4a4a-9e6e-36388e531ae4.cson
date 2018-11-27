@@ -1,5 +1,5 @@
 createdAt: "2018-10-28T05:18:46.464Z"
-updatedAt: "2018-11-23T02:57:02.787Z"
+updatedAt: "2018-11-27T03:47:34.711Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "advanced calculus of serveral variables"
@@ -18,9 +18,32 @@ content: '''
   
   The mapping $F: R^n\\to R^m$ is *continuously differentiable* at $a$ if the partial derivatives $D_iF$ all exist at each point of some open set containing $a$, and are continuous at $a$. every continuously differentiable funciton is differentiable, and every differentiabl function has directional derivatives.
   
-  if $M$ is an $(n-1)$-dimensional manifold in $R^n$, then at each of its points, $M$ has an $(n-1)$-dimensional tangent plane.
+  If $M$ is an $(n-1)$-dimensional manifold in $R^n$, then at each of its points, $M$ has an $(n-1)$-dimensional tangent plane.
   
-  suppose that $g: R^n\\to R$ is continuously differentiable. if $M$ is the set of all those points $x\\in S=g^{-1}(0)$ at which $\\nabla g(x)\\not =0$, then $M$ is an $(n-1)$-dimensional manifold. given $a\\in M$, the gradient vector $\\nabla g(a)$$ is orthogonal to the tangent plane to $M$ at $a$.
+  Suppose that $g: R^n\\to R$ is continuously differentiable. if $M$ is the set of all those points $x\\in S=g^{-1}(0)$ at which $\\nabla g(x)\\not =0$, then $M$ is an $(n-1)$-dimensional manifold. given $a\\in M$, the gradient vector $\\nabla g(a)$$ is orthogonal to the tangent plane to $M$ at $a$.
+  
+  Suppose that $f^{(k+1)}$ exists in a neighborhood of $a$ and is continuous at $a$. if: 
+  $$f^{(i)}(a)=0,\\quad for\\ i=1, 2, ..., k-1$$
+  but $f^(k)(a)\\not =0$, then 
+  - $f$ has a local minimum at $a$ if $k$ is even, and $f^{(k)}(a)>0$;
+  - $f$ has a local maximum at $a$ if $k$ is even, and $f^{(k)}(a)<0$;
+  - $f$ has neither a maximum nor a minimum if $k$ is odd;
+  
+  Let $f: R^n\\to R$ defined on $G^{-1}, G: R^n\\to R^m$, that is, on a $(n-m)$-mainifold $M$, let $a$ be a critical point on $M$: 
+  $$ \\nabla f(a) = \\nabla G(a) \\cdot \\lambda $$
+  let the auxiliary function $H: R^n \\to R$ for $f$ at $a$ be:
+  $$ H(x)=f(x)-G(x)\\cdot \\lambda $$
+  then:
+  - $a$ is local minimal(maximum) if $\\nabla^2 H$ is positive(negative)-definite on the tangent space $T_a$ of $M$ as $a$
+  - neither if nondefinite on $T_a$
+  
+  #### 3. Successive Approximations and Implicit Functions
+  
+  
+  
+  
+  
+  
   
 '''
 tags: []
