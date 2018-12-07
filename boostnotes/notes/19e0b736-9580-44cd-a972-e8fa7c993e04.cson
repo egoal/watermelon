@@ -1,0 +1,24 @@
+createdAt: "2018-12-04T09:43:26.760Z"
+updatedAt: "2018-12-05T09:02:37.395Z"
+type: "MARKDOWN_NOTE"
+folder: "742b290c4e679bed3513"
+title: "random"
+content: '''
+  # random
+  
+  ```cpp
+  std::random_device rd{};
+  std::mt19937 gen; // {rd()};
+  
+  std::normal_distribution<double> d{0,1};
+  
+  for(int i=0; i<10; ++i)
+    std::cout<<d(gen)<<", ";
+  ```
+  
+'''
+tags: [
+  "std"
+]
+isStarred: false
+isTrashed: false

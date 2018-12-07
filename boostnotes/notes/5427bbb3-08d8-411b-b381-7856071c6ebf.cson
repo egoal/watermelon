@@ -1,5 +1,5 @@
 createdAt: "2018-11-01T09:59:58.151Z"
-updatedAt: "2018-11-15T01:18:39.533Z"
+updatedAt: "2018-12-03T01:48:52.233Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "convex optimization"
@@ -16,7 +16,13 @@ content: '''
   $$s.t.\\quad f_i(x)\\le 0, \\quad Ax=b$$
   with $f_i$ convex, if there exists an *strictly feasible* point, ($f_i(x)<0, Ax=b$), then strong duality holds. 
   
-  
+  **stopping criteria**
+  $$ f_o(x^{(k)}) -g(\\lambda^{(k)}, \\mu^{(k)}) \\le \\epsilon_{abs} $$
+  or relative: 
+  $$ g(\\lambda^{(k)}, \\mu^{(k)})>0, \\quad
+  \\frac {f_o(x^{(k)}) -g(\\lambda^{(k)}, \\mu^{(k)})}{g(\\lambda^{(k)}, \\mu^{(k)})}\\le \\epsilon_{abs} $$
+  $$ f_o(x^{(k)}) <0, \\quad
+  \\frac {f_o(x^{(k)}) -g(\\lambda^{(k)}, \\mu^{(k)})}{ -f_o(x^{(k)})  }\\le \\epsilon_{abs} $$
 '''
 tags: []
 isStarred: false

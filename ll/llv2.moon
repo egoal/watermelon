@@ -69,9 +69,14 @@ export class Vector
 
   normalize: => 
     l = @len!
-    self /= l if l>0 
+    if l>0
+      @x /= l 
+      @y /= l 
 
-  normalized: => @copy!\normalize!
+  normalized: => 
+    r = @copy!
+    r\normalize!
+    r 
 
   -- statics
   @Zero: => Vector 0, 0 
