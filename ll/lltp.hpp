@@ -2,7 +2,7 @@
 
 // define below macro to use them before #include
 // #define LL_USE_OPENCV
-// #define LL_USE_EIGEN
+#define LL_USE_EIGEN
 
 //
 #ifdef LL_USE_OPENCV
@@ -74,7 +74,7 @@ Eigen::Matrix3d asSkewSymmetricMatrix(const Eigen::Vector3d &v) {
   return ssm;
 }
 
-Eigen::Matrix3d mapToSO3(const Eigen::Vector3d& s) {
+Eigen::Matrix3d exp(const Eigen::Vector3d& s) {
   //! refer to g2o/se3quat.h
   double theta = s.norm();
 
@@ -87,6 +87,11 @@ Eigen::Matrix3d mapToSO3(const Eigen::Vector3d& s) {
            (1 - cos(theta)) / (theta * theta) * (Omega * Omega);
   }
 }
+
+Eigen::Vector3d log(const Eigen::Matrix3d& R){
+  double d = .5* (R(0, 0)+ R(1, 1)+ R(2, 2)- 1.);
+}
+
 }
 }
 

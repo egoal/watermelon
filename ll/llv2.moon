@@ -245,7 +245,7 @@ export class Room
     go 
 
   -- simple bump warper 
-  bump_add_word: (name, size, color)=>
+  bump_add_world: (name, size, color)=>
     assert not @bump_worlds[name], 'cannot add world '..name..' twice!'
     @bump_worlds[name] = { color: color, world: bump.newWorld size }
 
