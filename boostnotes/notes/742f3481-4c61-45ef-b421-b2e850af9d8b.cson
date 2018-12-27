@@ -1,0 +1,16 @@
+createdAt: "2018-12-26T08:40:57.176Z"
+updatedAt: "2018-12-26T08:41:27.594Z"
+type: "MARKDOWN_NOTE"
+folder: "f3aeaddc36c42d9137b3"
+title: "pandas"
+tags: []
+content: '''
+  ## pandas
+  
+  ```python
+  import pandas as pd
+  ```
+  
+'''
+isStarred: false
+isTrashed: false
