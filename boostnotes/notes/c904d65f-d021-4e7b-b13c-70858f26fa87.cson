@@ -1,5 +1,5 @@
 createdAt: "2018-12-25T10:41:00.144Z"
-updatedAt: "2018-12-27T10:22:48.029Z"
+updatedAt: "2018-12-29T08:43:51.422Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "optimization algorithms on matrix manifold"
@@ -32,7 +32,10 @@ content: '''
   let $\\Im_x(M)$ denote the set of smooth real-valued functions defined on a neighborhood of $x$, a tangent vector $\\xi_x$ to a manifold $M$ at a point $x$ is a mappint from $\\Im_x(M)$ to $R$ such that there exists a curve $\\gamma$ on $M$ with $\\gamma(0)=x$, satisfying
   $$\\xi_x f=\\dot \\gamma(0)f:=\\frac{d(f(\\gamma(t)))}{dt}|_{t=0}$$
   for all $f\\in \\Im_x(M)$, such a curve $\\gamma$ is said to realize the tangent vector $\\xi_x$
+  > we emphasize that $\\dot \\gamma(0)$ is defined as a mapping from $\\Im_x(M)$ to $R$ , not as the time derivative $\\gamma'(0)$.
   
+  **Riemannian manifold**:
+  a manifold whose tangent spaces are endowed with a smoothly varying inner product is called a *Riemannian manifold*. the smoothly varying inner product is called the *Riemannian metric*.
 '''
 isStarred: false
 isTrashed: false

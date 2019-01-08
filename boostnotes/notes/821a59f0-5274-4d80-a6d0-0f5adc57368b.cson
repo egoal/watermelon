@@ -1,5 +1,5 @@
 createdAt: "2018-11-12T01:09:50.172Z"
-updatedAt: "2018-11-21T11:49:26.731Z"
+updatedAt: "2019-01-07T03:41:18.349Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "lua & moonscript"
@@ -15,6 +15,13 @@ content: '''
   
   ... -- 变长参数
   for i, v in ipairs{...} do print(v) end 
+  ```
+  
+  **moonscript惯用**
+  ```
+  -- 字符串插入
+  a = random 0, 100
+  "i am #{a}% sure."
   ```
   
 '''
