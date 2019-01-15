@@ -1,5 +1,5 @@
 createdAt: "2018-12-25T10:41:00.144Z"
-updatedAt: "2018-12-29T08:43:51.422Z"
+updatedAt: "2019-01-15T01:17:05.415Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "optimization algorithms on matrix manifold"
@@ -36,6 +36,16 @@ content: '''
   
   **Riemannian manifold**:
   a manifold whose tangent spaces are endowed with a smoothly varying inner product is called a *Riemannian manifold*. the smoothly varying inner product is called the *Riemannian metric*.
+  
+  **Line-Search Method**:
+  $$x_{k+1} = R_{x_k}(t_k\\eta _k)$$
+  
+  
+  
+  
+  
+  
+  
 '''
 isStarred: false
 isTrashed: false
