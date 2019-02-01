@@ -1,0 +1,18 @@
+createdAt: "2019-01-30T06:27:21.931Z"
+updatedAt: "2019-01-30T06:29:36.560Z"
+type: "MARKDOWN_NOTE"
+folder: "742b290c4e679bed3513"
+title: "functional"
+tags: []
+content: '''
+  # functional
+  
+  ```cpp
+  // std::inserter使用set时传递begin()
+  std::transform(s1.begin(), s1.end(), std::inserter(s2, s2.begin()), uop);
+  ```
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

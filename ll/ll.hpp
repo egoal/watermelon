@@ -37,7 +37,7 @@
   X(const X&) = delete; \
   X& operator=(const X&) = delete
 
-#define LL_ABORT(...) throw(std::runtime_error(__VA_ARGS__))
+#define LL_ABORT(...) throw std::runtime_error(__VA_ARGS__)
 #define LL_ASSERT(...) \
   if (!(__VA_ARGS__)) LL_ABORT(#__VA_ARGS__)
 

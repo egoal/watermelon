@@ -1,5 +1,5 @@
 createdAt: "2018-12-25T10:41:00.144Z"
-updatedAt: "2019-01-15T01:17:05.415Z"
+updatedAt: "2019-01-16T07:58:34.625Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "optimization algorithms on matrix manifold"
@@ -40,11 +40,34 @@ content: '''
   **Line-Search Method**:
   $$x_{k+1} = R_{x_k}(t_k\\eta _k)$$
   
+  normal: 
+  $$ \\eta_k = -grad\\ f(x_k) $$
+  
+  accelerated: locally optimal conjugate gradient
+  $$ \\eta_k = -grad\\ f(x_k) $$
+  $$ \\xi_k = \\arg \\min_{\\xi_k \\in span\\{\\eta_k, R_{x_k}^{-1}(x_{k-1}) \\}} f(R_{x_k}(\\xi_k))$$
+  $$ x_{k+1} = R_{x_k}(\\xi_k) $$
+  
+  | |$S^{n-1}$|$R^n$|
+  |---|---|---|
+  |metric|$g(\\xi, \\zeta) = \\xi^T \\zeta$||
+  |tangent space|$\\xi: x^T\\xi=0$|$R^n$|
+  |normal space|$\\xi: \\xi=\\alpha x$|$\\varnothing$|
+  |projection onto tangent space|$P_x\\xi = (I-xx^T)\\xi$|$I$|
+  |retraction|$R_x(\\xi)= \\frac {x+ \\xi}{\\|x+\\xi\\|};\\quad x\\cos\\|\\xi\\| + \\frac \\xi{\\|\\xi\\|}\\sin \\xi$|$R_x(\\xi)= x+ \\xi$|
+  |cost|$f(x) = x^TAx$||
+  |gradient|$\\nabla f(x) = P_x\\nabla\\bar f(x)$|$\\nabla\\bar f(x) = 2 Ax$|
   
   
-  
-  
-  
+  | |$St(p, n)$|$R^{n\\times p}$|
+  |---|---|---|
+  |metric|$g(Z_1, Z_2) = \\mathrm{tr} (Z_1^TZ_2)$||
+  |tangent space|$Z\\in R^{n\\times p}: \\mathrm{sym}(X^TZ)=0$|$R^{n\\times p}$|
+  |normal space|$Z\\in R^{n\\times p}: Z=XS, S^T=S$|$\\varnothing$|
+  |projection onto tangent space|$P_XZ = Z- X\\mathrm{sym}(X^TZ)$|$I$|
+  |retraction|$R_X(Z)= \\mathrm{qf}(X+Z)$|$R_X(Z)= X+ Z$|
+  |cost|$f(X) = \\mathrm{tr}(X^TAXN)$||
+  |gradient|$\\nabla f(x) = P_X\\nabla\\bar f(x)$|$\\nabla\\bar f(X) = 2 AXN$|
   
 '''
 isStarred: false
