@@ -24,6 +24,11 @@
       "key": "4d4f4fd5037554e03338",
       "color": "#3FD941",
       "name": "linux c"
+    },
+    {
+      "key": "3f153c5a68dd415c9898",
+      "color": "#30D5C8",
+      "name": "julia"
     }
   ],
   "version": "1.0"

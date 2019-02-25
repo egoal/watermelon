@@ -295,6 +295,17 @@ public:
     return str.empty() ? defval : static_cast<T>(std::stod(str));
   }
 
+  bool getBoolean(const std::string& key, bool defval = false) {
+    auto str = getString(key, "");
+    if (str.empty()) return defval;
+    try {
+      if (str == "false" || std::stoi(str) == 0) return false;
+      return true;
+    } catch (std::exception e) {
+      return true;
+    }
+  }
+
   // value list
   std::vector<std::string> getStringList(const std::string& key) const {
     auto iter = umapData_.find(key);

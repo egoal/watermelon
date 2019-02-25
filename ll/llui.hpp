@@ -42,7 +42,7 @@ public:
     std::string row(int i){
         std::stringstream ssout;
         for(int x=0; x<width_; ++x){
-            auto iter   =   umapdots_.find(pos2idx(x, y));
+            auto iter   =   umapdots_.find(pos2idx(x, i));
             ssout<<(iter==umapdots_.end()? ' ': iter->second);
         }
         return ssout.str();
