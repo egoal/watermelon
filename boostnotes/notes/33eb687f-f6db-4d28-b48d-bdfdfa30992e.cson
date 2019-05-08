@@ -1,5 +1,5 @@
 createdAt: "2018-11-05T02:33:49.841Z"
-updatedAt: "2018-12-05T09:02:22.147Z"
+updatedAt: "2019-05-08T10:54:09.116Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "love"
@@ -56,6 +56,10 @@ content: '''
   camera
   > git clone https://github.com/adnzzzzZ/STALKER-X
   
+  lighting
+  > git clone https://github.com/dylhunn/simple-love-lights
+  > git clone https://github.com/matiasah/shadows
+  
   aabb collider
   > git clone https://github.com/kikito/bump.lua
   
@@ -64,6 +68,9 @@ content: '''
   
   frame animation
   > git clone https://github.com/kikito/anim8
+  
+  path finding
+  > git clone https://github.com/Yonaba/Jumper
   
   functional 
   > git clone https://github.com/Yonaba/Moses
@@ -81,13 +88,19 @@ content: '''
   
   ```
   gui
+  > git clone https://github.com/Ulydev/Uare
   > git clone https://github.com/vrld/suit
+  
+  serialization
+  > git clone https://github.com/gvx/bitser/
   
   utility 
   > git clone https://github.com/vrld/hump
+  > git clone https://github.com/Ulydev/push
   
   
 '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: []

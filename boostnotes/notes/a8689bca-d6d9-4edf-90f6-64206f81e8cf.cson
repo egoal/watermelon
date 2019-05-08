@@ -1,5 +1,5 @@
 createdAt: "2019-01-15T01:53:24.258Z"
-updatedAt: "2019-01-15T01:54:34.585Z"
+updatedAt: "2019-03-11T01:33:57.187Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "trouble shooting"
@@ -13,8 +13,9 @@ content: '''
   
   firefox is already running, but is not responding. to open a new window, you must...
   `way-1: firefox -p[rofilemanager]` 之后选择删除出错的profile, 新建一个即可
-  `way-2: pidof firefox | xargs kill` 强制关闭
+  `way-2: pidof firefox | xargs kill` 强制关闭，`pkill firefox`
   
 '''
 isStarred: false
 isTrashed: false
+linesHighlighted: []

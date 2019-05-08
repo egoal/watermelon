@@ -112,20 +112,20 @@ T randrange(T minval, T maxval) {
 //* tuple print
 template <typename Tuple, std::size_t N>
 struct __tuple_printer {
-  static void print(const Tuple& t) {
-    __tuple_printer<Tuple, N - 1>::print(t);
-    std::cout << ", " << std::get<N - 1>(t);
+  static void print(const Tuple& t, std::ostream& os) {
+    __tuple_printer<Tuple, N - 1>::print(t, os);
+    os << ", " << std::get<N - 1>(t);
   }
 };
 template <typename Tuple>
 struct __tuple_printer<Tuple, 1> {
-  static void print(const Tuple& t) { std::cout << std::get<0>(t); }
+  static void print(const Tuple& t, std::ostream& os) { os << std::get<0>(t); }
 };
 template <typename... Args>
-void print(const std::tuple<Args...>& t) {
-  std::cout << "(";
-  __tuple_printer<decltype(t), sizeof...(Args)>::print(t);
-  std::cout << ")";
+void print(const std::tuple<Args...>& t, std::ostream& os = std::cout) {
+  os << "(";
+  __tuple_printer<decltype(t), sizeof...(Args)>::print(t, os);
+  os << ")";
 }
 
 //* simple unique patch
@@ -160,10 +160,6 @@ IT unique(IT beg, IT end) {
 
   return result;
 }
-
-//* transform if
-template <typename IT>
-IT transform_if() {}
 
 //* string function, dont want to relate to boost
 template <typename UOP>
@@ -208,37 +204,6 @@ inline std::string& string_strip(std::string& str) {
   return str;
 }
 
-//* simple warpper on algo, for fp
-template <typename Container, typename unop>
-void for_each(Container& c, unop op) {
-  std::for_each(std::begin(c), std::end(c), op);
-}
-template <typename Container, typename unop>
-Container& map(Container& c, unop op) {
-  std::transform(std::begin(c), std::end(c), std::begin(c), op);
-  return c;
-}
-template <typename Container, typename binop>
-Container& zip(Container& fc, Container& sc, binop op) {
-  std::transform(
-      std::begin(sc), std::end(sc), std::begin(sc), std::begin(fc), op);
-  return fc;
-}
-template <typename Container, typename con>
-bool exists(Container& c, con co) {
-  return std::any_of(std::begin(c), std::end(c), co);
-}
-template <typename Container, typename Predicate>
-Container& filter_not(Container& c, Predicate pre) {
-  c.erase(std::remove_if(std::begin(c), std::end(c), pre), std::end(c));
-  return c;
-}
-template <typename Container, typename Predicate>
-Container& filter(Container& c, Predicate pre) {
-  return filter_not(
-      c, [pre](typename Container::value_type i) { return !pre(i); });
-}
-
 /*file output*/
 // comma to stream, can be help to macro define
 class CommaOS {
@@ -255,6 +220,30 @@ public:
 private:
   std::ostream& os_;
   std::string delimiter_;
+};
+
+/* simple time counter */
+class TimeCounter {
+public:
+  TimeCounter(std::function<void(int)> ontoc = nullptr) : ontoc_(ontoc) {
+    reset();
+  }
+  ~TimeCounter() { show(); }
+
+  void reset() { start_ = std::chrono::high_resolution_clock::now(); }
+  void show() const {
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                  std::chrono::high_resolution_clock::now() - start_)
+                  .count();
+    if (ontoc_)
+      ontoc_(ms);
+    else
+      LL_LOG << ms << " ms passed.\n";
+  }
+
+private:
+  decltype(std::chrono::high_resolution_clock::now()) start_;
+  std::function<void(int)> ontoc_;
 };
 
 /* file config*/
@@ -400,5 +389,36 @@ public:
 private:
   std::map<K, V> left_;
   std::map<V, K> right_;
+};
+
+// simple unique priority queue
+template <typename T>
+class unique_priority_queue {
+public:
+  bool push(const T& t) {
+    if (set_.insert(t).second) {
+      queue_.push(t);
+      return true;
+    }
+
+    return false;
+  }
+
+  T pop() {
+    assert(!queue_.empty());
+    T t = queue_.top();
+    queue_.pop();
+    set_.erase(t);
+
+    return t;
+  }
+
+  std::size_t size() const { return queue_.size(); }
+
+  bool empty() const { return queue_.empty(); }
+
+private:
+  std::priority_queue<T> queue_;
+  std::set<T> set_;
 };
 }

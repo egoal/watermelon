@@ -5,11 +5,10 @@
 namespace ll {
 namespace da {
 
-enum class cmp { less, equal, greater };
-
 template <typename T = double>
 T mean(const std::vector<T>& vals) {
-  return std::accumulate(vals.begin(), vals.end(), T(0)) / vals.size();
+  return vals.empty() ? T(0) : std::accumulate(vals.begin(), vals.end(), T(0)) /
+                                   vals.size();
 }
 
 template <typename T = double>
@@ -17,7 +16,7 @@ std::tuple<T, T> mean_and_variance(const std::vector<T>& vals) {
   auto m = mean<T>(vals);
   auto v = std::accumulate(vals.begin(), vals.end(), T(0),
                [m](double sum, double v) { return sum + (v - m) * (v - m); }) /
-           vals.size();
+           (vals.size() + 1e-12);
 
   return std::make_tuple(m, v);
 }
@@ -29,7 +28,7 @@ std::vector<T> percent_quantile(
   assert(mxrt <= 1. && "bad range");
 
   auto mIdx = static_cast<std::size_t>(c.size() * mxrt);
-  auto sc = c;
+  auto sc = c; // copy 
   std::partial_sort(sc.begin(), sc.begin() + mIdx + 1, std::end(sc));
 
   std::vector<T> vec(ratios.size());

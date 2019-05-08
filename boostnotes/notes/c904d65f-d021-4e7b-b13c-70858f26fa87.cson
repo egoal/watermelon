@@ -1,5 +1,5 @@
 createdAt: "2018-12-25T10:41:00.144Z"
-updatedAt: "2019-01-16T07:58:34.625Z"
+updatedAt: "2019-04-03T02:22:26.452Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "optimization algorithms on matrix manifold"
@@ -69,6 +69,16 @@ content: '''
   |cost|$f(X) = \\mathrm{tr}(X^TAXN)$||
   |gradient|$\\nabla f(x) = P_X\\nabla\\bar f(x)$|$\\nabla\\bar f(X) = 2 AXN$|
   
+  > let $M$ be a Riemannian submanifold of Euclidean Space, then the Riemannian connections on $M$ is: 
+  > $$\\nabla_{\\eta_x} \\xi = P_x(D\\xi(x)[\\eta_x])$$
+  > i.e., a classical directional derivative followed by an orthogonal projection
+  
+  > let $f$ be a smooth real-valued function on $R^n$, $x\\in R^n$, $U$ a bounded neighborhood of $x$, and $H$ **any symmetric matrix**. then there exists $c> 0$ such that, for all $(x+ h)\\in U$, 
+  > $$||f(x+h)- (f(x)+ \\partial f(x)h+ \\frac 12h^THh)|| \\le c||h||^2$$
+  > if, moreover, $H_{i, j} = \\partial_i \\partial_j f(x)$, then there exists $c>0$ such that, 
+  > $$||f(x+h)- (f(x)+ \\partial f(x)h+ \\frac 12h^THh)|| \\le c||h||^3$$
+  
 '''
 isStarred: false
 isTrashed: false
+linesHighlighted: []
