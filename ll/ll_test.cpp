@@ -24,8 +24,13 @@ void testRange() {
 }
 
 void testMean() {
-  std::vector<double> v{1, 2, 3, 4, 5, 6, 7, 8};
-  ll::print(ll::da::mean_and_variance(v));
+  std::vector<double> v = ll::range(0., 1., 0.1);
+  ll::print(ll::da::mean_and_variance(v), std::cout);
+  std::cout << "\n";
+
+  auto vals = ll::da::percent_quantile(v, {0., 0.4, 0.5, 0.6, 1.});
+  for (auto v : vals) std::cout << v << ", ";
+  std::cout << std::endl;
 }
 
 void testUnique() {
@@ -35,41 +40,6 @@ void testUnique() {
   // };
   auto it = ll::unique(v.begin(), v.end());
   std::for_each(v.begin(), it, [](int i) { std::cout << i << ", "; });
-}
-
-void testFp() {
-  std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8};
-
-  auto echo = [](int i) { std::cout << i << ", "; };
-  ll::for_each(vec, echo);
-  std::cout << std::endl;
-
-  auto addone = [](int i) { return i + 1; };
-  ll::map(vec, addone);
-
-  ll::for_each(vec, echo);
-  std::cout << std::endl;
-
-  ll::zip(vec, vec, [](int i, int j) { return i * j; });
-
-  ll::for_each(vec, echo);
-  std::cout << std::endl;
-
-  ll::filter(vec, [](int i) { return i % 2 == 0; });
-
-  ll::for_each(vec, echo);
-  std::cout << std::endl;
-
-  std::vector<int> vec2{1, 2, 3, 4, 5, 6, 7, 8};
-  std::vector<int> vec3 = ll::range(10);
-  ll::filter(ll::zip(ll::map(vec, [](int i) { return i + 1; }), vec3,
-                 [](int i, int j) { return i + j; }),
-      [](int i) { return i % 2 == 0; });
-
-  ll::for_each(vec2, echo);
-  std::cout << std::endl;
-  ll::for_each(vec3, echo);
-  std::cout << std::endl;
 }
 
 void testMatch() {
@@ -93,13 +63,8 @@ void testPlot() {
   std::transform(xs.begin(), xs.end(), std::back_inserter(ys),
       [](double x) { return std::sin(x); });
 
-  ll::ui::board b(200, 60);
-  ll::ui::plot(b, xs, ys, 'o');
-
-  std::transform(
-      xs.begin(), xs.end(), ys.begin(), [](double x) { return std::cos(x); });
-
-  ll::ui::plot(b, xs, ys, '+').print();
+  ll::ui::canvas c(100, 80);
+  ll::ui::plot(c, xs, ys).print();
 }
 
 void testHL() {
@@ -120,8 +85,81 @@ void testHL() {
   e.start_repl("test val>");
 }
 
+// ||header||body||
+// ||length| key length| key|| value||
+
+constexpr int MAX_KEY_LENGTH = 64;
+
+class OutBundle {
+public:
+  OutBundle(const std::string& filename)
+      : os_(filename, std::ios::out | std::ios::binary) {}
+
+  template <typename T>
+  void putValue(const std::string& key, T value) {
+    writeHeader(key, sizeof(T));
+    writeValue(value);
+  }
+
+private:
+  std::ofstream os_;
+
+  template <typename T>
+  void writeValue(T t, int len = sizeof(T)) {
+    os_.write(reinterpret_cast<const char*>(&t), len);
+  }
+
+  void writeHeader(const std::string& key, int valuelen) {
+    writeValue(sizeof(int) + sizeof(int) + key.size() + valuelen);
+    writeValue(key.size());
+    os_.write(key.c_str(), key.size());
+  }
+};
+
+class InBundle {
+public:
+  InBundle(const std::string& filename)
+      : is_(filename, std::ios::in | std::ios::binary) {}
+
+  template <typename T>
+  T getValue(const std::string& key, T defval) {
+    readHeader();
+    readValue(defval);
+    return defval;
+  }
+
+private:
+  std::ifstream is_;
+
+  template <typename T>
+  void readValue(T& t, int len = sizeof(T)) {
+    is_.read(reinterpret_cast<char*>(&t), len);
+  }
+
+  void readHeader() {
+    static char buff[MAX_KEY_LENGTH];
+    int totallen, keylen;
+    std::string key;
+    readValue(totallen);
+    readValue(keylen);
+    is_.read(buff, keylen);
+    buff[keylen] = '\0';
+    key = buff;
+    std::cout << totallen << ", " << keylen << ", " << key << "\n";
+    // todo:
+  }
+};
+
 int main(int, char** argv) {
-  testHL();
+  {
+    OutBundle ob("a");
+    ob.putValue("rotation", 100);
+  }
+
+  {
+    InBundle ib("a");
+    std::cout << ib.getValue("rotation", 0) << std::endl;
+  }
 
   return 0;
 }

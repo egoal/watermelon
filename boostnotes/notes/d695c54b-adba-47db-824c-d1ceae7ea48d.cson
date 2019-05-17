@@ -1,10 +1,14 @@
 createdAt: "2018-12-13T07:58:40.732Z"
-updatedAt: "2019-01-15T08:20:30.820Z"
+updatedAt: "2019-05-09T08:59:58.736Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "notes"
 content: '''
   ## notes
+  
+  #### t-statistic
+  > one statistic that is often used to compare two means is the t-statistic:
+  > $$ t = \\frac{\\bar X_1- \\bar X_2}{\\sqrt {\\frac {S^2_1}{n_1}+ \\frac {S^2_2}{n_2}}} $$
   
   #### soft thresholding
   $$\\arg \\min_x \\frac 12||x- a||^2_2+ k||x||_1 $$
@@ -107,3 +111,4 @@ content: '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: []

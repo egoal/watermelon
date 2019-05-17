@@ -1,10 +1,15 @@
 createdAt: "2018-10-29T02:50:03.222Z"
-updatedAt: "2019-01-30T08:53:16.879Z"
+updatedAt: "2019-05-08T11:34:16.755Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "python"
 content: '''
   # python
+  ```python
+  # 匹配数字
+  re.findall(r'[-+]?\\d*\\.?\\d+', "<str>11,2.0,-3.2,.02</str>") # 11, 2.0, -3.2, .02
+  ```
+  
   ```python
   # version check
   import sys

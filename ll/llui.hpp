@@ -3,105 +3,91 @@
 #include "ll.hpp"
 #include "llda.hpp"
 
-namespace ll{namespace ui{
+namespace ll {
+namespace ui {
 
-struct mulchar{
-    mulchar(char c, int num): c_(c), count_(num){}
-    char c_;
-    int count_;
+struct mulchar {
+  mulchar(char c, int num) : c_(c), count_(num) {}
+  char c_;
+  int count_;
 };
-std::ostream& operator<<(std::ostream& os, const mulchar& dc){
-    LL_REPEAT(dc.count_) os<<dc.c_;
-    return os;
+std::ostream& operator<<(std::ostream& os, const mulchar& dc) {
+  LL_REPEAT(dc.count_) os << dc.c_;
+  return os;
 }
 
-class board{
+class canvas {
 public:
-    board(int w, int h): width_(w), height_(h){}
-    // LL_BAN_COPY(board);
+  canvas(int r, int c) : rows(r), cols(c) {
+    dots = new char[rows * cols];
+    fill(' ');
+  }
+  ~canvas() { delete[] dots; }
 
-    int width() const{ return width_; }
-    int height() const{ return height_; }
+  // this allows: canvas[row][col]
+  char* operator[](int r) const { return dots + r * cols; }
 
-    void clear(){ umapdots_.clear(); }
-    void set(int x, int y, char c='+'){
-        umapdots_[pos2idx(x, y)]    =   c;
-    }
+  void fill(char c) {
+    // std::memset(dots, c, sizeof(char));
+    std::fill(dots, dots + rows * cols, c);
+  }
+  void fill(int rbeg, int rend, int cbeg, int cend, char ch) {
+    for (int r = rbeg; r < rend; ++r)
+      for (int c = cbeg; c < cend; ++c) set(r, c, ch);
+  }
+  void set(int r, int c, char ch) { dots[r * cols + c] = ch; }
 
-    void print(std::ostream& os=std::cout){
-        for(int y=0; y<height_; ++y){
-            os<<"|";
-            for(int x=0; x<width_; ++x){
-                auto iter   =   umapdots_.find(pos2idx(x, y));
-                os<<(iter==umapdots_.end()? ' ': iter->second);
-            }
-            os<<"\n";
-        }
-        os<<"+"<<mulchar('-', width_)<<"\n";
+  void print(std::ostream& os = std::cout) const {
+    for (int r = 0; r < rows; ++r) {
+      for (int c = 0; c < cols; ++c) os << dots[r * cols + c];
+      os << "\n";
     }
-    std::string row(int i){
-        std::stringstream ssout;
-        for(int x=0; x<width_; ++x){
-            auto iter   =   umapdots_.find(pos2idx(x, i));
-            ssout<<(iter==umapdots_.end()? ' ': iter->second);
-        }
-        return ssout.str();
-    }
+  }
+
+  int rows, cols;
 
 private:
-    int width_, height_;
-    // sparse
-    std::unordered_map<int, char> umapdots_;
-
-    inline int pos2idx(int x, int y) const{ return y*width_+x; }
+  char* dots;
 };
 
-template<typename T1=double, typename T2=double>
-board& plot(board& b, const std::vector<T1>& xs, const std::vector<T2>& ys, 
-    char mk='o'){
-    assert(xs.size()==ys.size() && "bad inputs");
+class coordinate {
+public:
+  coordinate(canvas& _can, double xmin, double xmax, double ymin, double ymax)
+      : can(_can), xmin_(xmin), xmax_(xmax), ymin_(ymin), ymax_(ymax) {
+    can.fill(0, 1, 0, can.cols, '-');
+    // can.fill(can.rows - 1, can.rows, 0, can.cols, '-');
+    can.fill(0, can.rows, 0, 1, '|');
+    // can.fill(0, can.rows, can.cols-1, can.cols, '|');
+    can.set(0, 0, '+');
+  }
 
-    T1 minx, maxx;
-    T2 miny, maxy;
-    {
-        auto prx    =   std::minmax_element(xs.begin(), xs.end());
-        minx    =   *prx.first;
-        maxx    =   *prx.second;     
-        auto pry    =   std::minmax_element(ys.begin(), ys.end());
-        miny    =   *pry.first;
-        maxy    =   *pry.second;
-    }
+  char& at(double x, double y) const {
+    return can[1 + int(std::round((lambda(x, xmin_, xmax_) * (can.rows - 2))))]
+              [1 + int(std::round((lambda(y, ymin_, ymax_) * (can.cols - 2))))];
+  }
 
-    for(int i=0; i<xs.size(); ++i){
-        int x   =   (xs[i]-minx)/(maxx-minx)* (b.width()-1);
-        int y   =   (ys[i]-miny)/(maxy-miny)* (b.height()-1);
-        b.set(x, y, mk);
-    }
+private:
+  canvas& can;
+  double xmin_, xmax_, ymin_, ymax_;
 
-    return b;
+  double lambda(double val, double min, double max) const {
+    return ll::clamp((val - min) / (max - min), 0., 1.);
+  }
+};
+
+template <typename T = double>
+canvas& plot(canvas& can, const std::vector<T>& xs, const std::vector<T>& ys,
+    const char ch = '*') {
+  assert(xs.size() == ys.size());
+  auto prx = std::minmax_element(xs.begin(), xs.end());
+  auto pry = std::minmax_element(ys.begin(), ys.end());
+  coordinate coord(can, *prx.first, *prx.second, *pry.first, *pry.second);
+
+  for (std::size_t i = 0; i < xs.size(); ++i) {
+    coord.at(xs[i], ys[i]) = ch;
+  }
+
+  return can;
 }
-
-template<typename T>
-board& plot(board& b, const std::vector<T>& vals){
-    return plot<T, T>(b, ll::range<T>(vals.size()), vals);
 }
-
-template<typename T1=double, typename T2=double>
-void hist(const std::vector<T1>& vals, const std::vector<T2>& ranges, char m='.', 
-    std::ostream& os=std::cout, int width=40){
-    auto counts =   ll::da::histogram(vals, ranges);
-
-    int maxcount    =   *(std::max_element(vals.begin(), vals.end()));
-    if(maxcount>width){
-        ll::map(counts, [&](int v){ return v*width/maxcount; });
-    }
-
-    for(std::size_t i=0; i<counts.size(); ++i){
-        std::stringstream ssout;
-        ssout.precision(6);
-        ssout<<"["<<ranges[i]<<", "<<ranges[i+1]<<") ";
-        os<<std::setw(27)<<std::left<<ssout.str()<<mulchar(m, counts[i])<<"\n";
-    }
 }
-
-}}
