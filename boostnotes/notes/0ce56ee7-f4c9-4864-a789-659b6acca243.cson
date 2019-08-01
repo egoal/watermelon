@@ -1,0 +1,19 @@
+createdAt: "2019-06-11T03:11:49.379Z"
+updatedAt: "2019-06-11T03:13:22.863Z"
+type: "MARKDOWN_NOTE"
+folder: "e6cf9d6de29d53bd1458"
+title: "clang-format"
+tags: []
+content: '''
+  ## clang-format
+  
+  `{
+  AlignAfterOpenBracket: DontAlign, 
+  AllowShortCaseLabelsOnASingleLine: true, 
+  AccessModifierOffset: -2
+  }`
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

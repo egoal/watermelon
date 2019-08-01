@@ -1,5 +1,5 @@
 createdAt: "2019-01-30T06:27:21.931Z"
-updatedAt: "2019-01-30T06:29:36.560Z"
+updatedAt: "2019-06-17T08:36:11.890Z"
 type: "MARKDOWN_NOTE"
 folder: "742b290c4e679bed3513"
 title: "functional"
@@ -10,6 +10,19 @@ content: '''
   ```cpp
   // std::inserter使用set时传递begin()
   std::transform(s1.begin(), s1.end(), std::inserter(s2, s2.begin()), uop);
+  ```
+  ```cpp
+  // overload
+  // ++, --
+  // forward 
+  T& operator++();
+  friend T& operator++(T&);
+  // backward
+  T& operator++(int);
+  friend T& operator++(T&, int);
+  
+  // -
+  T operator-() const;
   ```
   
 '''

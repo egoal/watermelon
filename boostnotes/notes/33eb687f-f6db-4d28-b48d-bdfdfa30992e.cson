@@ -1,33 +1,15 @@
 createdAt: "2018-11-05T02:33:49.841Z"
-updatedAt: "2019-05-08T10:54:09.116Z"
+updatedAt: "2019-07-29T05:49:31.095Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
-title: "love"
+title: "love2d"
 content: '''
-  ## love
+  ## love2d
   
   ---
   #### thirdparty
   ojbect-orient 
   > git clone https://github.com/rxi/classic
-  ```lua 
-  -- mixins
-  A = Object:extend()
-  function A:p() print('A:p') end
-  
-  B = Object:extend()
-  function B.p() print('B:p') end 
-  function B.q() print('B:q') end 
-  
-  C = A:extend()
-  C:implement(B) -- only gain methods from B, A:p won't be overwritten!
-  -- until now, C.super is A, has metchod A:p and B:q
-  
-  c = C()
-  c:is(A) and c:is(C) -- true
-  c:is(B) -- false
-  
-  ```
   
   input 
   > git clone https://github.com/adnzzzzZ/boipushy
@@ -96,9 +78,13 @@ content: '''
   
   utility 
   > git clone https://github.com/vrld/hump
-  > git clone https://github.com/Ulydev/push
+  > git clone https://github.com/rxi/lume
   
+  fov
+  > git clone https://github.com/markandgo/Lua-FOV
   
+  messagebox
+  > git clone https://github.com/ttxi/Moan.lua
 '''
 tags: []
 isStarred: false

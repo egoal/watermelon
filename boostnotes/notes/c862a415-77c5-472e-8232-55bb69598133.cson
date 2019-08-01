@@ -1,11 +1,11 @@
 createdAt: "2019-02-14T08:32:56.264Z"
-updatedAt: "2019-02-15T03:11:17.548Z"
+updatedAt: "2019-07-01T07:22:51.175Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "lines"
 tags: []
 content: '''
-  # lines 
+  ## lines 
   
   the solution we adopt in this paper is to design approximation algorithms, which are computationally efficient and provide performance guarantees (roughly speaking, produce a set which is not far from the optimal subset).
   

@@ -1,0 +1,33 @@
+createdAt: "2019-06-11T02:55:55.251Z"
+updatedAt: "2019-06-11T03:03:10.306Z"
+type: "MARKDOWN_NOTE"
+folder: "e6cf9d6de29d53bd1458"
+title: "git"
+tags: []
+content: '''
+  ## git 
+  
+  **改动单个项目的提交配置**
+  `.git/config`下添加:
+  ```toml
+  [user]
+    name = egoal
+    email = 939425550@qq.com
+  ```
+  
+  **修改commit信息**
+  `git rebase -i <commit>` 在交互模式下`rebase`自己
+  
+  **本地直接关联远程仓库**
+  1. 有一个远端
+  2. `git remote add origin <url>` 关联之后，当前不在任何分枝上
+  3. `git pull origin master` 合并远端到本地，现在在`master`上，远端的点在本地之后
+  4. `git push origin master` 现在可以愉快的使用了
+  
+  **whitespace warning**
+  `git rebase --whitespace=fix| nowarn`
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -46,7 +46,7 @@
 
 #define LL_NOTNULL(x)                             \
   {                                               \
-    if (!x) LL_ABORT("null check failed: " + #x); \
+    if (!x) LL_ABORT("null check failed: "#x); \
   }                                               \
   x
 

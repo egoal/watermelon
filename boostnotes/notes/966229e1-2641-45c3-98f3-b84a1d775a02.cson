@@ -1,0 +1,21 @@
+createdAt: "2019-06-11T03:08:10.379Z"
+updatedAt: "2019-06-11T03:10:53.001Z"
+type: "MARKDOWN_NOTE"
+folder: "e6cf9d6de29d53bd1458"
+title: "graphviz"
+tags: []
+content: '''
+  ## graphviz
+  
+  **install**
+  `sudo apt-get install graphviz` 
+  `brew install graphviz` 
+  
+  **export**
+  `dot <dot-file> -T <format> -o <output-file>`
+  `dot test.dot -T png -o test.png`
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

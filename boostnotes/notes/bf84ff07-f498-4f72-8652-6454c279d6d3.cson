@@ -1,0 +1,41 @@
+createdAt: "2019-06-11T03:14:43.852Z"
+updatedAt: "2019-06-11T03:22:03.927Z"
+type: "MARKDOWN_NOTE"
+folder: "742b290c4e679bed3513"
+title: "boost-string"
+tags: []
+content: '''
+  ## boost-string
+  
+  ```cpp
+  #include <boost/algorithm/string.hpp>
+  
+  using namespace boost::algorithm;
+  
+  std::string s = "Boost";
+  to_upper_copy(s); // BOOST
+  to_lower_copy(s); // boost
+  erase_first_copy(s, "o"); // Bost
+  erase_head_copy(s, 2); // ost
+  
+  std::vector<std::string > v{"Boost", "C++", "Libraries"};
+  join(v, " "); // Boost C++ Libraries
+  
+  trim_copy("\\t Boost \\t"); // Boost, "trim_left_copy, trim_right_copy"
+  trim_copy_if("---Boost---", is_any_of("-")); // Boost
+  trim_copy_if("123Boost456", is_digit()); // Boost
+  
+  starts_with("Boost C++", "Boost"); // true, "ends_with, contains"
+  
+  std::vector<std::string> vec;
+  split(vec, s, is_space());
+  
+  #include <boost/format.hpp>
+  boost::format{"%1%.%2%.%3%"} %12 %5 %2014 // 12.5.2014
+  ```
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,10 +1,10 @@
 createdAt: "2018-11-09T10:24:53.969Z"
-updatedAt: "2018-11-09T10:27:52.321Z"
+updatedAt: "2019-07-01T07:22:57.287Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "numberical optimization"
 content: '''
-  # numberical optimization
+  ## numberical optimization
   
   
   #### 02 Funcdamentals of Unconstrainted Optimization:
@@ -311,3 +311,4 @@ content: '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: []

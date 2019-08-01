@@ -1,0 +1,34 @@
+createdAt: "2019-06-11T02:49:00.855Z"
+updatedAt: "2019-06-11T02:54:31.018Z"
+type: "MARKDOWN_NOTE"
+folder: "b0153a4adcdd7e1569b9"
+title: "interview"
+tags: []
+content: '''
+  ## interview
+  
+  ```c
+  // strcpy
+  char* copy_string(char* dst, const char* src){
+    assert(dst && src);
+    char* re = dst;
+    while(*dst++= *src++!='\\0');
+    return re;
+  }
+  
+  // 进制转换
+  std::stack<int> toK(int value, int K){
+    std::stack<int> s;
+    while(value!=0){
+      s.push(value% K);
+      N /= K;
+    }
+    return s;
+  }
+  
+  ```
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
