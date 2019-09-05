@@ -1,5 +1,5 @@
 createdAt: "2019-04-23T02:29:01.598Z"
-updatedAt: "2019-04-23T02:31:23.650Z"
+updatedAt: "2019-08-30T02:55:37.825Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "git"
@@ -7,15 +7,9 @@ tags: []
 content: '''
   # git
   
-  ```sh
-  git submodule add git://github.com/... # 创建引用
   
-  # 克隆带子项目的repo 
-  git submodule init
-  git submodule update
-  ```
   
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

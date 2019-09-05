@@ -1,5 +1,5 @@
 createdAt: "2019-06-11T02:55:55.251Z"
-updatedAt: "2019-06-11T03:03:10.306Z"
+updatedAt: "2019-08-30T02:55:24.260Z"
 type: "MARKDOWN_NOTE"
 folder: "e6cf9d6de29d53bd1458"
 title: "git"
@@ -26,6 +26,14 @@ content: '''
   
   **whitespace warning**
   `git rebase --whitespace=fix| nowarn`
+  
+  ```sh
+  git submodule add git://github.com/... # 创建引用
+  
+  # 克隆带子项目的repo 
+  git submodule init
+  git submodule update
+  ```
   
 '''
 linesHighlighted: []

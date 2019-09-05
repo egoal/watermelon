@@ -1,11 +1,19 @@
 createdAt: "2019-01-15T01:53:24.258Z"
-updatedAt: "2019-03-11T01:33:57.187Z"
+updatedAt: "2019-08-28T03:23:24.417Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "trouble shooting"
 tags: []
 content: '''
   # trouble shooting
+  
+  手动安装字体
+  `sudo mkdir /usr/local/share/fonts/ms_fonts`
+  `sudo cp ~/Downloads/*.ttf /usr/local/share/fonts/ms_fonts/`
+  `sudo chown root:staff /usr/local/share/fonts/ms_fonts -R`
+  `sudo chmod 644 /usr/local/share/fonts/ms_fonts/* -R`
+  `sudo chmod 755 /usr/local/share/fonts/ms_fonts`
+  `sudo fc-cache -fv`
   
   包安装失败, 可能是上次安装未完成，占用了资源锁
   `sudo rm /var/cache/apt/archives/lock`

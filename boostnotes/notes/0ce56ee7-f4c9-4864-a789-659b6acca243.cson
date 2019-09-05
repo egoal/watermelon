@@ -1,5 +1,5 @@
 createdAt: "2019-06-11T03:11:49.379Z"
-updatedAt: "2019-06-11T03:13:22.863Z"
+updatedAt: "2019-08-29T02:14:52.408Z"
 type: "MARKDOWN_NOTE"
 folder: "e6cf9d6de29d53bd1458"
 title: "clang-format"
@@ -12,6 +12,10 @@ content: '''
   AllowShortCaseLabelsOnASingleLine: true, 
   AccessModifierOffset: -2
   }`
+  
+  ## valgrind
+  内存泄漏
+  `valgrind --tool=memcheck --leak-check=full --log-file=[LOG_FILE] [PROGRAM] [PROGRAM ARGS]`
   
 '''
 linesHighlighted: []

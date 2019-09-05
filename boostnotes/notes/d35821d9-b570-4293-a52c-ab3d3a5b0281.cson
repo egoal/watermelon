@@ -1,0 +1,35 @@
+createdAt: "2019-09-05T07:30:55.406Z"
+updatedAt: "2019-09-06T03:49:11.321Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "Algebra"
+tags: []
+content: '''
+  ## Algebra
+  
+  > A group is a set $G$ with a low of composition that has the following properties:
+  > - The law of composition is associative: $(ab)c = a(bc)$ for all $a, b, c$ in $G$.
+  > - G contains an identity element $1$, such that $1a=a$ and $a1=a$ for all $a$ in $G$.
+  > - Every element $a$ of $G$ has an inverse, an element $b$ such that $ab=ba=1$.
+  
+  symmetric group $S_n$
+  $$ S_3 = \\{ 1, x, x^2, y, xy, x^2y \\} $$
+  $$ x=(1, 2, 3), y=(1, 2) \\quad x^3=1; y^2=1; yx= x^2y $$
+  
+  > A subset $H$ of a group $G$ is a subgroup if:
+  > - Closure: $a, b \\in H \\Rightarrow ab \\in H$
+  > - Identity: $1 \\in H$
+  > - Inverses: $a \\in H \\Rightarrow a^{-1}\\in H$
+  
+  *general linear group:* $GL_n$ = {$n\\times n$ invertible matrices}
+  *special linear group:* $SL_n$ = $\\{A \\in GL_n\\ |\\ det A=1\\}$
+  
+  *Euclidean Algorithm:* one can compute a greatest common divisor easily by repeated division with remainder. 
+  $$a=314, b=136, 314= 2\\times 136+ 42, 136=3\\times 42+ 10, 42 = 4\\times 10+ 2 \\Rightarrow 2$$
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

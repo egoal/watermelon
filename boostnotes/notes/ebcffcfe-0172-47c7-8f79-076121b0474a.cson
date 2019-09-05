@@ -1,5 +1,5 @@
 createdAt: "2018-12-26T02:13:04.711Z"
-updatedAt: "2019-07-12T08:36:43.459Z"
+updatedAt: "2019-08-27T07:26:45.034Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "conda"
@@ -31,6 +31,8 @@ content: '''
   
   `conda env remove --name [ENV_NAME]` # 先取消激活
   
+  删环境
+  `conda env remove --name [ENV_NAME]`
 '''
 isStarred: false
 isTrashed: false
