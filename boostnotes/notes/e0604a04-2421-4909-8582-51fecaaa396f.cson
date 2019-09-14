@@ -1,0 +1,29 @@
+createdAt: "2019-07-10T14:03:07.089Z"
+updatedAt: "2019-08-11T12:02:25.858Z"
+type: "MARKDOWN_NOTE"
+folder: "3ee76ac761e39836b6e0"
+title: "defold"
+tags: []
+content: '''
+  ### defold
+  
+  ```
+  https://github.com/subsoap/defos/
+  https://github.com/subsoap/defsave/
+  https://github.com/subsoap/defstring/
+  https://github.com/subsoap/defmath/
+  https://github.com/britzl/monarch/
+  https://github.com/rgrams/rendercam/
+  https://github.com/britzl/gooey/
+  https://github.com/britzl/defold-lfs/
+  https://github.com/dapetcu21/defold-fmod/
+  https://github.com/GameAnalytics/GA-SDK-DEFOLD/
+  https://github.com/britzl/steamworks-defold/
+  https://github.com/subsoap/discordrich/
+  https://github.com/Lerg/extension-directories/
+  ```
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
