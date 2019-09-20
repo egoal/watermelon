@@ -1,5 +1,5 @@
 createdAt: "2019-06-11T03:04:53.132Z"
-updatedAt: "2019-06-11T03:07:55.538Z"
+updatedAt: "2019-09-18T03:20:11.967Z"
 type: "MARKDOWN_NOTE"
 folder: "e6cf9d6de29d53bd1458"
 title: "vim"
@@ -7,17 +7,34 @@ tags: []
 content: '''
   ## vim
   
+  添加 `A`行尾，`a`当前
+  
   撤销 `u`
+  撤销当前行的全部操作 `U`
   回复 `C-r`
   
   查找模式 `/`，使用`n, N`跳到下，上一个
   
   复制 `y`，复制多行`yy(yny, nyy)`
-  剪切 `d`
+  剪切 `d`，`dw`删除到下一个词词首，`de`删除到词尾，`d$`删除到行尾
   粘贴 `p`
   
   删除单个字符 `x`
   
+  替换 `rx` 替换当前char为x `R`从此进入替换输入
+  
+  更改 `c`
+  类似于`d`，但使你进入插入模式;
+  
+  在匹配括号之间跳动 `%`
+  
+  替换 `:s/old/new/g` `:100, 120s/old/new/g` `:%s/old/new/g`
+  
+  执行，命令 `:!cmd`
+  
+  可视模式 `v`
+  
+  新建行 下方`o` 上方`O`
 '''
 linesHighlighted: []
 isStarred: false

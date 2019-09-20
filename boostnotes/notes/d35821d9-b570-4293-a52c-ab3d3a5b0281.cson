@@ -1,5 +1,5 @@
 createdAt: "2019-09-05T07:30:55.406Z"
-updatedAt: "2019-09-06T03:49:11.321Z"
+updatedAt: "2019-09-20T06:41:36.135Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "Algebra"
@@ -7,12 +7,14 @@ tags: []
 content: '''
   ## Algebra
   
+  ### 2. Groups
+  
   > A group is a set $G$ with a low of composition that has the following properties:
   > - The law of composition is associative: $(ab)c = a(bc)$ for all $a, b, c$ in $G$.
   > - G contains an identity element $1$, such that $1a=a$ and $a1=a$ for all $a$ in $G$.
   > - Every element $a$ of $G$ has an inverse, an element $b$ such that $ab=ba=1$.
   
-  symmetric group $S_n$
+  *symmetric group:* $S_n$
   $$ S_3 = \\{ 1, x, x^2, y, xy, x^2y \\} $$
   $$ x=(1, 2, 3), y=(1, 2) \\quad x^3=1; y^2=1; yx= x^2y $$
   
@@ -25,9 +27,60 @@ content: '''
   *special linear group:* $SL_n$ = $\\{A \\in GL_n\\ |\\ det A=1\\}$
   
   *Euclidean Algorithm:* one can compute a greatest common divisor easily by repeated division with remainder. 
-  $$a=314, b=136, 314= 2\\times 136+ 42, 136=3\\times 42+ 10, 42 = 4\\times 10+ 2 \\Rightarrow 2$$
+  $$(314, 136)\\to (42, 136)\\to (42, 10)\\to (2, 10)\\to (2, 0) \\Rightarrow 2$$
   
+  *cyclic groups:*
+  $$<x> = \\{..., x^{-2}, x^{-1}, 1, x, x^2, ...\\}$$
   
+  *homomorphism:*
+  > Let $G$ and $H$ be groups, a homomorphism $\\varphi:G\\to H$ is a map from $G$ to $H$ such that for all $a$ and $b$ in $G$:
+  > $$\\varphi(ab) = \\varphi(a) \\varphi(b)$$
+  > it provides a way to relate the different groups.
+  
+  *kernel:*
+  > The kernel of $\\varphi$ often donted by $ker\\ \\varphi$:
+  > $$ker\\ \\varphi = \\{ a\\in G| \\varphi(a)=1 \\}$$
+  
+  *isomorphism:*
+  > An isomorphism $\\varphi:G\\to H$ from a group $G$ to $H$ is a bijiective group homomorphism - a bijective map such that $\\varphi(ab) = \\varphi(a) \\varphi(b)$
+  > Two groups is *isomorphic* if there exists an isomorphism $\\varphi$ between them.
+  
+  *equivalence relation:*
+  > An equivalence relation on a set $S$ is a relation that holds between certain pairs of elements of $S$. An equivalence relation si required to be:
+  > - transitive: $a\\sim b, b\\sim c \\Rightarrow a\\sim c$
+  > - symmetric: $a\\sim b \\Rightarrow b\\sim a$
+  > - reflexive: $\\forall a, a\\sim a$
+  
+  *normal subgroup:*
+  > Let $H$ be a subgroup of a group $G$, the following conditions are equivalent:
+  > - $H$ is a normal subgroup: $\\forall h\\in H, g \\in G \\Rightarrow ghg^{-1}\\in H$
+  > - $\\forall g\\in G, gHg^{-1}=H$
+  > - $\\forall g\\in G, gH = Hg$
+  > - every left coset of $H$ in $G$ is a right coset
+  > 
+  
+  **First Isomorphism Theorem:**
+  > Let $\\varphi: G\\to G'$ be a surjective group homomorphism with kernel $N$. The quotient group $\\bar G=G/N$ is isomorphic to the image $G'$. To be precise, let $\\pi: G\\to \\bar G$ be the canonical map. There is a unique isomorphism $\\bar \\varphi: \\bar G\\to G'$ such that $\\varphi = \\bar \\varphi \\circ \\pi$
+  
+  ### 3. Vector Spaces
+  
+  *field:*
+  > a field $F$ is a set together with two laws of composition
+  > $$F\\times F\\overset +\\to  F, \\quad F\\times F\\overset \\times \\to F$$
+  > called addition: $a, b\\leadsto a+b$ and multiplication: $a, b\\leadsto ab$, which satisfy these axioms:
+  > - addtion makes $F$ into a abelian group $F^+$; its identity element is denoted by $0$.
+  > - multiplication is commutative, and it makes the set of nonzero elements of $F$ into a abelian group $F^\\times$; its identity element is denoted by $1$.
+  > - distributive law: $\\forall a, b, c\\in F \\Rightarrow a(b+ c)= ab+ ac$
+  
+  > An *isomorphism* $\\varphi$ from vector space $V$ to $V'$ is a bijective map such that:
+  > $$\\varphi (v+ w) = \\varphi (v)+ \\varphi (w), \\quad \\varphi (cv) = c \\varphi (v)$$
+  
+  > - Let $B$ and $B'$ be two bases of a vector space $V$, the basechange matrix $P$ is an invertible matrix that is determined uniquely by the two bases $B$ and $B'$
+  > - Let $B$ be a basis of a vector space $V$. the other bases are the sets of the form $B' = BP$ where $P$ can be any invertible $n\\times n$ matrix.
+  
+  ### 4. Linear Operators
+  
+  > a general example of a real matrix that has at least one real eigenvalue is one all of whose entries are positive. such matrices, called *positivate matrices*, has one of their most important properties that they always have an eigenvector whose coordinates are positive.
   
 '''
 linesHighlighted: []

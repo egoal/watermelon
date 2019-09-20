@@ -1,5 +1,5 @@
 createdAt: "2018-10-29T02:50:03.222Z"
-updatedAt: "2019-05-08T11:34:16.755Z"
+updatedAt: "2019-09-09T02:21:38.191Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "python"
@@ -67,6 +67,8 @@ content: '''
   '{:b}'.format(11) # '1011'
   # 千位分隔符
   '{:,}'.format(1230000) # '1,230,000'
+  
+  f'number is: {3.1415:3.2f}' # f-string format
   
   # 严谨的转换
   if string.isdigit():
