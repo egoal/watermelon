@@ -1,10 +1,55 @@
 createdAt: "2018-11-05T02:33:49.841Z"
-updatedAt: "2019-07-29T05:49:31.095Z"
+updatedAt: "2019-09-23T09:46:15.441Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "love2d"
 content: '''
   ## love2d
+  
+  ```lua
+  -- shader
+  local shader_str = [[
+  extern number _time = 0.;
+  const number T = 4.;
+  const number B = 0.01;
+  
+  number plot(number x, number y, number width){
+      return smoothstep(y- width, y, x)- smoothstep(y, y+ width, x);
+  }
+  
+  vec4 color_lerp(vec4 c1, vec4 c2, number a){
+      return (1- a)* c1+ a* c2;
+  }
+  
+  vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords){
+      vec4 pixel = Texel(texture, texture_coords); 
+  
+      number margin = 0.;
+      if(_time< 2.) margin = min(0.1* _time, 0.2);
+      else if(_time< 3.) margin = 0.2;
+      else if(_time< 5.) margin = 0.2- (_time-3.)* 0.1;
+      
+      if(texture_coords.y< margin || texture_coords.y> (1-margin)) return vec4(0.);
+  
+      pixel *= 1.- 2.* margin;
+  
+      return pixel;
+  }
+  
+  ]]
+  
+  -- load
+  shader = love.graphics.newShader(shader_str)
+  
+  -- update
+  shader:send("_time", passed_time)
+  
+  -- draw
+  love.graphics.setShader(shader)
+  -- draw things here
+  love.graphics.setShader()
+  
+  ```
   
   ---
   #### thirdparty

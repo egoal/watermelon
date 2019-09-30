@@ -1,11 +1,15 @@
 createdAt: "2019-01-15T08:11:37.311Z"
-updatedAt: "2019-01-15T08:15:25.944Z"
+updatedAt: "2019-09-25T03:41:33.771Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "matrix basics"
 tags: []
 content: '''
   ## matrix basics
+  
+  *Jordan Canonical Form(JCF):*
+  > for all $A\\in C^{n\\times n}$ with eigen values $\\lambda_1, ..., \\lambda_n\\in C$(not necessarily distinct), there exists $X\\in C^{n\\times n}_ n$ such that: 
+  > $$X^{-1}AX = J = diag (J_1, ..., J_q)$$
   
   $AC^T =|A| \\ \\mathbf I$, $C$为伴随矩阵
   
@@ -155,3 +159,4 @@ content: '''
 '''
 isStarred: false
 isTrashed: false
+linesHighlighted: []

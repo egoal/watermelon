@@ -1,5 +1,5 @@
 createdAt: "2018-11-12T01:09:50.172Z"
-updatedAt: "2019-01-07T03:41:18.349Z"
+updatedAt: "2019-09-24T02:31:49.261Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "lua & moonscript"
@@ -15,6 +15,17 @@ content: '''
   
   ... -- 变长参数
   for i, v in ipairs{...} do print(v) end 
+  
+  -- io
+  file = io.open("test", "r")
+  io.input(file)
+  io.read() -- read a line. "*all", "*line", "*number", num
+  io.close(file)
+  
+  file = io.open("test", "a")
+  io.output(file)
+  io.write("-- write a line")
+  io.close(file)
   ```
   
   **moonscript惯用**
@@ -28,3 +39,4 @@ content: '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: []
