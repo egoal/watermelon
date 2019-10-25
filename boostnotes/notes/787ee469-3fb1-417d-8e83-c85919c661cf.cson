@@ -1,0 +1,37 @@
+createdAt: "2019-10-17T07:37:30.228Z"
+updatedAt: "2019-10-21T03:55:47.645Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "All of Statistics"
+tags: []
+content: '''
+  ## All of Statistics
+  
+  ### 5. Inequalities
+  
+  **inequality**:
+  > Markov, for *non-negative* X: 
+  > $$P(X>t) \\le \\frac{E(X)}t$$
+  > $$E(x) = \\int_0^{\\infty} xf(x) dx \\ge \\int_x^{\\infty} xf(x) dx \\ge t\\int_x^{\\infty} f(x) dx = tP(x)$$
+  
+  > Chebyshev
+  > $$ P(|x-\\mu|\\ge t) \\le \\frac {\\sigma^2}{t^2}, \\quad P(|Z|\\ge k)\\le \\frac 1{k^2} $$
+  > $$P(|x-\\mu|\\ge t)  = P(|x-\\mu|^2\\ge t^2)\\le \\frac {E(x-\\mu)^2}{t^2} $$
+  
+  > Hoeffding, \\
+  > for *independent observations* $\\{Y_i\\}$ with $E(Y_i)=0$ and $a_i\\le Y_i\\le b_i$, let $\\epsilon>0$:
+  $$P(\\sum_{i=1}^n Y_i\\ge \\epsilon)\\le e^{-t\\epsilon} \\prod_{i=1}^n e^{t^2(b_i-a_i)^2/8}, \\quad \\forall t>0$$ 
+  > let $X_i\\sim Bernolli(p)$, then $\\overline{X_n}= n^{-1}\\sum X_i$:
+  $$ P(|\\overline X_n - p|>\\epsilon) \\le 2e^{-2n\\epsilon^2}, \\quad \\forall \\epsilon>0$$
+  > Cauchy-Schwarz, for $X$, $Y$ with *finite variances*:
+  $$E|XY| \\le \\sqrt{E(X^2)E(Y^2)}$$
+  > Jensen, for *convex* $g$:
+  $$E(g(X)) \\ge g(E(X))$$
+  
+  **the central limit theorem(CLT)**:
+  let $X_i$ be **IID** with mean $\\mu$ and variance $\\sigma^2$, let $\\overline{X_n}=n^{-1}\\sum_{i=1}^n X_i$. then: $\\overline{X_n} \\approx N(\\mu, \\sigma^2/n)$
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

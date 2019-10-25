@@ -1,5 +1,5 @@
 createdAt: "2018-12-13T07:58:40.732Z"
-updatedAt: "2019-05-09T08:59:58.736Z"
+updatedAt: "2019-10-17T07:41:51.839Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "notes"
@@ -87,25 +87,6 @@ content: '''
   where $t$ varies over the real numbers. give:
   $$\\psi_X'(t)|_{t=0} = E(X), \\quad \\psi_X''(t)|_{t=0} = E(X^2)$$
   if $\\psi_X(t)=\\psi_Y(t)$ for all $t$ in an open interval around $0$, then $X\\overset d=Y$
-  
-  **inequality**:
-  > Markov, for *non-negative* X: 
-  $$P(X>t) \\le \\frac{E(X)}t$$
-  > Chebyshev
-  $$ P(|x-\\mu|\\ge t) \\le \\frac {\\sigma^2}{t^2}, \\quad P(|Z|\\ge k)\\le \\frac 1{k^2} $$
-  > Hoeffding, \\
-  > for *independent observations* $\\{Y_i\\}$ with $E(Y_i)=0$ and $a_i\\le Y_i\\le b_i$, let $\\epsilon>0$:
-  $$P(\\sum_{i=1}^n Y_i\\ge \\epsilon)\\le e^{-t\\epsilon} \\prod_{i=1}^n e^{t^2(b_i-a_i)^2/8}, \\quad \\forall t>0$$ 
-  > let $X_i\\sim Bernolli(p)$, then $\\overline{X_n}= n^{-1}\\sum X_i$:
-  $$ P(|\\overline X_n - p|>\\epsilon) \\le 2e^{-2n\\epsilon^2}, \\quad \\forall \\epsilon>0$$
-  > Cauchy-Schwarz, for $X$, $Y$ with *finite variances*:
-  $$E|XY| \\le \\sqrt{E(X^2)E(Y^2)}$$
-  > Jensen, for *convex* $g$:
-  $$E(g(X)) \\ge g(E(X))$$
-  
-  **the central limit theorem(CLT)**:
-  let $X_i$ be **IID** with mean $\\mu$ and variance $\\sigma^2$, let $\\overline{X_n}=n^{-1}\\sum_{i=1}^n X_i$. then: $\\overline{X_n} \\approx N(\\mu, \\sigma^2/n)$
-  
   
 '''
 tags: []
