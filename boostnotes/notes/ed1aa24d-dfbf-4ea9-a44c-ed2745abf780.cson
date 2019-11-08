@@ -1,5 +1,5 @@
 createdAt: "2018-12-20T02:40:58.283Z"
-updatedAt: "2019-08-09T06:25:58.959Z"
+updatedAt: "2019-10-29T07:36:39.468Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "utility commands"
@@ -11,7 +11,7 @@ content: '''
   > `zip -r sub.zip sub-dot sub-kml sub.txt`
   
   `grep`
-  > `-i` 忽略大小写；`-e` 多模式匹配； `-v` 反选；
+  > `-i` 忽略大小写；`-e` 多模式匹配； `-v` 反选；`-n` 显示行号；
   
   `du` 查看文件大小
   > `-s` 不含subfolder；`-h` 给人看；

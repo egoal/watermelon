@@ -1,11 +1,25 @@
 createdAt: "2019-10-17T07:37:30.228Z"
-updatedAt: "2019-10-21T03:55:47.645Z"
+updatedAt: "2019-11-08T07:37:50.263Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "All of Statistics"
 tags: []
 content: '''
   ## All of Statistics
+  
+  ### distribution
+  **指数分布(exponential distribution, $X\\sim Exponential(\\lambda)$)**，可以用来表示独立随机时间发生的时间间隔，比如旅客进入进场的时间间隔，打进客服中心电话的时间间隔等
+  - $f(x; \\lambda) = \\lambda e^{-\\lambda x}; x\\ge 0$， $\\lambda >0$称为率参数，即单位时间发生该事件的次数。
+  - $E[X] = \\frac1{\\lambda}, D[X] = \\frac1{\\lambda^2}$
+  
+  **泊松分布(poisson distribution，$X\\sim\\pi(\\lambda), X\\sim P(\\lambda)$)**，描述单位时间内随机时间发生的次数，如某一服务设施在一定时间内收到的服务请求次数。
+  - $P(X=k)=\\frac{e^{-\\lambda}\\lambda^k}{k!}$，$\\lambda$为单位时间内随机时间的平均发生率
+  - $EX=DX=\\lambda$
+  - $X\\sim P(\\lambda_x), Y\\sim P(\\lambda_y) \\Rightarrow X+Y\\sim P(\\lambda_x+ \\lambda_y)$
+  
+  **伯努利分布(Bernoulli distribution)**
+  - $f(x)=p^x(1-p)^{1-x}; x\\in (0, 1)$
+  - $EX=p, DX=p(1-p)$
   
   ### 5. Inequalities
   
@@ -18,18 +32,25 @@ content: '''
   > $$ P(|x-\\mu|\\ge t) \\le \\frac {\\sigma^2}{t^2}, \\quad P(|Z|\\ge k)\\le \\frac 1{k^2} $$
   > $$P(|x-\\mu|\\ge t)  = P(|x-\\mu|^2\\ge t^2)\\le \\frac {E(x-\\mu)^2}{t^2} $$
   
-  > Hoeffding, \\
+  > Hoeffding, 
   > for *independent observations* $\\{Y_i\\}$ with $E(Y_i)=0$ and $a_i\\le Y_i\\le b_i$, let $\\epsilon>0$:
-  $$P(\\sum_{i=1}^n Y_i\\ge \\epsilon)\\le e^{-t\\epsilon} \\prod_{i=1}^n e^{t^2(b_i-a_i)^2/8}, \\quad \\forall t>0$$ 
+  > $$P(\\sum_{i=1}^n Y_i\\ge \\epsilon)\\le e^{-t\\epsilon} \\prod_{i=1}^n e^{t^2(b_i-a_i)^2/8}, \\quad \\forall t>0$$ 
   > let $X_i\\sim Bernolli(p)$, then $\\overline{X_n}= n^{-1}\\sum X_i$:
-  $$ P(|\\overline X_n - p|>\\epsilon) \\le 2e^{-2n\\epsilon^2}, \\quad \\forall \\epsilon>0$$
+  > $$ P(|\\overline X_n - p|>\\epsilon) \\le 2e^{-2n\\epsilon^2}, \\quad \\forall \\epsilon>0$$
+  
   > Cauchy-Schwarz, for $X$, $Y$ with *finite variances*:
-  $$E|XY| \\le \\sqrt{E(X^2)E(Y^2)}$$
+  > $$E|XY| \\le \\sqrt{E(X^2)E(Y^2)}$$
+  
   > Jensen, for *convex* $g$:
-  $$E(g(X)) \\ge g(E(X))$$
+  > $$E(g(X)) \\ge g(E(X))$$
+  > thus: 
+  > $$EX^2\\ge (EX)^2, E(1/X)\\ge 1/E(X)$$
   
   **the central limit theorem(CLT)**:
   let $X_i$ be **IID** with mean $\\mu$ and variance $\\sigma^2$, let $\\overline{X_n}=n^{-1}\\sum_{i=1}^n X_i$. then: $\\overline{X_n} \\approx N(\\mu, \\sigma^2/n)$
+  
+  ### 6. Convergence of Random Variables
+  
   
 '''
 linesHighlighted: []

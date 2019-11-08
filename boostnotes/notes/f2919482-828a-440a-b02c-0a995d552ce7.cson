@@ -1,13 +1,12 @@
 createdAt: "2019-09-23T09:43:01.419Z"
-updatedAt: "2019-09-23T09:55:25.145Z"
+updatedAt: "2019-10-29T08:05:30.796Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
-title: "shader"
+title: ""
 tags: []
-content: '''
-  ## shader
-  
-'''
-linesHighlighted: []
+content: ""
+linesHighlighted: [
+  13
+]
 isStarred: false
-isTrashed: false
+isTrashed: true
