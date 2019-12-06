@@ -44,10 +44,10 @@
 #define __FILENAME__ ll::__current_filename(__FILE__)
 #define LL_LOG std::cerr << "[" << __FILENAME__ << ": " << __LINE__ << "] "
 
-#define LL_NOTNULL(x)                             \
-  {                                               \
-    if (!x) LL_ABORT("null check failed: "#x); \
-  }                                               \
+#define LL_NOTNULL(x)                           \
+  {                                             \
+    if (!x) LL_ABORT("null check failed: " #x); \
+  }                                             \
   x
 
 #define LL_ABS(x) ((x) > 0 ? (x) : (-x))
@@ -77,6 +77,7 @@ std::unique_ptr<T> make_unique(Args&&... args) {
 #endif
 
 // range vector
+// todo: make it a iteratable struct instead.
 template <typename T>
 std::vector<T> range(T e) {
   std::vector<T> vec(e);
@@ -128,37 +129,158 @@ void print(const std::tuple<Args...>& t, std::ostream& os = std::cout) {
   os << ")";
 }
 
-//* simple unique patch
-template <typename IT, typename BOP>
-IT unique(IT beg, IT end, BOP eql) {
+//* simple fp patch
+template <typename IT, typename UOP>
+IT max_by(IT beg, IT end, UOP f) {
   if (beg == end) return end;
-
-  IT cur = beg;
-  IT result = beg + 1;
-  while (++cur != end) {
-    if (std::find_if(beg, result,
-            [&](decltype(*cur) value) { return eql(value, *cur); }) == result) {
-      *result = *cur;
-      ++result;
+  auto largest = beg;
+  auto s = f(*beg);
+  ++beg;
+  for (; beg != end; ++beg) {
+    auto s2 = f(*beg);
+    if (s < s2) {
+      largest = beg;
+      s = s2;
     }
   }
 
-  return result;
+  return largest;
 }
-template <typename IT>
-IT unique(IT beg, IT end) {
-  if (beg == end) return end;
 
-  IT cur = beg;
-  IT result = beg + 1;
-  while (++cur != end) {
-    if (std::find(beg, result, *cur) == result) {
-      *result = *cur;
-      ++result;
+// we dont have c++11 for now
+template <typename T, typename Collection, typename UOP>
+std::vector<T> mapf(UOP f, Collection c) {
+  std::vector<T> v(c.size());
+  std::transform(c.begin(), c.end(), v.begin(), f);
+  return v;
+}
+
+template <typename Collection, typename UOP>
+Collection filter(UOP f, Collection c) {
+  Collection re;
+  std::copy_if(c.begin(), c.end(), std::inserter(re, re.end()), f);
+  return re;
+}
+
+template <typename T, typename Collection, typename BOP>
+T fold(BOP f, T init, Collection c) {
+  return std::accumulate(c.begin(), c.end(), init, f);
+}
+
+template <typename T, typename Collection, typename BOP>
+T reduce(BOP f, Collection c) {
+  return std::accumulate(c.begin() + 1, c.end(), *c.begin(), f);
+}
+
+template <typename T, typename Collection>
+T sum(Collection c) {
+  return std::accumulate(c.begin() + 1, c.end(), *c.begin());
+}
+
+template <typename T, typename Collection, typename UOP>
+T sum_by(UOP f, Collection c) {
+  return sum<T>(ll::mapf<T>(f, c));
+}
+
+template <typename K, typename V>
+K get_key(const std::pair<K, V>& pr) {
+  return pr.first;
+}
+
+template <typename K, typename V>
+V get_value(const std::pair<K, V>& pr) {
+  return pr.second;
+}
+
+template <typename IT1, typename IT2>
+class Zip {
+public:
+  Zip(IT1 beg1, IT1 end1, IT2 beg2, IT2 end2)
+      : beg1_(beg1), end1_(end1), beg2_(beg2), end2_(end2) {}
+
+  class iterator {
+  public:
+    iterator(IT1 it1, IT2 it2) : pr_(it1, it2) {}
+
+    bool operator!=(const iterator& other) const { return pr_ != other.pr_; }
+    iterator operator++() {
+      pr_.first++;
+      pr_.second++;
+      return *this;
     }
-  }
 
-  return result;
+    std::pair<IT1, IT2> operator*() { return pr_; }
+
+  private:
+    std::pair<IT1, IT2> pr_;
+  };
+
+  iterator begin() { return iterator(beg1_, beg2_); }
+  iterator end() { return iterator(end1_, end2_); }
+
+  std::size_t size() const { return std::distance(beg1_, end1_); }
+
+  IT1 beg1_, end1_;
+  IT2 beg2_, end2_;
+};
+
+template <typename IT1, typename IT2>
+Zip<IT1, IT2> zip(IT1 beg1, IT1 end1, IT2 beg2, IT2 end2) {
+  return Zip<IT1, IT2>(beg1, end1, beg2, end2);
+}
+
+template <typename T, typename BOP, typename Container1, typename Container2>
+std::vector<T> zip_with(BOP f, Container1 c1, Container2 c2) {
+  LL_ASSERT(c1.size() <= c2.size());
+  std::vector<T> results(c1.size());
+  std::transform(c1.begin(), c1.end(), c2.begin(), results.begin(), f);
+  return results;
+}
+
+template <typename IT>
+class IndexedRange {
+public:
+  IndexedRange(IT beg, IT end) : beg_(beg), end_(end) {}
+
+  struct value_type {
+    value_type(std::size_t i, IT it) : index(i), iter(it) {}
+    std::size_t index;
+    IT iter;
+  };
+
+  class iterator {
+  public:
+    iterator(std::size_t i, IT it) : idx_(i), it_(it) {}
+
+    bool operator!=(const iterator& other) const {
+      return idx_ != other.idx_ || it_ != other.it_;
+    }
+
+    iterator operator++() {
+      ++idx_;
+      ++it_;
+      return *this;
+    }
+
+    value_type operator*() { return value_type(idx_, it_); }
+
+  private:
+    std::size_t idx_;
+    IT it_;
+  };
+
+  iterator begin() { return iterator(0, beg_); }
+  iterator end() { return iterator(size(), end_); }
+
+  std::size_t size() const { return std::distance(beg_, end_); }
+
+private:
+  IT beg_, end_;
+};
+
+template <typename T>
+IndexedRange<T> enumerate(T beg, T end) {
+  return IndexedRange<T>(beg, end);
 }
 
 //* string function, dont want to relate to boost
@@ -369,16 +491,27 @@ template <typename K, typename V>
 class bimap {
 public:
   bool insert(const K& k, const V& v) {
-    auto prl = left_.insert(std::make_pair(std::forward(k), std::forward(v)));
-    if (!prl.second) return false;
-    auto prr = right_.insert(std::make_pair(std::forward(v), std::forward(k)));
-    return prr.second;
+    if (left_.count(k) || right_.count(v)) return false;
+    left_[k] = v;
+    right_[v] = k;
+
+    return true;
   }
 
-  void erase(K k) {
-    left_.erase(k);
-    right_.erase(std::find_if(right_.begin(), right_.end(),
-        [&k](const std::pair<V, K>& pr) { return pr.second == k; }));
+  void erase_key(K k) {
+    auto iter = left_.find(k);
+    if (iter != left_.end()) {
+      right_.erase(iter->second);
+      left_.erase(iter);
+    }
+  }
+
+  void erase_value(V v) {
+    auto iter = right_.find(v);
+    if (iter != right_.end()) {
+      left_.erase(iter->second);
+      right_.erase(iter);
+    }
   }
 
   std::size_t size() const { return left_.size(); }

@@ -1,5 +1,5 @@
 createdAt: "2018-10-29T02:34:59.727Z"
-updatedAt: "2018-12-26T07:21:24.081Z"
+updatedAt: "2019-11-26T03:26:26.140Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "std: sys, os, collections, json, time, tkinter"
@@ -53,7 +53,10 @@ content: '''
   ```python
   import time
   
+  s = time.time()
   time.sleep(1)
+  e = time.time()
+  print(e- s)
   
   tm = time.localtime() # (tm_year=2017, tm_mon=5, ...)
   time.strtime('%Y-%m-%d %H:%M:%S') # 2018-10-29 10:42:44
@@ -107,3 +110,4 @@ content: '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: []
