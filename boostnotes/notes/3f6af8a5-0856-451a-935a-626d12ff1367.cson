@@ -1,5 +1,5 @@
 createdAt: "2018-11-09T10:24:53.969Z"
-updatedAt: "2019-07-01T07:22:57.287Z"
+updatedAt: "2019-12-25T02:03:30.412Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "numberical optimization"
@@ -208,10 +208,10 @@ content: '''
   $$ \\lambda_i^* c_i(x^*)=0,\\ for\\ i \\in \\mathcal E \\bigcup \\mathcal I $$
   其实就是KKT条件. 其中$\\lambda_i^*$的值一定程度上反应了边界的约束力
   
-  critical cone(临界锥)描述了在KKT条件满足时的临界区域:
+  critical cone(临界锥)描述了在KKT条件满足时的临界区域:
   
   $$\\mathcal C(x^*, \\lambda ^*) = \\{ w \\in \\mathcal F(x^*) | \\nabla c_i(x^*)^Tw=0, \\ all \\ i \\in  \\mathcal A(x^*) \\bigcap \\mathcal I \\ with \\ \\lambda_i^* > 0\\}$$
-  类似一般问题一阶导为0时, 找到垂直方向, 随后分析二阶情况来确定是否为极值. 类似地, 二阶条件为:
+  类似一般问题一阶导为0时, 找到垂直方向, 随后分析二阶情况来确定是否为极值. 类似地, 二阶条件为:
   
   $$\\Rightarrow w^T \\nabla_{xx}^2 \\mathcal L(x^*, \\lambda^*) w \\ge 0$$
   $$\\Leftarrow w^T \\nabla_{xx}^2 \\mathcal L(x^*, \\lambda^*) w > 0$$

@@ -1,11 +1,14 @@
 createdAt: "2019-06-11T02:55:55.251Z"
-updatedAt: "2019-08-30T02:55:24.260Z"
+updatedAt: "2019-12-23T03:33:33.017Z"
 type: "MARKDOWN_NOTE"
 folder: "e6cf9d6de29d53bd1458"
 title: "git"
 tags: []
 content: '''
   ## git 
+  
+  **撤销**
+  `git revert <commit>`作为一项提交记录，可以直接推
   
   **改动单个项目的提交配置**
   `.git/config`下添加:

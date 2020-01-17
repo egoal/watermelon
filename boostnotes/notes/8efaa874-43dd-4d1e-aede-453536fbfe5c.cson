@@ -1,0 +1,88 @@
+createdAt: "2019-12-30T02:13:12.040Z"
+updatedAt: "2020-01-13T07:25:58.774Z"
+type: "MARKDOWN_NOTE"
+folder: "3ee76ac761e39836b6e0"
+title: "c mono"
+tags: []
+content: '''
+  # c# mono
+  
+  ```c#
+  // readonly只能在构造函数中设定，之后不可改变
+  public readonly int Value;
+  public int Value { get; }
+  
+  // call constructor
+  public Point(): this(0, 0) {}
+  ```
+  
+  operator override
+  ```c#
+  public struct Point{
+    public int X { get; set; }
+    public int Y { get; set; }
+  
+    public Point(int x = 0, int y = 0){
+        X = x;
+        Y = y;
+    }
+    public static Point operator -(Point one, Point other) => new Point(one.X - other.X, one.Y - other.Y);
+    public static Point operator -(Point one) => new Point(-one.X, -one.Y);
+    public static Point operator +(Point one, Point other) => new Point(one.X + other.X, one.Y + other.Y);
+    public static Point operator *(Point point, int s) => new Point(point.X * s, point.Y * s);
+  
+    public static Point Dot(Point one, Point other) => new Point(one.X * other.X, one.Y * other.Y);
+    public static int Cross(Point one, Point other) => one.X * other.Y - one.Y * other.X;
+  
+    override public string ToString() => $"({X}, {Y})";
+  }
+  
+  ```
+  
+  IO
+  ```c#
+  using System.IO;
+  using System.IO.IsolateStorage;
+  
+  const string FILE_NAME = "testfile";
+  
+  var isoFile = IsolatedStorageFile.GetUserStoreForDomain();
+  if(isoFile.FileExists(FILE_NAME)){
+    Console.WriteLine("file exists.");
+    
+    using(var isoStream = new IsolatedStorageFileStream(FILE_NAME, FileMode.Open)){
+      using(var reader = new StreamReader(isoStream)){
+        var line = reader.Readline();
+        while(line!= null){
+          Console.WriteLine(line);
+          line = reader.Readline();
+        }
+      }
+    }
+  }else{
+    using(var isoStream = new IsolatedStorageFileStream(FILE_NAME, FileMode.Create)){
+      using (var writer = new StreamWriter(isoStream)){
+          writer.WriteLine("this is a line.\\nanother line.");
+          Console.WriteLine("file write.");
+      }
+    }
+  }
+  
+  
+  ```
+  
+  **Nez**
+  ```c#
+  // Scene能添加EntitySystem
+  Scene::AddEntityProcessor
+  // EntitySystem通常按顺序添加，比如输入系统、物理系统、碰撞事件系统
+  EntitySystem::EntitySystem(Matcher)
+    // Matcher筛选器
+    // new Matcher().All\\One\\Exclude(typeof(BuffComponent), typeof(DamageCompoenent), ...)
+  EntitySystem::Process(List<Entity>);
+  EntityProcessSystem::Process(Entity);
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,5 +1,5 @@
 createdAt: "2019-01-14T07:12:08.555Z"
-updatedAt: "2019-08-15T08:06:51.432Z"
+updatedAt: "2020-01-08T09:07:37.076Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "kotlin"
@@ -17,6 +17,7 @@ content: '''
   // 扩展函数
   fun Random.IntRange(low: Int, high: Int): Int
   
+  // 操作符重载
   operator fun Point.unaryMinus() = Point(-x, -y)
   ```
   

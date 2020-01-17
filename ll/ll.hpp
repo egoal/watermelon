@@ -149,36 +149,36 @@ IT max_by(IT beg, IT end, UOP f) {
 
 // we dont have c++11 for now
 template <typename T, typename Collection, typename UOP>
-std::vector<T> mapf(UOP f, Collection c) {
+std::vector<T> mapf(UOP f, const Collection& c) {
   std::vector<T> v(c.size());
-  std::transform(c.begin(), c.end(), v.begin(), f);
+  std::transform(c.cbegin(), c.cend(), v.begin(), f);
   return v;
 }
 
 template <typename Collection, typename UOP>
-Collection filter(UOP f, Collection c) {
+Collection filter(UOP f, const Collection& c) {
   Collection re;
-  std::copy_if(c.begin(), c.end(), std::inserter(re, re.end()), f);
+  std::copy_if(c.cbegin(), c.cend(), std::inserter(re, re.end()), f);
   return re;
 }
 
 template <typename T, typename Collection, typename BOP>
-T fold(BOP f, T init, Collection c) {
-  return std::accumulate(c.begin(), c.end(), init, f);
+T fold(BOP f, T init, const Collection& c) {
+  return std::accumulate(c.cbegin(), c.cend(), init, f);
 }
 
 template <typename T, typename Collection, typename BOP>
-T reduce(BOP f, Collection c) {
-  return std::accumulate(c.begin() + 1, c.end(), *c.begin(), f);
+T reduce(BOP f, const Collection& c) {
+  return std::accumulate(c.cbegin() + 1, c.cend(), *c.cbegin(), f);
 }
 
 template <typename T, typename Collection>
-T sum(Collection c) {
-  return std::accumulate(c.begin() + 1, c.end(), *c.begin());
+T sum(const Collection& c) {
+  return std::accumulate(c.cbegin() + 1, c.cend(), *c.cbegin());
 }
 
 template <typename T, typename Collection, typename UOP>
-T sum_by(UOP f, Collection c) {
+T sum_by(UOP f, const Collection& c) {
   return sum<T>(ll::mapf<T>(f, c));
 }
 
@@ -190,6 +190,29 @@ K get_key(const std::pair<K, V>& pr) {
 template <typename K, typename V>
 V get_value(const std::pair<K, V>& pr) {
   return pr.second;
+}
+
+template <typename IT, typename BOP>
+std::vector<std::pair<IT, IT>> group(IT beg, IT end, BOP f) {
+  std::vector<std::pair<IT, IT>> res;
+  if (beg == end) return res;
+
+  auto it = beg;
+  while (f(*beg, *it)) ++it;
+
+  res.push_back(std::make_pair(beg, it));
+  auto left = group(it, end, f);
+  res.insert(res.end(), left.begin(), left.end());
+
+  return res;
+}
+
+template <typename Container, typename BOP>
+std::vector<Container> group(Container c, BOP f) {
+  auto prs = group(c.begin(), c.end(), f);
+  std::vector<Container> res;
+  for (auto& pr : prs) res.emplace_back(pr.first, pr.second);
+  return res;
 }
 
 template <typename IT1, typename IT2>

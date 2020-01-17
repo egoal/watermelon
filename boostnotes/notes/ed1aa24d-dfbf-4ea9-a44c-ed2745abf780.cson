@@ -1,5 +1,5 @@
 createdAt: "2018-12-20T02:40:58.283Z"
-updatedAt: "2019-10-29T07:36:39.468Z"
+updatedAt: "2019-12-17T06:38:06.849Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "utility commands"
@@ -7,8 +7,13 @@ tags: []
 content: '''
   # utility commands
   
+  `tar`
+  > `tar -xvf [FILE_NAME]`
+  > `tar -czvf [FILE_NAME]`
+  
   `zip`
   > `zip -r sub.zip sub-dot sub-kml sub.txt`
+  > `unzip [FILE_NAME]`
   
   `grep`
   > `-i` 忽略大小写；`-e` 多模式匹配； `-v` 反选；`-n` 显示行号；
@@ -27,8 +32,6 @@ content: '''
   按键等待： `read -p 'press any key'`
   
   移动指定文件： `find . -iname '*.rtv'| xargs mv -t ..`
-  
-  常规解压文件：`tar -xvf [FILE_NAME]` `unzip [FILE_NAME]`
   
   强制关闭程序：`xkill`
   
