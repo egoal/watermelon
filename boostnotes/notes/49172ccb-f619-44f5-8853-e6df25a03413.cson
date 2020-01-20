@@ -1,0 +1,38 @@
+createdAt: "2020-01-19T09:27:08.039Z"
+updatedAt: "2020-01-20T07:20:56.718Z"
+type: "MARKDOWN_NOTE"
+folder: "3ee76ac761e39836b6e0"
+title: "Godot"
+tags: []
+content: '''
+  # Godot
+  
+  ```c#
+  [Signal]
+  public delegate void MySignal();
+  
+  EmitSignal(nameof(MySignal));
+  ```
+  
+  创建实例
+  ```c#
+  [Export]
+  public PackedScene Bullet{ get; set; } // 导出拖拽
+  
+  public PackedScene Bullet{ get; set; } = ResourceLoader.Load<PackedScene>("res://Bullet.tscn");
+  var Bullet = GD.Load<PackedScene>("res://Bullet.tscn"); // 路径load，会缓存
+  
+  var bullet = Bullet.Instance() as Bullet; // Instance() 出来是Node
+  {} // other initials
+  AddChild(bullet);
+  ```
+  
+  **VisibilityNotifier2D**
+  
+  检测物体在屏幕/视口内外`is_on_screen(): bool`
+  signals: `screen_entered`, `screen_exited`, `viewport_entered`, `viewport_exited`
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,13 +1,74 @@
 createdAt: "2019-12-30T02:13:12.040Z"
-updatedAt: "2020-01-13T07:25:58.774Z"
+updatedAt: "2020-01-20T10:14:55.182Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
-title: "c mono"
+title: "dotnet"
 tags: []
 content: '''
-  # c# mono
+  # dotnet
   
   ```c#
+  // reflection
+  namespace Dan
+  
+  {
+      [AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor |
+          AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
+      public class DebugInfo : Attribute {
+          public int BugNo { get; }
+          public string Developer { get; }
+          public string LastReview { get; }
+          public string Message { get; set; }
+  
+          public DebugInfo(int bg, string dev, string d) {
+              BugNo = bg;
+              Developer = dev;
+              LastReview = d;
+          }
+  
+          public override string ToString() => $"[{BugNo}] {Developer}: '{Message}' {LastReview}";
+      }
+  
+      [DebugInfo(45, "Zara", "12/8/2012", Message = "return type mismatch")]
+      [DebugInfo(49, "Nuha", "10/10/2012", Message = "unused variable.")]
+      public class Rectangle {
+          public double Width { get; set; } = 0;
+          public double Height { get; set; } = 0;
+  
+          [DebugInfo(55, "Zara", "19/10/2012", Message = "return type mismatch.")]
+          public double Area { get { return Width * Height; } }
+  
+          [DebugInfo(67, "Zara", "19/10/2012")]
+          public override string ToString() => $"{Width}x{Height}";
+      }
+  
+      class Program {
+          static void Main(string[] args) {
+              foreach (var attr in typeof(Rectangle).GetCustomAttributes(false)) {
+                  var dbi = attr as DebugInfo;
+                  if (dbi != null) Console.WriteLine(dbi);
+              }
+  
+              foreach (var m in typeof(Rectangle).GetMethods())
+                  foreach (var attr in m.GetCustomAttributes(true))
+                      Console.WriteLine(attr);
+  
+              foreach (var m in typeof(Rectangle).GetMembers())
+                  foreach (var attr in m.GetCustomAttributes(false))
+                      Console.WriteLine(attr);
+          }
+      }
+  
+  }
+  
+  
+  
+  // inline
+  using System.Runtime.CompilerServices;
+  
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  void InlineFunc(){}
+  
   // readonly只能在构造函数中设定，之后不可改变
   public readonly int Value;
   public int Value { get; }
@@ -69,18 +130,6 @@ content: '''
   }
   
   
-  ```
-  
-  **Nez**
-  ```c#
-  // Scene能添加EntitySystem
-  Scene::AddEntityProcessor
-  // EntitySystem通常按顺序添加，比如输入系统、物理系统、碰撞事件系统
-  EntitySystem::EntitySystem(Matcher)
-    // Matcher筛选器
-    // new Matcher().All\\One\\Exclude(typeof(BuffComponent), typeof(DamageCompoenent), ...)
-  EntitySystem::Process(List<Entity>);
-  EntityProcessSystem::Process(Entity);
   ```
 '''
 linesHighlighted: []
