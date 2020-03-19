@@ -1,11 +1,15 @@
 createdAt: "2019-06-11T02:55:55.251Z"
-updatedAt: "2019-12-23T03:33:33.017Z"
+updatedAt: "2020-03-10T07:50:13.378Z"
 type: "MARKDOWN_NOTE"
 folder: "e6cf9d6de29d53bd1458"
 title: "git"
 tags: []
 content: '''
   ## git 
+  
+  **取消失败的pull**
+  `git reflog` 查看操作记录，然后强退
+  `git reset --hard HEAD@{0}`
   
   **撤销**
   `git revert <commit>`作为一项提交记录，可以直接推

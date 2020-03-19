@@ -1,11 +1,50 @@
 createdAt: "2020-01-19T09:27:08.039Z"
-updatedAt: "2020-01-20T07:20:56.718Z"
+updatedAt: "2020-02-04T07:19:31.693Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "Godot"
 tags: []
 content: '''
   # Godot
+  
+  **鼠标设置**
+  ```c#
+  var arrow = ResourceLoader.Load("res://arrow.png");
+  var beam = ResourceLoader.Load("res:://beam.png");
+  Input.SetCustomMouseCursor(arrow);
+  Input.SetCustomMouseCursor(beam, Input.CursorShape.IBeam);
+  
+  if(OS.WindowFullscreen) Input.SetMouseMode(Input.MouseMode.Capture);
+  ```
+  
+  **File Storage**
+  ```c#
+  // json
+  var data = new Dictionary<string, object>(){
+    ["HighScore"] = HighScore;
+  };
+  var fout = new File();
+  fout.Open(SAVE_FILE, File.ModeFlags.Write);
+  fout.StroeLine(JSON.Print(data));
+  fout.Close();
+  
+  var fin = new File();
+  fin.Open(SAVE_FILE, File.ModeFlags.Read);
+  
+  string line = fin.GetLine();
+  var dict = JSON.Parse(line).Result as Dictionary;
+  HighScore = Convert.ToInt32(dict["HighScore"]);
+  
+  // config
+  var config = new ConfigFile();
+  if(config.Load(SAVE_FILE)== Error.Ok){
+    HighScore = (int)config.GetValue("data", "highscore", 0);
+    
+    // 保存时可以Set, 然后Save
+    config.SetValue("data", "highscore", 100);
+    config.Save(SAVE_FILE);
+  }
+  ```
   
   ```c#
   [Signal]
@@ -14,7 +53,7 @@ content: '''
   EmitSignal(nameof(MySignal));
   ```
   
-  创建实例
+  **创建实例**
   ```c#
   [Export]
   public PackedScene Bullet{ get; set; } // 导出拖拽

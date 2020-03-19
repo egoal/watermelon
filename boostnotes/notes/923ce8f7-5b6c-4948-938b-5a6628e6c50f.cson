@@ -1,5 +1,5 @@
 createdAt: "2018-10-29T02:50:03.222Z"
-updatedAt: "2019-09-09T02:21:38.191Z"
+updatedAt: "2020-02-21T10:06:17.599Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "python"
@@ -8,6 +8,7 @@ content: '''
   ```python
   # 匹配数字
   re.findall(r'[-+]?\\d*\\.?\\d+', "<str>11,2.0,-3.2,.02</str>") # 11, 2.0, -3.2, .02
+  re.findall(r'[(](.*?)[)]', '(aaa, bbb)(ccc)') # ['aaa, bbb', 'ccc']
   ```
   
   ```python

@@ -1,5 +1,5 @@
 createdAt: "2018-10-28T05:18:46.464Z"
-updatedAt: "2018-11-27T03:47:34.711Z"
+updatedAt: "2020-03-06T14:10:06.857Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "advanced calculus of serveral variables"
@@ -49,3 +49,6 @@ content: '''
 tags: []
 isStarred: false
 isTrashed: false
+linesHighlighted: [
+  10
+]

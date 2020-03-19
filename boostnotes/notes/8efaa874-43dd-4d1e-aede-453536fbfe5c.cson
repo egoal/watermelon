@@ -1,11 +1,15 @@
 createdAt: "2019-12-30T02:13:12.040Z"
-updatedAt: "2020-01-20T10:14:55.182Z"
+updatedAt: "2020-03-14T13:59:53.490Z"
 type: "MARKDOWN_NOTE"
 folder: "3ee76ac761e39836b6e0"
 title: "dotnet"
 tags: []
 content: '''
   # dotnet
+  
+  **Thirdparty**
+  > `Log`库：`serilog`
+  > `Linq`加强：`MoreLinq`，提供了`max_by`之类的东西
   
   ```c#
   // reflection
