@@ -1,5 +1,5 @@
 createdAt: "2018-11-09T10:24:53.969Z"
-updatedAt: "2019-12-25T02:03:30.412Z"
+updatedAt: "2020-04-18T14:31:54.188Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "numberical optimization"
@@ -223,17 +223,6 @@ content: '''
   $$ \\mathcal D=\\max_{\\lambda \\in R^n} q(\\lambda)\\quad s.t. \\quad \\lambda \\ge 0 $$
   对偶问题为原问题的下界
   
-  #### 13 Linear Programming: The Simplex Method
-  
-  $$ \\min c^Tx, \\quad s.t.\\ Ax=b,\\ x\\ge 0 $$
-  形式变换:
-  
-  $$ \\min c^Tx, \\quad s.t.\\ Ax \\le b $$
-  $$ \\rightarrow \\quad \\min c^Tx, \\quad s.t.\\ Ax+z=0,\\ z\\ge 0 $$
-  $$ \\rightarrow \\quad \\min \\begin{bmatrix} c \\\\ -c \\\\ 0 \\end{bmatrix}^T \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix}, \\quad s.t.\\ [A\\ -A\\ I] \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix} = b,\\ \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix} \\ge 0$$
-  $x^+$, $x^-$分别为$x$的正负部分: $x = x^+-x^-$
-  
-  **[13.2]**
   
   #### 14 Linear Programming: Interior-Point Method
   

@@ -1,5 +1,5 @@
 createdAt: "2019-11-26T03:24:44.690Z"
-updatedAt: "2019-11-26T03:25:19.969Z"
+updatedAt: "2020-04-15T07:33:20.418Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "fp"
@@ -8,7 +8,7 @@ content: '''
   ## fp
   
   ```python
-  from fn import _
+  from fn import F, _
   
   ```
   

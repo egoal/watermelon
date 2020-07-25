@@ -1,0 +1,43 @@
+createdAt: "2020-04-18T14:31:24.249Z"
+updatedAt: "2020-04-22T09:31:50.018Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "numberical optimization 2"
+tags: []
+content: '''
+  ## numberical optimization 2
+  
+  #### 13 Linear Programming: The Simplex Method
+  
+  基本形式:
+  $$ \\min c^Tx, \\quad s.t.\\ Ax=b,\\ x\\ge 0 $$
+  
+  形式变换:
+  $$ \\min c^Tx, \\quad s.t.\\ Ax \\le b $$
+  $$ \\rightarrow \\quad \\min c^Tx, \\quad s.t.\\ Ax+z=0,\\ z\\ge 0 $$
+  $$ \\rightarrow \\quad \\min \\begin{bmatrix} c \\\\ -c \\\\ 0 \\end{bmatrix}^T \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix}, \\quad s.t.\\ [A\\ -A\\ I] \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix} = b,\\ \\begin{bmatrix} x^+ \\\\ x^- \\\\ z \\end{bmatrix} \\ge 0$$
+  $x^+$, $x^-$分别为$x$的正负部分: $x = x^+-x^-$
+  
+  对偶问题
+  $$\\max b^T\\lambda, \\quad s.t.\\ A^T\\lambda \\le c$$
+  $$\\max b^T\\lambda, \\quad s.t.\\ A^T\\lambda +s = c,\\ s\\ge 0$$
+  
+  **basic feasible point**:
+  > A vertor $x$ is a *basic feasible* point if it is feasible and if there exists a subset $\\mathcal B$ of the index set {1, 2, 3, ..., n} such that
+  > - $\\mathcal B$ contains exactly $m$ indices
+  > - $i\\not \\in \\mathcal B \\Rightarrow x_i=0$
+  > - *basis matrix* $B=A[:,\\ \\mathcal B]$ is nonsingular
+   
+  > All basic feasible points for the problem are vertices of the feasible polytope $\\{x| Ax=b, x>=0\\}$ and vice versa.
+  
+  **degeneracy**
+  > a basis $\\mathcal B$ is said to be degenerate if $x_i=0$ for some $i\\in \\mathcal B$, where $x$ is the basic feasible solution corresponding to $\\mathcal B$, a linear program is said to be degenerate if it has at least one degenerate basis.
+  > 
+  
+  #### 14 Linear Programming: Interior-Point Method
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
