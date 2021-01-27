@@ -1,0 +1,65 @@
+createdAt: "2021-01-08T06:37:02.929Z"
+updatedAt: "2021-01-22T07:47:59.220Z"
+type: "MARKDOWN_NOTE"
+folder: "1e8e7087e48b4c193327"
+title: "Matrix analysis for scientists and engineers"
+tags: []
+content: '''
+  ## Matrix analysis for scientists and engineers
+  
+  ---
+  - $S \\oplus S^{\\perp} \\subseteq R^n$ 的证明
+  
+  令 $\\{v_1, ..., v_k\\}$为$S$的一组标准正交基，对任意$x\\in R^n$：
+  $$ x_1 = \\sum (x^T v_i) v_i \\quad x_2 = x - x_1 $$
+  有:
+  $$x_2^T v_j = x^T v_j- x_1^Tv_j = x^Tv_j - x^Tv_j = 0$$
+  因此 $x_2 \\in S^{\\perp}$
+  
+  唯一分解：
+  $x = x_1+ x_2 = x_1'+ x_2'$, where $x_1, x_1'\\in S$ and $x_2, x_2'\\in S^{\\perp}$, Then:
+  $$ 0= (x_1'- x_1)^T (x_1'- x_1)= (x_1'- x_1)^T(-(x_1'- x_1)) \\Rightarrow x_1=x_1' \\quad x_2=x_2'$$
+  
+  ---
+  - $\\mathcal N(A)^{\\perp} = \\mathcal R(A^T)$
+  - $\\mathcal R(A)^{\\perp} = \\mathcal N(A^T)$
+  
+  $\\forall x\\in \\mathcal N(A), y$
+  $$y^TAx=0 \\Rightarrow (A^Ty)^Tx = 0$$ 
+  
+  ---
+   $A, B \\in R^{n\\times n}$ then:
+  1. $0\\le rank(A+B) \\le rank(A)+ rank(B)$
+  2. $rank(A)+ rank(B)- n \\le rank(AB) \\le \\min \\{rank(A), rank(B)\\}$
+  3. $nullity(B)\\le nullity(AB)\\le nullity(A)+ nullity(B)$
+  4. if $B$ is *nonsingular*, $rank(AB)=rank(BA)=rank(A)$ and $\\mathcal N(BA) = \\mathcal N(A)$
+  
+  ---
+  对$A: \\mathcal X \\to \\mathcal Y$, 有变换$T: \\mathcal N(A)^{\\perp} \\to \\mathcal R(A)$使得: 
+  $$Tx = Ax, \\quad \\forall x\\in N(A)^{\\perp}$$
+  这显然是个双射，因此有唯一逆变换: $T^{-1}: \\mathcal R(A) \\to \\mathcal N(A)^{\\perp}$，由此定义**Moore-Penrose pseudoinverse** $A^+: \\mathcal Y \\to \\mathcal X$:
+  $$ A^+ y = T^{-1}y_1 $$
+  其中 $y = y_1+ y_2, \\quad y_1\\in \\mathcal R(A), \\quad y_2\\in \\mathcal R(A)^{\\perp}$
+  
+  ---
+  伪逆特征$G=A^+$
+  1. $AGA = A$
+  2. $GAG = G$
+  3. $(AG)^T = AG$
+  4. $(GA)^T = GA$
+  
+  通常来说$(AB)^+ \\ne B^+A^+$，(一个充分条件是$A$列满秩，$B$行满秩)
+  
+  ---
+  通解，
+  $$AX = B \\Rightarrow X = A^+B + (I - A^+A)Y \\quad Y\\in R^{n\\times k}$$
+  $(I - A^+A)$这个变换，就相当于保留了在$\\mathcal N(A)$中的分量
+  此外，特解$X = A^+B$最小化了 $Tr(X^TX)$
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

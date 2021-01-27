@@ -1,5 +1,5 @@
 createdAt: "2019-01-15T08:11:37.311Z"
-updatedAt: "2020-07-27T13:08:08.820Z"
+updatedAt: "2021-01-15T06:35:02.580Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "matrix basics"
@@ -107,6 +107,10 @@ content: '''
   $$X = A^+B + (I-A^+ A)Y, \\quad \\forall \\ Y\\in R^{n\\times k}$$
   其中$A^+B$为使得$Tr X^TX$取最小值
   
+  SVD求解：
+  $$AX=0$$
+  $$ |AX| = |U\\Sigma V^TX| = |\\Sigma (V^TX)| \\Rightarrow V^TX = [0,0,...,1] \\Rightarrow X = v_m $$
+  
   2范数$k$秩近似:
   $$ \\min_{M\\in R_k^{m\\times n}} ||A-M||_2 \\quad \\rightarrow \\quad M= \\sum_{i=1}^k \\sigma_i u_i v_i^T $$
   特别地，对$n$阶方阵计算的$k-1$阶近似为其最近的奇异阵
@@ -141,7 +145,7 @@ content: '''
   
   > if $f$ is a analytic function, then the eigenvalues of $f(A)$ are $f(\\lambda)$, buf $f(A)$ does not necessarily have all the same eigenvectors, unless, say, $A$ is **diagonalizable**.
   
-  > a complex square matrix $A$ is **normal** if: $A^*A = AA^*$
+  > a complex square matrix $A$ is **normal** if: $A^TA = AA^T$，也就是说对称、反对称、正交
   
   #### kronnecker & vectorization
   $$A\\otimes B =\\{a_{ij}B\\}$$
@@ -160,4 +164,6 @@ content: '''
 '''
 isStarred: false
 isTrashed: false
-linesHighlighted: []
+linesHighlighted: [
+  6
+]
