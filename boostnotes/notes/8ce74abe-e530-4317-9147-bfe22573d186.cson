@@ -1,5 +1,5 @@
 createdAt: "2019-11-26T03:24:44.690Z"
-updatedAt: "2020-04-15T07:33:20.418Z"
+updatedAt: "2020-10-19T14:12:08.760Z"
 type: "MARKDOWN_NOTE"
 folder: "f3aeaddc36c42d9137b3"
 title: "fp"
@@ -10,6 +10,12 @@ content: '''
   ```python
   from fn import F, _
   
+  import itertools as it
+  
+  for i, j in it.zip_longest(gen1, gen2, fillvalue=DEFAULT):
+    if i==DEFAULT or j==DEFAULT:
+      print('found shorter~')
+      
   ```
   
 '''

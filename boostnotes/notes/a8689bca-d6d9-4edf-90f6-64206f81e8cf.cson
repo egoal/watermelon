@@ -1,5 +1,5 @@
 createdAt: "2019-01-15T01:53:24.258Z"
-updatedAt: "2019-08-28T03:23:24.417Z"
+updatedAt: "2020-10-29T10:14:10.066Z"
 type: "MARKDOWN_NOTE"
 folder: "4d4f4fd5037554e03338"
 title: "trouble shooting"
@@ -23,6 +23,9 @@ content: '''
   `way-1: firefox -p[rofilemanager]` 之后选择删除出错的profile, 新建一个即可
   `way-2: pidof firefox | xargs kill` 强制关闭，`pkill firefox`
   
+  windows mingw使用
+  `cmake .. -G "MinGW Makefiles"`
+  `mingw32-make `
 '''
 isStarred: false
 isTrashed: false

@@ -1,5 +1,5 @@
 createdAt: "2018-12-13T07:58:40.732Z"
-updatedAt: "2019-10-17T07:41:51.839Z"
+updatedAt: "2020-08-07T11:09:36.093Z"
 type: "MARKDOWN_NOTE"
 folder: "1e8e7087e48b4c193327"
 title: "notes"
@@ -23,6 +23,11 @@ content: '''
   $$ (u\\times v)\\times w = (u\\cdot w) v- (v\\cdot w)u$$
   $$ (a\\times b)\\cdot (c\\times d) = (a\\cdot c)(b\\cdot d)- (a\\cdot d)(b\\cdot c) $$
   $$ ||a\\times b||^2+ (a\\cdot b)^2 = ||a||^2||b||^2 $$
+  
+  #### 罗德里格公式（Rodrigue）
+  点$p$绕**过原点的轴**$n$旋转$\\theta$:
+  
+  $$ p^* = p \\cos \\theta+ (n\\times p) \\sin \\theta+ n (n\\cdot p)(1-\\cos \\theta) $$
   
   #### 泰勒展开
   $$ f(x)= \\sum _{i=0}^n \\frac {f^{(i)}(a)}{i!} (x-a)^i + R_n(x) $$
