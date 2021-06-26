@@ -1,7 +1,7 @@
-temp/
+**temp/
 cpp/build/
 .vscode/
-.ipynb_checkpoints/
+**.ipynb_checkpoints/
 **.DS_Store
 _*/
 jns/
