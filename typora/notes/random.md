@@ -1,3 +1,18 @@
+**Frechet distance**
+$$
+\delta _F (f, g) = \inf_{\alpha, \beta} \max_{t\in [0, 1]} d(f(\alpha(t)), g(\beta(t)))
+$$
+直观理解为所有参数化形式之间的最大距离的下界，度量了两条曲线的相似性；
+
+针对离散化的形式（两条合理采样的折线），可以转为索引匹配后最大距离的最小值，以动态规划的方式求解；
+$$
+\| L\| = \max_ {i=1, ..., m} d(u_{a_i}, v_{b_i}) \\
+\delta _{dF}(Q, P) = \min \{\|L\| \ |\ L\ is\ a\ coupling\ between P\ and\ Q\}
+$$
+
+
+
+
 **soft-thresholding**
 $$
 \arg \min_x \frac 12 \| x-a \|^2_2+ k\| x\|_1

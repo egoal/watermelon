@@ -63,3 +63,53 @@ $$
 
 **Proposition 2.10.4**: Let $\varphi: G\to \mathcal G$ be a homomorphism with kernel $K$ and let $\mathcal H$ be a subgroup of $\mathcal G$. Denote the inverse image $\varphi ^{-1}(\mathcal H)$ by $H$. Then $H$ is a subgroup of $G$ that contains $K$. If $\mathcal H$ is a normal subgroup of $\mathcal G$, then $H$ is a normal subgroup of $G$. If $\varphi$ is surjective and if $H$ is a normal subgroup of $G$ then $\mathcal H$ is a normal subgroup of $\mathcal G$.
 
+
+
+**Theorem 2.12.2** Let $N$ be a normal subgroup of a group $G$, and let $\bar G$ denote the set of cosets of $N$ in $G$. There is a low of composition on $\bar G$ that makes this set into a group, such that the map $\pi: G\to \bar G$ defined by $\pi (a)=\bar a$ is a surjective homomorphism whose kernel is $N$.
+
+ 考虑*product set*: for subgroups $A$, $B$ of $G$, $AB = \{x\in G| x=ab \ for\ some\ a\in A, b\in B \}$
+
+
+
+**Theorem 2.12.10 First Isomorphism Theorem.** Let $\varphi: G\to G'$ be a surjective group homomorphism with kernel $N$. The quotient group $\bar G = G / N$ is isomorphic to the image $G'$. To be precise, let $\pi: G\to G'$ be the canonical map. There is a unique isomorphism $\bar \varphi: \bar G\to G'$ such that $\varphi = \bar \varphi \circ \pi$
+
+比如，复数绝对值$C^\times \to R^\times$的像是正实数，kernel则是单位圆$U$，对应商群$C^\times /U$与正实数群同构。
+
+
+
+## 3. Vector Spaces
+
+**Definition 3.2.2** A field $F$ is a set together with two laws of composition
+$$
+F\times F \overset + \to F, \quad F\times F\overset \times \to F
+$$
+called addition: $a, b \mapsto a+ b$ and multiplication: $a, b \mapsto ab$, which satisfy these axioms:
+
+1. Addition makes $F$ into an abelian group $F^ +$; its identity element is denoted by $0$
+2. Multiplication is commutative, and it makes the set of nonzero elements of $F$ into an abelian group $F^\times$; its identity element is denoted by $1$
+3. distributive law: For all $a, b, c \in F, a(b+c)=ab+ ac$
+
+
+
+## 4. Linear Operators
+
+
+
+## 5. Applications of Linear Operators
+
+**Theorem 5.4.4 (c)** Let $A$ and $B$ be complex $n\times n$ matrices that commute: $AB=BA$. Then $e^{A+B} = e^A e^B$.
+
+
+
+## 6. Symmetry
+
+A rigid motion of the plane if called an *isometry*(等距), and if an isometry carries a subset $F$ of the plane to itself, it is called a *symmetry* of $F$.
+
+
+
+**Theorem 6.2.3** The following conditions on a map $\varphi: R^n \to R^n$ are equivalent:
+
+- $\varphi$ is an isometry that fixes the origin: $\varphi (0) = 0$
+- $\varphi$ preserves dot products: $(\varphi(u)\cdot \varphi(v)) = (u\cdot v)$
+- $\varphi$ is an orthogonal linear operator
+

@@ -185,7 +185,7 @@ auto max_by(UOP f, const Collection &c)
   auto largest = c.begin();
   auto s = f(*largest);
 
-  auto iter = ++(c.begin());
+  auto iter = std::next(c.begin()); // ++(c.begin());
 
   for (; iter != c.end(); ++iter) {
     auto s2 = f(*iter);
@@ -204,7 +204,7 @@ auto min_by(UOP f, const Collection &c)
   auto smallest = c.begin();
   auto s = f(*smallest);
 
-  auto iter = ++(c.begin());
+  auto iter = std::next(c.begin());
   for (; iter != c.end(); ++iter) {
     auto s2 = f(*iter);
     if (s2 < s) {
@@ -214,6 +214,22 @@ auto min_by(UOP f, const Collection &c)
   }
 
   return std::make_pair(smallest, s);
+}
+
+template <typename Collection, typename BOP>
+std::vector<std::size_t> sort_indices(BOP f, const Collection &c) {
+  auto indices = range(c.size()).vec();
+  std::sort(indices.begin(), indices.end(),
+            [&](std::size_t i, std::size_t j) { return f(c[i], c[j]); });
+  return indices;
+}
+
+template <typename Collection>
+std::vector<std::size_t> sort_indices(const Collection &f) {
+  auto indices = range(f.size()).vec();
+  std::sort(indices.begin(), indices.end(),
+            [&](std::size_t i, std::size_t j) { return f[i] < f[j]; });
+  return indices;
 }
 
 template <typename Collection, typename UOP>
@@ -237,13 +253,13 @@ T fold(BOP f, T init, const Collection &c) {
 
 template <typename T, typename Collection, typename BOP>
 T reduce(BOP f, const Collection &c) {
-  return std::accumulate(++(c.cbegin()), c.cend(), *c.cbegin(), f);
+  return std::accumulate(std::next(c.cbegin()), c.cend(), *c.cbegin(), f);
 }
 
 template <typename Collection>
 auto sum(const Collection &c) ->
     typename std::remove_reference<decltype(*c.begin())>::type {
-  return std::accumulate(++(c.cbegin()), c.cend(), *c.cbegin());
+  return std::accumulate(std::next(c.cbegin()), c.cend(), *c.cbegin());
 }
 
 template <typename Collection, typename UOP>
@@ -295,13 +311,13 @@ public:
     iterator(IT1 it1, IT2 it2) : pr_(it1, it2) {}
 
     bool operator!=(const iterator &other) const { return pr_ != other.pr_; }
-    iterator& operator++() {
+    iterator &operator++() {
       ++pr_.first;
       ++pr_.second;
       return *this;
     }
 
-    const std::pair<IT1, IT2>& operator*() { return pr_; }
+    const std::pair<IT1, IT2> &operator*() { return pr_; }
 
   private:
     std::pair<IT1, IT2> pr_;

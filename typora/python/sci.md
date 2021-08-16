@@ -68,6 +68,12 @@ plt.xticks(range(len(xs)), xs, rotation=60)
 markerline, stemlines, baseline = plt.stem(x, np.cos(x), '-.')
 plt.setp(baseline, color='r', linewidth=2)
 
+# 极坐标
+theta = np.linspace(0, np.pi)
+rho = np.cos(theta)
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+ax.plot(theta, rho)
+
 # 关闭图示
 plt.xticks([])
 plt.axis('off') # 'equal'

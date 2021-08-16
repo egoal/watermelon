@@ -123,3 +123,42 @@ $$
 \phi_1^\times \phi_2^\times - \phi_2^\times \phi_1^\times = (\phi_1^\times \phi_2)^\times
 $$
 
+---
+
+**最小二乘变换（含近似R）**
+$$
+(R, t) = \arg \min_ {R\in SO(d), t\in R^d} \Sigma_i w_i \|(Rp_i+ t)- q_i\| \tag 1
+$$
+Assume $R$ is fixed:
+$$
+0=\frac \partial {\partial t} \Sigma w_i \|(Rp_i+ t)- q_i\| \\
+\Rightarrow t = \bar q- R\bar p \quad \quad \bar p= \frac {\Sigma w_ip_i}{\Sigma w_i},\ \bar q= \frac {\Sigma w_iq_i}{\Sigma w_i},
+\tag 2
+$$
+then:
+$$
+\Sigma w_i\|(Rp_i+t)- q_i\| = \Sigma w_i \|R(p_i- \bar p)- (q_i- \bar q)\| = \Sigma w_i\|R x_i - y_i\| \tag 3
+$$
+
+$$
+R = \arg\min \Sigma w_i\|Rx_i - y_i\|^2 =\arg\min \Sigma w_i (x_i^Tx_i- 2y_i^TRx_i+ y_i^Ty_i) \\
+= \arg\max \Sigma w_iy_i^TRx_i = tr (WY^TRX) \tag 4
+$$
+
+有$tr(AB)=tr(BA)$
+$$
+tr(WY^TRX) = tr(RXWY^T) = tr(RS) = tr(RU\Sigma V^T) \\
+= tr(V^TRU\Sigma)=tr(M\Sigma)=\Sigma \sigma_i m_{ii} \tag 5
+$$
+$M^TM=I \Rightarrow |m_{ij}|\le 1$ 因此(5)取最大值时有$M=I$，即 $R=VU^T$
+
+当$\det(VU^T)=-1$时，即须有$\det(M)=-1$，最大值取在仅有$m_{dd}=-1$
+
+近似$R$：
+$$
+\arg\min \|R-M\|_F^2 = tr((R-M)^T(R-M)) = \arg \max tr(R^TM) = tr(V^TR^TU\cdot \Sigma)
+$$
+
+
+
+
