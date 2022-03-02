@@ -35,40 +35,41 @@
 #include <stdarg.h>
 
 // macros
-#define LL_BAN_COPY(X)                                                         \
-  X(const X &) = delete;                                                       \
+#define LL_BAN_COPY(X)   \
+  X(const X &) = delete; \
   X &operator=(const X &) = delete
 
 #define LL_ABORT(...) throw std::runtime_error(__VA_ARGS__)
-#define LL_ASSERT(...)                                                         \
-  if (!(__VA_ARGS__))                                                          \
-  LL_ABORT(#__VA_ARGS__)
+#define LL_ASSERT(...) \
+  if (!(__VA_ARGS__)) LL_ABORT(#__VA_ARGS__)
 
 #define __FILENAME__ ll::__current_filename(__FILE__)
 #define LL_LOG std::cerr << "[" << __FILENAME__ << ": " << __LINE__ << "] "
-#define LL_LOG_F(str, ...)                                                     \
-  {                                                                            \
-    std::sprintf(ll::__logchar_mem__, str, __VA_ARGS__);                       \
-    LL_LOG << ll::__logchar_mem__;                                             \
+#define LL_LOG_F(str, ...)                               \
+  {                                                      \
+    std::sprintf(ll::__logchar_mem__, str, __VA_ARGS__); \
+    LL_LOG << ll::__logchar_mem__;                       \
   }
 
-#define LL_NOTNULL(x)                                                          \
-  {                                                                            \
-    if (!x)                                                                    \
-      LL_ABORT("null check failed: " #x);                                      \
-  }                                                                            \
+#define LL_NOTNULL(x)                           \
+  {                                             \
+    if (!x) LL_ABORT("null check failed: " #x); \
+  }                                             \
   x
 
 #define LL_ABS(x) ((x) > 0 ? (x) : (-x))
 
-#define LL_TOFILE(f, ...)                                                      \
-  {                                                                            \
-    std::ofstream fout(f, std::ios::out | std::ios::app);                      \
-    ll::CommaOS cos(fout);                                                     \
-    cos, __VA_ARGS__;                                                          \
+#define LL_TOFILE(f, ...)                                 \
+  {                                                       \
+    std::ofstream fout(f, std::ios::out | std::ios::app); \
+    ll::CommaOS cos(fout);                                \
+    cos, __VA_ARGS__;                                     \
   }
 
 #define LL_REPEAT(n) for (int __i__ = 0; __i__ < n; ++__i__)
+
+#define LL_IDENTITY [](auto &&x) { return x; }
+#define LL_GET_N(n) [](auto &&x) { return std::get<n>(x); }
 
 namespace ll {
 inline std::string __current_filename(const std::string &file) {
@@ -76,7 +77,7 @@ inline std::string __current_filename(const std::string &file) {
   return file.substr(pos == std::string::npos ? 0 : pos + 1);
 }
 
-static char __logchar_mem__[1024]; // memory for LL_LOG_F
+static char __logchar_mem__[1024];  // memory for LL_LOG_F
 
 inline std::string unsafe_format(const char *fmt, ...) {
   va_list ap;
@@ -95,30 +96,33 @@ std::unique_ptr<T> make_unique(Args &&... args) {
 }
 #endif
 
-template <typename T> T clamp(T val, T low, T high) {
+template <typename T>
+T clamp(T val, T low, T high) {
   assert(low <= high && "bad arguments");
-  if (val < low)
-    return low;
-  if (val > high)
-    return high;
+  if (val < low) return low;
+  if (val > high) return high;
   return val;
 }
 
-template <typename T> T rand(T maxval) {
+template <typename T>
+T rand(T maxval) {
   return T(std::rand() / double(RAND_MAX) * maxval);
 }
-template <typename T> T randrange(T minval, T maxval) {
+template <typename T>
+T randrange(T minval, T maxval) {
   return T(std::rand() / double(RAND_MAX) * (maxval - minval)) + minval;
 }
 
 //* tuple print
-template <typename Tuple, std::size_t N> struct __tuple_printer {
+template <typename Tuple, std::size_t N>
+struct __tuple_printer {
   static void print(const Tuple &t, std::ostream &os) {
     __tuple_printer<Tuple, N - 1>::print(t, os);
     os << ", " << std::get<N - 1>(t);
   }
 };
-template <typename Tuple> struct __tuple_printer<Tuple, 1> {
+template <typename Tuple>
+struct __tuple_printer<Tuple, 1> {
   static void print(const Tuple &t, std::ostream &os) { os << std::get<0>(t); }
 };
 template <typename... Args>
@@ -129,12 +133,21 @@ void print(const std::tuple<Args...> &t, std::ostream &os = std::cout) {
 }
 
 //* simple fp patch, we only have c++11 for now.
-template <typename T> class Range {
-public:
+
+template <typename IT, typename OIT, typename Pred, typename Map>
+void transform_if(IT beg, IT end, OIT ret, Pred pred, Map map) {
+  for (; beg != end; ++beg)
+    if (pred(*beg)) *ret++ = map(*beg);
+}
+
+// range vector
+template <typename T>
+class Range {
+ public:
   Range(T beg, T end, T step) : beg_(beg), end_(end), step_(step) {}
 
   class iterator {
-  public:
+   public:
     iterator(T i, T step) : i_(i), step_(step) {}
 
     bool operator!=(const iterator &other) const {
@@ -151,7 +164,7 @@ public:
 
     T operator*() const { return i_; }
 
-  private:
+   private:
     T i_, step_;
   };
 
@@ -163,20 +176,37 @@ public:
   std::vector<T> vec() const {
     std::vector<T> v;
     v.reserve(size());
-    for (T i = beg_; i < end_; i += step_)
-      v.emplace_back(i);
+    for (T i = beg_; i < end_; i += step_) v.emplace_back(i);
     return v;
   }
 
-private:
+ private:
   T beg_, end_, step_;
 };
 
-// range vector
-// todo: make it a iteratable struct instead.
-template <typename T> Range<T> range(T e) { return Range<T>(0, e, 1); }
-template <typename T> Range<T> range(T s, T e, T d) {
+template <typename T>
+Range<T> range(T e) {
+  return Range<T>(0, e, 1);
+}
+template <typename T>
+Range<T> range(T s, T e, T d) {
   return Range<T>(s, e, d);
+}
+
+template <typename F>
+struct Not {
+  Not(F f) : f_(f) {}
+  template <typename Arg>
+  bool operator()(Arg arg) {
+    return !f_(arg);
+  }
+
+ private:
+  F &f_;
+};
+template <typename F>
+Not<F> inverse(F f) {
+  return Not<F>(f);
 }
 
 template <typename Collection, typename UOP>
@@ -185,7 +215,7 @@ auto max_by(UOP f, const Collection &c)
   auto largest = c.begin();
   auto s = f(*largest);
 
-  auto iter = std::next(c.begin()); // ++(c.begin());
+  auto iter = std::next(c.begin());  // ++(c.begin());
 
   for (; iter != c.end(); ++iter) {
     auto s2 = f(*iter);
@@ -234,8 +264,9 @@ std::vector<std::size_t> sort_indices(const Collection &f) {
 
 template <typename Collection, typename UOP>
 auto mapf(UOP f, const Collection &c) -> std::vector<decltype(f(*c.begin()))> {
-  std::vector<decltype(f(*c.begin()))> v(c.size());
-  std::transform(c.begin(), c.end(), v.begin(), f);
+  std::vector<decltype(f(*c.begin()))> v;
+  v.reserve(c.size());
+  std::transform(c.begin(), c.end(), std::back_inserter(v), f);
   return v;
 }
 
@@ -267,23 +298,35 @@ auto sum_by(UOP f, const Collection &c) -> decltype(f(*c.begin())) {
   return sum(ll::mapf(f, c));
 }
 
-template <typename K, typename V> K get_key(const std::pair<K, V> &pr) {
-  return pr.first;
+template <typename Vec, typename CC, typename C = typename CC::value_type>
+void concat_to(Vec &re, const CC &collections) {
+  if (collections.empty()) return;
+
+  re.clear();
+  re.reserve(ll::sum_by([](const C &c) { return c.size(); }, collections));
+
+  re = ll::fold(
+      [](Vec &sum, const C &x) {
+        sum.insert(sum.end(), x.begin(), x.end());
+        return sum;
+      },
+      re, collections);
 }
 
-template <typename K, typename V> V get_value(const std::pair<K, V> &pr) {
-  return pr.second;
+template <typename CC, typename T = typename CC::value_type::value_type>
+std::vector<T> concat(const CC &collections) {
+  std::vector<T> re;
+  concat_to(re, collections);
+  return re;
 }
 
 template <typename IT, typename BOP>
 std::vector<std::pair<IT, IT>> group(IT beg, IT end, BOP f) {
   std::vector<std::pair<IT, IT>> res;
-  if (beg == end)
-    return res;
+  if (beg == end) return res;
 
   auto it = beg;
-  while (f(*beg, *it))
-    ++it;
+  while (f(*beg, *it)) ++it;
 
   res.push_back(std::make_pair(beg, it));
   auto left = group(it, end, f);
@@ -296,18 +339,18 @@ template <typename Container, typename BOP>
 std::vector<Container> group(Container c, BOP f) {
   auto prs = group(c.begin(), c.end(), f);
   std::vector<Container> res;
-  for (auto &pr : prs)
-    res.emplace_back(pr.first, pr.second);
+  for (auto &pr : prs) res.emplace_back(pr.first, pr.second);
   return res;
 }
 
-template <typename IT1, typename IT2> class Zip {
-public:
+template <typename IT1, typename IT2>
+class Zip {
+ public:
   Zip(IT1 beg1, IT1 end1, IT2 beg2, IT2 end2)
       : beg1_(beg1), end1_(end1), beg2_(beg2), end2_(end2) {}
 
   class iterator {
-  public:
+   public:
     iterator(IT1 it1, IT2 it2) : pr_(it1, it2) {}
 
     bool operator!=(const iterator &other) const { return pr_ != other.pr_; }
@@ -319,7 +362,7 @@ public:
 
     const std::pair<IT1, IT2> &operator*() { return pr_; }
 
-  private:
+   private:
     std::pair<IT1, IT2> pr_;
   };
 
@@ -337,6 +380,12 @@ Zip<IT1, IT2> zip(IT1 beg1, IT1 end1, IT2 beg2, IT2 end2) {
   return Zip<IT1, IT2>(beg1, end1, beg2, end2);
 }
 
+template <typename C1, typename C2>
+auto zip(C1 &c1, C2 &c2) -> Zip<decltype(c1.begin()), decltype(c2.begin())> {
+  return Zip<decltype(c1.begin()), decltype(c2.begin())>(c1.begin(), c1.end(),
+                                                         c2.begin(), c2.end());
+}
+
 template <typename T, typename BOP, typename Container1, typename Container2>
 std::vector<T> zip_with(BOP f, Container1 c1, Container2 c2) {
   LL_ASSERT(c1.size() <= c2.size());
@@ -345,8 +394,9 @@ std::vector<T> zip_with(BOP f, Container1 c1, Container2 c2) {
   return results;
 }
 
-template <typename IT> class IndexedRange {
-public:
+template <typename IT>
+class IndexedRange {
+ public:
   IndexedRange(IT beg, IT end) : beg_(beg), end_(end) {}
 
   struct value_type {
@@ -356,7 +406,7 @@ public:
   };
 
   class iterator {
-  public:
+   public:
     iterator(std::size_t i, IT it) : idx_(i), it_(it) {}
 
     bool operator!=(const iterator &other) const {
@@ -371,7 +421,7 @@ public:
 
     value_type operator*() { return value_type(idx_, it_); }
 
-  private:
+   private:
     std::size_t idx_;
     IT it_;
   };
@@ -381,7 +431,7 @@ public:
 
   std::size_t size() const { return std::distance(beg_, end_); }
 
-private:
+ private:
   IT beg_, end_;
 };
 
@@ -397,14 +447,12 @@ std::vector<std::string> string_split(const std::string &str, UOP uop) {
   int s(0), i(0);
   while (i < static_cast<int>(str.size())) {
     if (uop(str[i])) {
-      if (s < i)
-        vecStrs.push_back(str.substr(s, i - s));
+      if (s < i) vecStrs.push_back(str.substr(s, i - s));
       s = i + 1;
     }
     ++i;
   }
-  if (s < i)
-    vecStrs.push_back(str.substr(s, i));
+  if (s < i) vecStrs.push_back(str.substr(s, i));
 
   return vecStrs;
 }
@@ -414,24 +462,35 @@ inline std::vector<std::string> string_split<char>(const std::string &str,
   return string_split(str, [&](char tc) { return tc == c; });
 }
 template <>
-inline std::vector<std::string>
-string_split<std::string>(const std::string &str, std::string s) {
+inline std::vector<std::string> string_split<std::string>(
+    const std::string &str, std::string s) {
   return string_split(str,
                       [&](char c) { return s.find(c) != std::string::npos; });
 }
 template <>
-inline std::vector<std::string>
-string_split<const char *>(const std::string &str, const char *ps) {
+inline std::vector<std::string> string_split<const char *>(
+    const std::string &str, const char *ps) {
   return string_split(str, std::string(ps));
 }
 
 template <typename Collection>
 std::string string_join(const Collection &c, const std::string &split = " ") {
+  if (c.empty()) return "";
   std::stringstream ss;
   auto iter = c.begin();
   ss << (*iter);
-  for (++iter; iter != c.end(); ++iter)
-    ss << split << (*iter);
+  for (++iter; iter != c.end(); ++iter) ss << split << (*iter);
+  return ss.str();
+}
+
+// string_join(mapf(f, c), split)
+template <typename Collection, typename UOP>
+std::string string_join(UOP f, const Collection &c, const std::string &split) {
+  if (c.empty()) return "";
+  std::stringstream ss;
+  auto iter = c.begin();
+  ss << f(*iter);
+  for (++iter; iter != c.end(); ++iter) ss << split << f(*iter);
   return ss.str();
 }
 
@@ -448,23 +507,24 @@ inline std::string &string_strip(std::string &str) {
 /*file output*/
 // comma to stream, can be help to macro define
 class CommaOS {
-public:
+ public:
   CommaOS(std::ostream &os = std::cout, const std::string &deli = "")
       : os_(os), delimiter_(deli) {}
 
-  template <typename T> CommaOS &operator,(T t) {
+  template <typename T>
+  CommaOS &operator,(T t) {
     os_ << t << delimiter_;
     return *this;
   }
 
-private:
+ private:
   std::ostream &os_;
   std::string delimiter_;
 };
 
 /* simple time counter */
 class TimeCounter {
-public:
+ public:
   TimeCounter(std::function<void(int)> ontoc = nullptr) : ontoc_(ontoc) {
     reset();
   }
@@ -481,7 +541,7 @@ public:
       LL_LOG << ms << " ms passed.\n";
   }
 
-private:
+ private:
   decltype(std::chrono::high_resolution_clock::now()) start_;
   std::function<void(int)> ontoc_;
 };
@@ -489,18 +549,17 @@ private:
 /* file config*/
 // parser for my style
 class ConfigParser {
-public:
+ public:
   ConfigParser(const std::string &filename) { reload(filename); }
   LL_BAN_COPY(ConfigParser);
 
-  void reload(const std::string &filename) {
+  bool reload(const std::string &filename) {
     std::ifstream fin(filename.c_str());
-    assert(fin.is_open());
+    if (!fin.is_open()) return false;
     std::string line, key, e, val;
     while (std::getline(fin, line)) {
       line = line.substr(0, line.find(';'));
-      if (line.empty())
-        continue;
+      if (line.empty()) continue;
 
       std::stringstream ssin(line);
       ssin >> key >> e;
@@ -509,9 +568,9 @@ public:
       // strip
       string_strip(val);
 
-      if (!val.empty())
-        umapData_.insert({key, val});
+      if (!val.empty()) umapData_.insert({key, val});
     }
+    return true;
   }
 
   // single value
@@ -528,11 +587,9 @@ public:
 
   bool getBoolean(const std::string &key, bool defval = false) {
     auto str = getString(key, "");
-    if (str.empty())
-      return defval;
+    if (str.empty()) return defval;
     try {
-      if (str == "false" || std::stoi(str) == 0)
-        return false;
+      if (str == "false" || std::stoi(str) == 0) return false;
       return true;
     } catch (std::exception e) {
       return true;
@@ -571,19 +628,16 @@ public:
     return save(filename, headers,
                 std::unordered_map<std::string, std::string>());
   }
-  bool
-  save(const std::string &filename, const std::string &headers,
-       const std::unordered_map<std::string, std::string> &umapValDesc) const {
+  bool save(
+      const std::string &filename, const std::string &headers,
+      const std::unordered_map<std::string, std::string> &umapValDesc) const {
     std::ofstream fout(filename);
-    if (!fout.is_open())
-      return false;
+    if (!fout.is_open()) return false;
     // todo: headers may contain new lines
-    if (!headers.empty())
-      fout << headers << "\n";
+    if (!headers.empty()) fout << headers << "\n";
     for (const auto &pr : umapData_) {
       auto iter = umapValDesc.find(pr.first);
-      if (iter != umapValDesc.end())
-        fout << "# " << iter->second << "\n";
+      if (iter != umapValDesc.end()) fout << "# " << iter->second << "\n";
       fout << pr.first << "\t=\t" << pr.second << "\n";
     }
 
@@ -596,7 +650,7 @@ public:
       os << pr.first << "\t=\t" << pr.second << "\n";
   }
 
-private:
+ private:
   std::unordered_map<std::string, std::string> umapData_;
 };
 
@@ -615,11 +669,11 @@ inline std::string getStringFrom(const std::string &filename,
 }
 
 // simple binary map
-template <typename K, typename V> class bimap {
-public:
+template <typename K, typename V>
+class bimap {
+ public:
   bool insert(const K &k, const V &v) {
-    if (left_.count(k) || right_.count(v))
-      return false;
+    if (left_.count(k) || right_.count(v)) return false;
     left_[k] = v;
     right_[v] = k;
 
@@ -647,14 +701,15 @@ public:
   const std::map<K, V> &left() const { return left_; }
   const std::map<V, K> &right() const { return right_; }
 
-private:
+ private:
   std::map<K, V> left_;
   std::map<V, K> right_;
 };
 
 // simple unique priority queue
-template <typename T> class unique_priority_queue {
-public:
+template <typename T>
+class unique_priority_queue {
+ public:
   bool push(const T &t) {
     if (set_.insert(t).second) {
       queue_.push(t);
@@ -677,24 +732,23 @@ public:
 
   bool empty() const { return queue_.empty(); }
 
-private:
+ private:
   std::priority_queue<T> queue_;
   std::set<T> set_;
 };
 
 // simple array2d
-template <typename T> class array2d {
-public:
+template <typename T>
+class array2d {
+ public:
   array2d(int rows, int cols) : rows_(rows), cols_(cols) {
     data_ = new T[rows * cols];
   }
   array2d(int rows, int cols, T defval) : array2d(rows, cols) {
-    for (int i = 0; i < rows * cols; ++i)
-      data_[i] = defval;
+    for (int i = 0; i < rows * cols; ++i) data_[i] = defval;
   }
   ~array2d() {
-    if (data_)
-      delete[] data_;
+    if (data_) delete[] data_;
   }
 
   int rows() const { return rows_; }
@@ -706,8 +760,8 @@ public:
   T &at(int r, int c) { return data[r * cols_ + c]; }
   const T at(int r, int c) const { return data[r * cols_ + c]; }
 
-private:
+ private:
   T *data_{nullptr};
   int rows_, cols_;
 };
-} // namespace ll
+}  // namespace ll
