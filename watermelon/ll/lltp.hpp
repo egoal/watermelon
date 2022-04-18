@@ -4,7 +4,7 @@
 
 // define below macro to use them before #include
 // #define LL_USE_OPENCV
-#define LL_USE_EIGEN
+// #define LL_USE_EIGEN
 
 //
 #ifdef LL_USE_OPENCV

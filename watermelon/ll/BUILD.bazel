@@ -1,0 +1,13 @@
+load("//:config.bzl", "COPTS_BASE", "COPTS_INCLUDE", "COPTS_STATIC_LIB", "LINK_BASE")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "ll",
+    srcs = [
+        "ll.hpp",
+        "llda.hpp",
+    ],
+    copts = COPTS_INCLUDE + COPTS_BASE + COPTS_STATIC_LIB + LINK_BASE,
+    linkstatic = True,
+)

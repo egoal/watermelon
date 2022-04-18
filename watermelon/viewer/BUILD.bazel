@@ -1,0 +1,45 @@
+load("//:config.bzl", "COPTS_BASE", "COPTS_INCLUDE", "COPTS_STATIC_LIB", "LINK_BASE")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "glad",
+    srcs = ["glad/glad.cpp"],
+    hdrs = [
+        "glad/glad.h",
+        "glad/khrplatform.h",
+    ],
+    # linkopts = [
+    #     "-lglfw3",
+    #     "-lGL",
+    #     "-lX11",
+    #     "-lpthread",
+    #     "-lXrandr",
+    #     "-lXi",
+    #     "-ldl",
+    # ],
+    # linkstatic = True,
+)
+
+cc_binary(
+    name = "viewer",
+    # hdrs = glob(["*.hpp"])+ glob(["*.h"]),
+    srcs = glob(["*.cpp"]),
+    linkopts = [
+        "-L/usr/local/lib",
+        "-lglfw",
+        "-lGL",
+        "-lX11",
+        "-lpthread",
+        "-lXrandr",
+        "-lXi",
+        "-ldl",
+    ],
+    copts = COPTS_INCLUDE + COPTS_BASE + LINK_BASE,
+    linkstatic = True,
+    deps = [
+        ":glad",
+        "//ll",
+        "@com_github_google_glog//:glog",
+    ],
+)
