@@ -1,3 +1,4 @@
+#include "glm/gtc/type_ptr.hpp"
 #include "shader.h"
 #include <glog/logging.h>
 
@@ -64,4 +65,9 @@ void Shader::SetFloat(const std::string &name, float value) const {
 
 void Shader::SetVec3(const std::string &name, float x, float y, float z) const {
   glUniform3f(glGetUniformLocation(id_, name.c_str()), x, y, z);
+}
+
+void Shader::SetMat4(const std::string &name, const glm::mat4 &m) const {
+  glUniformMatrix4fv(glGetUniformLocation(id_, name.c_str()), 1, GL_FALSE,
+                     glm::value_ptr(m));
 }
