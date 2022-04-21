@@ -66,6 +66,7 @@
 
 #define LL_IDENTITY [](auto &&x) { return x; }
 #define LL_GET_N(n) [](auto &&x) { return std::get<n>(x); }
+#define LL_INVERSE(f) [&f](auto &&x) { return !f(x); }
 
 namespace ll {
 inline std::string __current_filename(const std::string &file) {
@@ -134,15 +135,6 @@ template <typename T> T __next(T t) {
   return t;
 }
 
-template <typename F> struct Not {
-  Not(F f) : f_(f) {}
-  template <typename Arg> bool operator()(Arg arg) { return !f_(arg); }
-
-private:
-  F &f_;
-};
-template <typename F> Not<F> inverse(F f) { return Not<F>(f); }
-
 template <typename Collection, typename UOP>
 auto mapf(UOP f, const Collection &c) {
   std::vector<decltype(f(*c.begin()))> v;
@@ -159,7 +151,7 @@ template <typename Collection, typename UOP> auto filter(UOP f, Collection &c) {
 template <typename Collection, typename UOP>
 Collection filter(UOP f, Collection &&c) {
   static_assert(!std::is_const<Collection>::value);
-  c.erase(std::remove_if(c.begin(), c.end(), ll::inverse(f)), c.end());
+  c.erase(std::remove_if(c.begin(), c.end(), LL_INVERSE(f)), c.end());
   return c;
 }
 

@@ -1,0 +1,6 @@
+exports_files([
+    "awesomeface.png",
+    "container.jpg",
+    "shader.fs",
+    "shader.vs",
+])

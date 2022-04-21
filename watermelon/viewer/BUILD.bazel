@@ -9,22 +9,29 @@ cc_library(
         "glad/glad.h",
         "glad/khrplatform.h",
     ],
-    # linkopts = [
-    #     "-lglfw3",
-    #     "-lGL",
-    #     "-lX11",
-    #     "-lpthread",
-    #     "-lXrandr",
-    #     "-lXi",
-    #     "-ldl",
-    # ],
-    # linkstatic = True,
 )
 
-cc_binary(
-    name = "viewer",
-    # hdrs = glob(["*.hpp"])+ glob(["*.h"]),
+cc_library(
+  name = "glm",
+  hdrs = glob([
+    "glm/*.hpp",
+    "glm/**/*.hpp",
+    "glm/**/*.h",
+  ]),
+  includes = ["glm"],
+  textual_hdrs = glob(["glm/**/*.inl"]),
+  visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "viewer_lib",
     srcs = glob(["*.cpp"]),
+    hdrs = glob([
+        "*.hpp",
+        "*.h",
+    ]),
+    copts = COPTS_INCLUDE + COPTS_BASE + LINK_BASE,
+    includes = ["."],
     linkopts = [
         "-L/usr/local/lib",
         "-lglfw",
@@ -35,10 +42,31 @@ cc_binary(
         "-lXi",
         "-ldl",
     ],
-    copts = COPTS_INCLUDE + COPTS_BASE + LINK_BASE,
     linkstatic = True,
     deps = [
         ":glad",
+        "//ll",
+        ":glm",
+        "@com_github_google_glog//:glog",
+    ],
+)
+
+cc_binary(
+    name = "viewer",
+    # hdrs = glob(["*.hpp"])+ glob(["*.h"]),
+    srcs = ["main.cpp"],
+    copts = COPTS_INCLUDE + COPTS_BASE + LINK_BASE,
+    data = [
+        "//viewer/assets:awesomeface.png",
+        "//viewer/assets:container.jpg",
+        "//viewer/assets:shader.fs",
+        "//viewer/assets:shader.vs",
+    ],
+    includes = ["."],
+    linkstatic = True,
+    deps = [
+        ":glad",
+        ":viewer_lib",
         "//ll",
         "@com_github_google_glog//:glog",
     ],
