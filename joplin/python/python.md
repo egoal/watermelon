@@ -19,6 +19,11 @@
 ## python
 
 ```python
+# 配合命令
+import subprocess
+res = subprocess.check_output('find . -name "*.txt"', shell=True)
+res.decode('utf-8').split('\n')
+
 int('ff', 16) == hex(255) # 进制
 chr(ord('a')) == 'a' # asc
 
@@ -30,6 +35,24 @@ if line.isdigit():
 
 # 字符串格式化
 f'number is {math.pi: 3.2f}' # 3.14
+
+```
+
+## multiprocessing
+
+```python
+import multiprocessing
+
+def fun(name):
+    print(f'hello {name}.')
+
+names = ['1', '2', '3']
+pool = multiprocessing.Pool(processes=3)
+for n in names:
+    pool.apply_async(func, (n, ))
+pool.close()
+pool.join()
+
 ```
 
 ## sys, os

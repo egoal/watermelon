@@ -51,5 +51,9 @@ Travelling Salesman Problem: 在完全图中穿过所有节点最后回到出发
 
 ## 5. Matchings
 
+> A subset $M$ of $E$ is called a *matching* in $G$ if its elements are links and no two are adjacent in $G$; 
+
+$M$的两个端点成为一对匹配，如果节点$v$在匹配中，成为在$M$ saturates vertex $v$，如果$G$的所有节点都饱和，则称为perfect matching.
+
 
 

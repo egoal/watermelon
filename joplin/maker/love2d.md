@@ -7,6 +7,10 @@ __add, __sub, __mul, __div, __unm -- 相反数
 __mod, __pow, __concat -- 字符串连接符 ..
 __eq, _lt, _le -- ==, <, <=
 __tostring
+
+if pcall(f, args, ...) then else ... end
+
+string.rep('abc', 3) -- abcabcabc
 ```
 
 

@@ -35,6 +35,12 @@ git push origin master
 	email = 939425550@qq.com
 ```
 
+直接在仓库下
+
+`git config user.name "egoal"`
+
+`git config user.email 939425550@qq.com`
+
 
 
 **修改commit提交信息**

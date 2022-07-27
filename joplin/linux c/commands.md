@@ -1,4 +1,13 @@
+`ln`
+
+> `ln -s [SRC] [DST]`
+>
+> `sudo rm [DST]`
+
+
+
 `tar`
+
 > `tar -xvf [FILE_NAME]`
 > `tar -czvf [FILE_NAME]`
 
@@ -49,3 +58,4 @@
 
 
 `ldd` 现实程序所有依赖
+

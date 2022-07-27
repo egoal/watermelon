@@ -1,3 +1,15 @@
+**sql**
+
+```sqlite
+select count(*) from [TAB]; 行数
+
+select [COLUMN_1],[COLUMN_2] from [TAB] limit [ROWS]; 查看一定行数
+
+select distinct [COLUMNS] from [TAB];
+```
+
+
+
 **graphviz**
 
 常规安装 `sudo apt-get install graphviz`		 `brew install graphviz` 
@@ -35,6 +47,8 @@ digraph main{
 `valgrind --tool=memcheck --leak-check=full --log-file=[LOG_FILE] [PROGRAM] [PROGRAM ARGS]` 内存泄漏
 
 `valgrind --tool=callgrind [PROGRAM] [PROGRAM ARGS]` 性能分析
+
+`valgrind --tool=massif [PROGRAM] [ARGS]` 内存占用
 
 
 

@@ -103,7 +103,7 @@ if $Z_1, ..., Z_p$ are independent standard Normal random variables, then $\sum_
 let $X\sim N(\mu, \Sigma)$, then:
 1. *marginal distribution*: $X_a\sim N(\mu_a, \Sigma_{aa})$
 2. *conditional distribution*: $(X_b|X_a = x_a)\sim N(\mu_b+\Sigma_{ba}\Sigma_{aa}^{-1}(x_a-\mu_a),\quad \Sigma_{bb}-\Sigma_{ba}\Sigma_{aa}^{-1}\Sigma_{ab})$
-3. if $a$ is a vector then $a^TX\sim N(a^T\mu, a^T\Sigma_a)$
+3. if $a$​ is a vector then $a^TX\sim N(a^T\mu, a^T\Sigma a)$​
 4. $V=(X-\mu)^T\Sigma^{-1}(X-\mu)\sim \chi _k^2$
 
 
