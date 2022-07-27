@@ -1,7 +1,5 @@
-**temp/
 **.vscode/
 **.ipynb_checkpoints/
 **.DS_Store
-_*/
-jns/
 **/bazel-*
+joplin/temp-storage
