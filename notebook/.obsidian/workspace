@@ -1,0 +1,144 @@
+{
+  "main": {
+    "id": "f096ce819f882572",
+    "type": "split",
+    "children": [
+      {
+        "id": "88a8393057220074",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "linux c/commands.md",
+            "mode": "preview",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e9be7d968e331197",
+    "type": "split",
+    "children": [
+      {
+        "id": "99137bc92bd4dbb2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8edc24f3420c5c78",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "e76ad0a1971b89b1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "faef1824dfcc43cf",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c7a39ce07b9759bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb28fcc4d028e518",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2b62d43b0644f120",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "linux c/commands.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c8f2f5fb44d2d3b0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "linux c/commands.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "52c9f315c7a649c9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "a0dc9e208086322f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "linux c/commands.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "88a8393057220074",
+  "lastOpenFiles": [
+    "notes/matrix basics.md",
+    "notes/lines.md",
+    "notes/random.md",
+    "python/python.md",
+    "python/sci.md",
+    "python/thirdparty.md",
+    "books/algebra.md",
+    "books/algebra 1.md",
+    "cpp/cmake.md",
+    "linux c/software-notes.md"
+  ]
+}

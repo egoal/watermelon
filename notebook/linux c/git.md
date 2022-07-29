@@ -1,17 +1,3 @@
-**merge分支**
-
-```
-git checkout dev
-git pull
-git checkout master
-git merge dev
-git push origin master
-```
-
-
-
-
-
 **取消失败的pull**
 
 1. `git reflog`  查看操作记录

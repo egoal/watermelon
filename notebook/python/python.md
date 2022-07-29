@@ -1,24 +1,13 @@
-## conda
-
-`conda update conda`
-
-`conda create --name [ENV_NAME] python=3.7` 创建环境
-
-`conda info --envs`
-
-`source activate [ENV_NAME]` `source deactivate`
-
-`conda list` 显示当前包
-
-`conda search/install/update [PACKAGE_NAME]` 当前环境安装包
-
-`conda remove -n [ENV_NAME] [PACKAGE_NAME, ...]` 删包
-
-`conda env remove --name [ENV_NAME]` 删环境
-
 ## python
 
 ```python
+
+import logging
+
+logging.basicConfig(filename='log.log', filemode='w', level=logging.DEBUG, 
+					format='%(asctime)s %(levelname)-8s %(message)s')
+logging.info('a line of info.')
+
 # 配合命令
 import subprocess
 res = subprocess.check_output('find . -name "*.txt"', shell=True)
@@ -37,6 +26,25 @@ if line.isdigit():
 f'number is {math.pi: 3.2f}' # 3.14
 
 ```
+
+## conda
+
+`conda update conda`
+
+`conda create --name [ENV_NAME] python=3.7` 创建环境
+
+`conda info --envs`
+
+`source activate [ENV_NAME]` `source deactivate`
+
+`conda list` 显示当前包
+
+`conda search/install/update [PACKAGE_NAME]` 当前环境安装包
+
+`conda remove -n [ENV_NAME] [PACKAGE_NAME, ...]` 删包
+
+`conda env remove --name [ENV_NAME]` 删环境
+
 
 ## multiprocessing
 

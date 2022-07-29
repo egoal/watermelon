@@ -1,6 +1,17 @@
 ```cpp
-// std::inserter, std::back_inserter指定插入位置
-std::transform(in.begin(), in.end(), std::inserter(out, out.begin()), UOP);
+
+// std::reference_wrapper 可以保存容器引用
+
+std::list<int> l;
+std::vector<std::reference_wrapper<int> > v(l.begin(), l.end());
+std::random_shuffle(v.begin(), v.end()); // std::random_shuffle本身只能作用于随机访问器，std::list不能直接使用
+// 这样等于创建了一个view，原l是不变的
+for(auto& i: l) i*=2;
+for(auto& ri: v) ri.get() *=2;
+// 如果直接修改了值，两者是同步的（那必然的，毕竟是引用啊）
+
+std::optional<std::reference_wrapper<int>> // 这样就能让std::optional适应引用
+
 
 // 几个不常用重载
 T& operator++(); // ++t
