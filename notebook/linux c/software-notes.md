@@ -1,3 +1,5 @@
+安装一个Stacer还是很方便的
+
 **sql**
 
 ```sqlite
@@ -50,9 +52,13 @@ digraph main{
 
 `valgrind --tool=massif [PROGRAM] [ARGS]` 内存占用
 
+可视化工具 `kcachegrind`，`sudo apt-get install kcachegrind` 之后直接打开就行
+
 
 
 **以免需要偶尔使用到vim**
+
+跳转到本行头部 `^`，尾部`$`
 
 添加 `A`当行尾，`a`当前
 

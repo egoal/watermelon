@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "88a8393057220074",
+        "id": "91ed4285360168c4",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "linux c/commands.md",
-            "mode": "preview",
+            "file": "temp-storage/记录.md",
+            "mode": "source",
             "source": false
           }
         }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "linux c/commands.md",
+                "file": "temp-storage/记录.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "linux c/commands.md",
+                "file": "temp-storage/记录.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "linux c/commands.md"
+                "file": "temp-storage/记录.md"
               }
             }
           }
@@ -128,17 +128,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "88a8393057220074",
+  "active": "91ed4285360168c4",
   "lastOpenFiles": [
-    "notes/matrix basics.md",
-    "notes/lines.md",
-    "notes/random.md",
+    "linux c/commands.md",
+    "linux c/software-notes.md",
+    "temp-storage/记录.md",
+    "temp-storage/sample1.png",
+    "temp-storage/ribao.md",
+    "linux c/git.md",
+    "books/deep learning.md",
     "python/python.md",
-    "python/sci.md",
-    "python/thirdparty.md",
-    "books/algebra.md",
-    "books/algebra 1.md",
-    "cpp/cmake.md",
-    "linux c/software-notes.md"
+    "notes/random.md",
+    "notes/matrix basics.md"
   ]
 }

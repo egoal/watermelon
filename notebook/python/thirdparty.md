@@ -1,3 +1,10 @@
+## qt
+
+启动designer `pyqt5-tools.exe designer`
+编辑完成之后更新py文件 ` pyuic5.exe .\core\console.ui -o .\core\console.py`
+```python
+```
+
 ## fp
 
 ```python 
@@ -92,6 +99,4 @@ print(tt.draw())
 +-------------------------------------------+
 '''
 ```
-
-
 

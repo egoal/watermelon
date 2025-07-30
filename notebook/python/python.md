@@ -1,11 +1,68 @@
 ## python
 
 ```python
+# 远程启动jupyter
+jupyter lab --no-browser --port=8899 # 远端
+ssh -L 8899:localhost:8899 user@server_ip # 本地
+# 之后打开 http://localhost:8899
+# 如果无法选择conda环境作为内核，可以注册一下
+conda install ipykernel
+python -m ipykernel install --user --name=ENV_NAME # --display-name XXX
+
+# profile
+python -m cProfile -o 1.prof a.py ...
+snakeviz 1.prof # pip install snakeviz
+
+# 镜像安装
+pip install [xxx] -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 简单的并行
+from multiprocessing import Pool
+with Pool(4) as pool:
+	r = list(tqdm(pool.imap(proc_one, tasks), total=len(tasks)))
+
+# Pool中四种map的区别，(f, xs)
+Pool.map  # 这种就相当于是map的并行版本，返还list
+r = Pool.map_async # 和上面相似，但是不会阻塞当前进程，直到调用r.wait()，随后通过r.get()获得list结果
+Pool.imap # 不会立刻展开xs，所以默认不会拆分chunks，所以通常速度更慢、内存更小、可以类似generate的方式不断获取结果
+Pool.imap_unordered # 和上面一样，返回东西不安顺序
+
+# 自动登陆服务器之类的
+def scp_file(file, dst):
+    import pexpect
+    pw = 'xxxxxxxx'
+    cmd = f'scp -r {file} {dst}'
+    child = pexpect.spawn(cmd, logfile=sys.stdout.buffer)
+    try:
+        child.expect('continue connecting', timeout=1)
+        child.sendline('yes')
+    except:
+        pass
+    child.expect('password')
+    child.sendline(pw)
+    child.expect(pexpect.EOF, timeout=None)
+
+
+# jupyter 计时
+%%time # 当前cell
+%time # 下一行
+
+# 控制台进度条
+from tqdm import tqdm
+
+for i in tqdm(range(100)):
+	pass
 
 import logging
 
-logging.basicConfig(filename='log.log', filemode='w', level=logging.DEBUG, 
-					format='%(asctime)s %(levelname)-8s %(message)s')
+logging.basicConfig(
+	level=logging.INFO,
+	format="%(asctime)s [%(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+	handlers=[
+		logging.FileHandler(".log", 'w'),
+		logging.StreamHandler()
+	]
+)
 logging.info('a line of info.')
 
 # 配合命令
@@ -80,13 +137,19 @@ for root, dirs, files in os.walk('.'):
 ## time
 
 ```python
+import time
+import datetime
+
+# 字符串转时间
+dt = datetime.datetime.strptime('230203 01:38:59', '%y%m%d %H:%M:%S') # 获得秒级精度，年份%y是两位数
+
 s = time.time()
 time.sleep(1)
 e = time.time()
 print(e- s)
 
 tm = time.localtime() # tm.tm_year, tm.tm_mon
-filename = time.strtime('%Y-%m-%d %H:%M:%S')+ '.log'
+filename = time.strftime('%Y-%m-%d %H:%M:%S')+ '.log'
 ```
 
 ## re

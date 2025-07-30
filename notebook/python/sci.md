@@ -3,9 +3,21 @@
 ```python
 import pandas as pd
 
+# 筛选
+subframe = frame[(frame["sex"]=="F") & (frame["age"]<=32) & (row.size>="C")] #类似numpy的简单slice
+
+def fn(row):
+	return row.sex== "F" and row.age<=32 and row.size>="C"
+subframe = frame.apply(fn, axis=1) # 使用某个函数, axis=1即按行来操作（默认为0按列）
+
+# （映射）添加列
+frame["new_column"] = [1, 2, 3, 4, 5]
+frame["size"] = frame["data"].map(get_size_fn)
+frame["size"] = frame.apply(lambda x: fn(x["data"], x["info"], x["level"]), axis=1)
+
+frame.to_csv("a.csv", index=False) # 去掉index列
+
 ```
-
-
 
 
 
@@ -15,6 +27,8 @@ import pandas as pd
 import numpy as np
 
 np.set_printoptions(precision=3, suppress=True)
+
+mu, sigma = np.mean(xs), np.std(xs)
 
 # array构造
 np.r_[3, [0]*3, 1:2:3j]
@@ -36,6 +50,13 @@ A[np.argsort(A[:0]), :]
 ## scipy
 
 ```python
+# kdtree
+from scipy.spatial import KDTree
+
+updatetree, maptree = KDTree(updatecloud), KDTree(mapcloud)
+matches = updatetree.query_ball_tree(maptree, 1.5) # 在`maptree`中寻找`updatetree`附近的点
+# 返回的matches与`updatecloud`等长，记录每个索引找到的在`mapcloud`中的索引
+
 import scipy.linalg as la
 import scipy.optimize as opt
 
@@ -65,6 +86,19 @@ import matplotlib.pyplot as plt
 
 plt.style.use('ggplot')
 matplotlib.rcParams['font.sans-serif'] = ['Droid Sans Fallback'] # 中文显示
+
+# 饼图
+labels = '未生成', '数据不够', '对齐有问题', '编辑器', '通过', '其他'
+sizes = [6, 9, 14, 34, 16, 18] 
+explode = (0, 0, 0.2, 0, 0, 0) # 饼块和中心的偏移距离 
+
+plt.figure(figsize=(12, 8)) 
+plt.subplot(121) 
+plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, counterclock=False, startangle=90)
+plt.axis('equal') 确保是个圆的
+
+plt.subplot(122) 
+plt.pie(sizes[2:-1], explode=explode[2:-1], labels=labels[2:-1], autopct='%1.1f%%', shadow=True, counterclock=False, startangle=90) plt.axis('equal')
 
 # 条形图
 plt.bar(x, height=y)

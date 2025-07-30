@@ -2,4 +2,4 @@
 **.ipynb_checkpoints/
 **.DS_Store
 **/bazel-*
-joplin/temp-storage
+notebook/temp-storage

@@ -1,0 +1,245 @@
+{
+  "main": {
+    "id": "f096ce819f882572",
+    "type": "split",
+    "children": [
+      {
+        "id": "ef5ab1e164b78547",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7e6879f62e92adbd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "python/python.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "python"
+            }
+          },
+          {
+            "id": "34fb58e90fa67a25",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "temp-storage/记录3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "记录3"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e9be7d968e331197",
+    "type": "split",
+    "children": [
+      {
+        "id": "99137bc92bd4dbb2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8edc24f3420c5c78",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "e76ad0a1971b89b1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "faef1824dfcc43cf",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "插件不再活动"
+            }
+          },
+          {
+            "id": "1a85946d8a54653b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 286.5
+  },
+  "right": {
+    "id": "c7a39ce07b9759bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb28fcc4d028e518",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2b62d43b0644f120",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "temp-storage/记录.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "记录 的反向链接列表"
+            }
+          },
+          {
+            "id": "c8f2f5fb44d2d3b0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "temp-storage/记录.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "记录 的出链列表"
+            }
+          },
+          {
+            "id": "52c9f315c7a649c9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "a0dc9e208086322f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "temp-storage/记录.md"
+              },
+              "icon": "lucide-list",
+              "title": "记录 的大纲"
+            }
+          },
+          {
+            "id": "3ec9a6487d12d950",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "canvas:新建白板": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "34fb58e90fa67a25",
+  "lastOpenFiles": [
+    "python/python.md",
+    "temp-storage/记录3.md",
+    "temp-storage/记录.md",
+    "temp-storage/记录2.md",
+    "linux c/commands.md",
+    "未命名 2.canvas",
+    "未命名 1.canvas",
+    "未命名.canvas",
+    "未命名 3.canvas",
+    "linux c/software-notes.md",
+    "未命名 10.canvas",
+    "temp-storage/0417.md",
+    "temp-storage/随机.md",
+    "python/sci.md",
+    "python/thirdparty.md",
+    "未命名 9.canvas",
+    "未命名 8.canvas",
+    "未命名 7.canvas",
+    "未命名 6.canvas",
+    "未命名 5.canvas",
+    "linux c/git.md",
+    "cpp/cmake.md",
+    "cpp/std.md",
+    "maker/love2d & lua.md",
+    "temp-storage/2021工作总结.md",
+    "temp-storage/1 - 副本.png",
+    "temp-storage/1.png",
+    "maker/godot & csharp.md",
+    "books/advanced calculus of several variables.md",
+    "books/学习笔记.md",
+    "books/algebra.md",
+    "books/algebra 1.md",
+    "books/matrix analysis for scientists and engineers.md",
+    "books/neural networks and deep learning.md",
+    "books/optimization algorithms on matrix manifold.md",
+    "notes/matrix basics.md",
+    "temp-storage/city_ngp_editor.md"
+  ]
+}

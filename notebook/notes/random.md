@@ -109,13 +109,12 @@ let $X\sim N(\mu, \Sigma)$, then:
 
 
 **期望与方差**
-$$
-E(\sum_i a_i X_i) = \sum_i a_i E(X_i) \\
-E(\prod_i X_i) = \prod_i E(X_i) \quad \quad independ\ required \\
-V(X) = E(X^2)-E(X) ^2 \\
-V(aX+b) = a^2 V(x) \\
-V(\sum_i a_i X_i) = \sum_i a_i^2 V(X_i)+ \sum_i \sum_j Cov(X_i, X_j)
-$$
+$$ E(\sum_i a_i X_i) = \sum_i a_i E(X_i) $$
+
+$$ E(\prod_i X_i) = \prod_i E(X_i) \quad \quad independ\ required $$
+$$ V(X) = E(X^2)-E(X) ^2 $$
+$$ V(aX+b) = a^2 V(x) $$
+$$ V(\sum_i a_i X_i) = \sum_i a_i^2 V(X_i)+ \sum_i \sum_j Cov(X_i, X_j) $$
 
 > $X$ is a random vector with mean $\mu$ and variance $\Sigma$ then, if $A$ is a matrix(vector) then $E(AX) = AE(X)$ and $V(AX) = A\Sigma A^T$
 

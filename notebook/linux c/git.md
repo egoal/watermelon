@@ -1,3 +1,5 @@
+**取消对一些文件的跟踪** `git rm -r --cached [DIR]`
+
 **取消失败的pull**
 
 1. `git reflog`  查看操作记录
