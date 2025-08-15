@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "python/python.md",
-                "mode": "source",
+                "file": "books/the elements of statistical learning.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "python"
+              "title": "the elements of statistical learning"
             }
           },
           {
@@ -28,15 +28,14 @@
               "type": "markdown",
               "state": {
                 "file": "temp-storage/记录3.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "记录3"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -83,10 +82,17 @@
             "id": "faef1824dfcc43cf",
             "type": "leaf",
             "state": {
-              "type": "starred",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "插件不再活动"
+              "type": "canvas",
+              "state": {
+                "file": "未命名.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "未命名"
             }
           },
           {
@@ -103,7 +109,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 286.5
+    "width": 286.5,
+    "collapsed": true
   },
   "right": {
     "id": "c7a39ce07b9759bf",
@@ -202,22 +209,27 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "34fb58e90fa67a25",
+  "active": "7e6879f62e92adbd",
   "lastOpenFiles": [
-    "python/python.md",
+    "books/the elements of statistical learning.md",
+    "未命名.canvas",
+    "未命名 1.canvas",
     "temp-storage/记录3.md",
     "temp-storage/记录.md",
-    "temp-storage/记录2.md",
+    "python/sci.md",
+    "python/python.md",
     "linux c/commands.md",
+    "notes/random.md",
+    "books/optimization algorithms on matrix manifold.md",
+    "books/学习笔记.md",
+    "未命名.md",
+    "temp-storage/记录2.md",
     "未命名 2.canvas",
-    "未命名 1.canvas",
-    "未命名.canvas",
     "未命名 3.canvas",
     "linux c/software-notes.md",
     "未命名 10.canvas",
     "temp-storage/0417.md",
     "temp-storage/随机.md",
-    "python/sci.md",
     "python/thirdparty.md",
     "未命名 9.canvas",
     "未命名 8.canvas",
@@ -233,13 +245,8 @@
     "temp-storage/1.png",
     "maker/godot & csharp.md",
     "books/advanced calculus of several variables.md",
-    "books/学习笔记.md",
     "books/algebra.md",
     "books/algebra 1.md",
-    "books/matrix analysis for scientists and engineers.md",
-    "books/neural networks and deep learning.md",
-    "books/optimization algorithms on matrix manifold.md",
-    "notes/matrix basics.md",
-    "temp-storage/city_ngp_editor.md"
+    "books/matrix analysis for scientists and engineers.md"
   ]
 }
