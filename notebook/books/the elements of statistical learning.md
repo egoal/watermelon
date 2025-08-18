@@ -13,7 +13,7 @@
 我们的训练数据集$D$是从数据总体中随机抽样得到的，不同的训练数据集会得到不同的模型$f_D(x)$，是一个依赖于$D$的随机变量；
 
 接下来我们讨论在某一个固定点$x$处，模型$f_D(x)$的预测表现（实际上我们关心的是**所有可能训练集上**模型的平均表现）：
-期望预测误差（Expected Predition Error, EPE）可分解为：
+期望预测误差（Expected Prediction Error, EPE）可分解为：
 $$ E_D[(Y- f_D(x))^2 | X= x] = Bias(x)^ 2+ Var(x)+ \sigma^ 2 $$
 简要推导：
 $$E_D[(Y - f_D(x))^ 2] = E_D[(f(x) + \epsilon - f_D(x))] = E_D[((f_D(x)- E_D[f_D(x)]) + (E_D[f_D(x)]- f(x))- \epsilon)^2]\quad 插入E_D[f_D(x)]$$
@@ -29,4 +29,15 @@ $$ f(X) = \beta_0+ \sum_{j=1}^p X_j \beta_j $$
 
 > 统计中一个很有名的断言是，对$\beta$的最小二乘估计，是所有线性无偏估计中方差最小的。
 > 尽管Gauss-Markov定理这么说，但可能会存在一些很好的有偏估计。考虑方差-偏差的权衡，有可能牺牲少许的偏差，获得较大的方差提升；
+
+## 3.4 Shrinkage Methods
+
+ridge regression相当于按一定比例缩放了参数/特征，不具备将特定参数归0的能力。而lasso则介于其与子集选择之间，保留了一定的归0能力；
+
+可以将子集选择(subset selection)、岭回归(ridge regression)及lasso一般化，统一视为贝叶斯估计：
+$$ \tilde \beta = \arg \min_\beta \sum _{i=1}^N (y_i- \beta_0- \sum_{j=1}^p x_{ij}\beta_j)^2 + \lambda \sum_{j=1}^p |\beta_j|^q $$
+此时，三者分别对应$q=0, 1, 2$
+
+使用L1和L2的正则，即构成弹性网络(elastic-net)惩罚项：
+$$\lambda \sum_{j=1}^p (\alpha \beta_j^2+ (1-\alpha)|\beta_j|)$$
 
